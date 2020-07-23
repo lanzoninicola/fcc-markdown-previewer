@@ -1,0 +1,6 @@
+#dashboard {
+    display: flex;
+    justify-content: center;
+    font-family: 'Hind';
+    font-weight: 200;
+}

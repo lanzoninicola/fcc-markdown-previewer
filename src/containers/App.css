@@ -1,0 +1,27 @@
+/* alegreya-sans-regular - latin */
+@font-face {
+  font-family: 'Alegreya Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../asset/fonts/alegreya-sans-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Alegreya Sans Regular'), local('AlegreyaSans-Regular'),
+       url('../asset/fonts/alegreya-sans-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../asset/fonts/alegreya-sans-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../asset/fonts/alegreya-sans-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../asset/fonts/alegreya-sans-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../asset/fonts/alegreya-sans-v10-latin-regular.svg#AlegreyaSans') format('svg'); /* Legacy iOS */
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+h3 {
+  margin: 10px;
+  font-family: 'Alegreya Sans';
+  font-weight: 600;
+  font-size: 1rem;
+}
