@@ -14,8 +14,6 @@ const Header = ({ storeMarkupVersionHistory }) => {
                 <h1 id="title">MARKDOWN PREVIEW</h1>
             </div>
             <div className="header-toolbar">
-                <p>New</p>
-                <p onClick={storeMarkupVersionHistory} style={{ cursor: 'pointer' }}>Save</p>
                 <p>Download</p>
                 <p>Copy</p>
             </div>

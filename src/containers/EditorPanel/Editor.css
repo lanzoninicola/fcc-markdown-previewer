@@ -9,19 +9,21 @@
     box-shadow: 0 20px 25px -5px rgba(240, 233, 230, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
     
-#editorSection-toolbar {
+#editorSection-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  
 }
 
-#editorSection-toolbar-title {
+#editorSection-header-title {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
-#editorSection-toolbar-select {
+
+
+#editorSection-header-select {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -30,7 +32,7 @@
   
 }
 
-#editorSection-toolbar-select select {
+#editorSection-header-select select {
   width: 150px;
   padding: 5px;
   height: auto;
@@ -39,13 +41,20 @@
   font-family: 'Hind';
 }
 
-#editorSection-toolbar-select select:focus {
+#editorSection-header-select select:focus {
   border: solid 1px rgb(233,236,239, 1)
 }
 
-#editorSection-toolbar-select-label {
+#editorSection-header-select-label {
   display: flex;
   align-items: center;
   padding-right: 10px;
   font-size: 1rem;
+}
+
+#editorSection-toolbarArea {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 10px;
 }
