@@ -1,9 +1,12 @@
 import React from 'react'
 import './EditorArea.css'
 
-const EditorArea = ({ rawText, handleEditorChange }) => {
+const EditorArea = ({ editingStatus, rawText, handleEditorChange }) => {
+
+    const readonly = (editingStatus === 'idle') ? true : false
+
     return (
-        <textarea id="editor" onChange={handleEditorChange} value={rawText}></textarea>
+        <textarea id="editor" onChange={handleEditorChange} value={rawText} readOnly={readonly}></textarea>
     )
 }
 

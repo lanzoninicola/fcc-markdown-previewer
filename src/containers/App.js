@@ -28,37 +28,60 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.dataNeedsToBeRestoredFromLastSession()
-  }
-
-  dataNeedsToBeRestoredFromLastSession = () => {
-    const markupTextLogger = localStorage.getItem('markupTextLogger');
-    const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
-
-    if ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory)) {
+    if (this.isThereDataInLocalStorageSession()) {
       this.setState({ showModal: true })
+    } else {
+      this.initSession()
     }
   }
 
-  rollbackData = () => {
+  isThereDataInLocalStorageSession = () => {
     const markupTextLogger = localStorage.getItem('markupTextLogger');
     const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
-    const lastMarkupSavedVersion = markupVersionsHistory['versions'][markupVersionsHistory['versions'].length - 1];
 
-    // console.log(markupVersionsHistory['versions'])
+    let result = false;
+
+    if ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory)) {
+      result = true;
+    }
+
+    return result;
+  }
+
+  rollbackData = () => {
+    const markupTextLoggerData = localStorage.getItem('markupTextLogger');
+    const markupVersionsHistoryData = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+
+    let lastMarkupSavedVersion = 0;
+    let markupVersionsHistory = [];
+    if (markupVersionsHistoryData) {
+      lastMarkupSavedVersion = markupVersionsHistoryData['versions'][markupVersionsHistoryData['versions'].length - 1];
+      markupVersionsHistory = markupVersionsHistoryData['versions'];
+    }
 
     this.setState({
-      markupText: markupTextLogger,
+      markupText: markupTextLoggerData,
       lastMarkupVersion: lastMarkupSavedVersion,
-      markupVersionsHistory: markupVersionsHistory['versions'],
+      markupVersionsHistory: markupVersionsHistory,
       editingStatus: 'InProgress',
       showModal: false
     });
   }
 
+  initSession = () => {
+    this.resetLocalStorageSession();
+    this.setState({
+      showModal: false,
+      editingStatus: 'idle'
+    });
+  }
+
   handleEditorChange = (e) => {
-    localStorage.setItem('markupTextLogger', e.target.value)
-    this.setState({ markupText: e.target.value });
+    localStorage.setItem('markupTextLogger', e.target.value);
+    this.setState({
+      editingStatus: 'InProgress',
+      markupText: e.target.value
+    });
   }
 
   handleNewMarkupContent = () => {
@@ -99,6 +122,11 @@ class App extends Component {
     this.setState({ markupText: '' });
   }
 
+  resetLocalStorageSession = () => {
+    this.resetMarkupTextLogger();
+    this.resetMarkupHistory();
+  }
+
   resetMarkupTextLogger = () => {
     localStorage.removeItem('markupTextLogger')
   }
@@ -108,7 +136,10 @@ class App extends Component {
   }
 
   resetMarkupVersion = () => {
-    this.setState({ lastMarkupVersion: 0 });
+    this.setState({
+      lastMarkupVersion: 0,
+      markupVersionsHistory: []
+    });
   }
 
   getMarkupVersionsHistorySaved = () => {
@@ -172,14 +203,6 @@ class App extends Component {
     return newMarkupVersion;
   }
 
-  removeMarkupVersionsHistory = () => {
-    localStorage.removeItem('markupVersionsHistory')
-  }
-
-  removeMarkupTextLogger = () => {
-    localStorage.removeItem('markupTextLogger')
-  }
-
   handleMarkupVersionChange = (e) => {
     let versionSelectedFromHistory = e.target.value;
     const versionNumber = versionSelectedFromHistory.substring(8, 99);
@@ -219,8 +242,8 @@ class App extends Component {
       <Modal
         title={'Message:'}
         message={'There is some content saved from the last session. Do you want to restore it?'}>
-        <Button type="primary" eventHandler={this.rollbackData}>YES</Button>
-        <Button type="secondary" eventHandler={() => this.showModal(false)}>NO</Button>
+        <Button type="primary" eventHandler={() => this.rollbackData(true)}>YES</Button>
+        <Button type="secondary" eventHandler={this.initSession}>NO</Button>
       </Modal>
     )
 
@@ -232,6 +255,7 @@ class App extends Component {
         <Dashboard text={markupText} />
         <div className="container">
           <EditorPanel
+            editingStatus={editingStatus}
             status={editingStatus}
             markupText={markupText}
             handleEditorChange={this.handleEditorChange}
