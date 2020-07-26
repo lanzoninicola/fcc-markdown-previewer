@@ -1,0 +1,13 @@
+  #toolbar {
+    display: flex;
+    /* border: solid 0.7px rgb(0, 0, 0, 0.2); */
+    border-radius: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+  
+
+  

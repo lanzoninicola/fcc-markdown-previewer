@@ -14,6 +14,7 @@ class App extends Component {
     super(props)
 
     this.state = {
+      editingStatus: 'idle',
       markupText: placeholder,
       lastMarkupVersion: 0,
       lastSaveDate: null,
@@ -51,6 +52,8 @@ class App extends Component {
     this.resetMarkupTextLogger();
     this.resetMarkupHistory();
     this.resetMarkupVersion();
+
+    this.setState({ editingStatus: 'New' })
   }
 
   handleClearMarkupContent = () => {
@@ -182,6 +185,7 @@ class App extends Component {
   render() {
 
     const {
+      editingStatus,
       markupText,
       markupVersionsHistory,
       lastMarkupVersion,
@@ -195,6 +199,7 @@ class App extends Component {
         <Dashboard text={markupText} />
         <div className="container">
           <EditorPanel
+            status={editingStatus}
             markupText={markupText}
             handleEditorChange={this.handleEditorChange}
             markupVersionsHistory={markupVersionsHistory}
