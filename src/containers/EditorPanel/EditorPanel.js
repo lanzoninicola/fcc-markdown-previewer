@@ -38,20 +38,18 @@ class EditorPanel extends Component {
                         </div>
                         : null}
                 </div >
-                <div id="editorSection-toolbarArea">
-                    <Toolbar
-                        status={status}
-                        handleNewMarkupContent={handleNewMarkupContent}
-                        handleAddMarkupContentToHistory={handleAddMarkupContentToHistory}
-                        handleClearMarkupContent={handleClearMarkupContent}
-                    />
-                </div>
+                <Toolbar
+                    status={status}
+                    handleNewMarkupContent={handleNewMarkupContent}
+                    handleAddMarkupContentToHistory={handleAddMarkupContentToHistory}
+                    handleClearMarkupContent={handleClearMarkupContent}
+                />
                 <EditorArea
                     rawText={markupText}
                     handleEditorChange={handleEditorChange}
                 />
 
-            </div>
+            </div >
         )
     }
 }

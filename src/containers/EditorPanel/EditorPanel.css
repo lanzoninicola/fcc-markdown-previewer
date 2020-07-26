@@ -52,9 +52,3 @@
   font-size: 1rem;
 }
 
-#editorSection-toolbarArea {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-bottom: 10px;
-}

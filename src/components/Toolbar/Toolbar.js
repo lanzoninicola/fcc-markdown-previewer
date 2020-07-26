@@ -46,7 +46,9 @@ const Toolbar = ({ status, handleNewMarkupContent, handleAddMarkupContentToHisto
     })
 
     return (
-        <div id="toolbar">{toolbarItemsRender}</div>
+        <div id="toolbarArea">
+            <div id="toolbar">{toolbarItemsRender}</div>
+        </div>
     )
 }
 

@@ -9,5 +9,10 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   }
   
-
+  #toolbarArea {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 10px;
+  }
   
