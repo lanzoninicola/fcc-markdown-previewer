@@ -3,7 +3,7 @@ import './Toolbar.css'
 import ToolbarItem from './ToolbarItem/ToolbarItem'
 import { svgNewIcon, svgSnapshotIcon, svgClearIcon } from './ToolbarIcons'
 
-const Toolbar = ({ status, handleNewMarkupContent, handleAddMarkupContentToHistory, handleClearMarkupContent }) => {
+const Toolbar = ({ editingStatus, handleNewMarkupContent, handleAddMarkupContentToHistory, handleClearMarkupContent }) => {
 
     const toolbarItems = [
         {
@@ -17,14 +17,14 @@ const Toolbar = ({ status, handleNewMarkupContent, handleAddMarkupContentToHisto
             label: 'Snapshot',
             icon: svgSnapshotIcon,
             alt: 'Take a snapshot of markup text',
-            disabled: status === 'idle' ? true : false,
+            disabled: editingStatus === 'idle' ? true : false,
             eventHandler: handleAddMarkupContentToHistory
         },
         {
             label: 'Clear',
             icon: svgClearIcon,
             alt: 'Remove Markup Content',
-            disabled: status === 'idle' ? true : false,
+            disabled: editingStatus === 'idle' ? true : false,
             eventHandler: handleClearMarkupContent
         }
     ]

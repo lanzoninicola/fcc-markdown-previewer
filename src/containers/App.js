@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
-import PreviewPanel from './PreviewPanel/PreviewPanel'
-import EditorPanel from './EditorPanel/EditorPanel'
-import Header from '../components/Header/Header'
-import Dashboard from '../components/Dashboard/Dashboard'
-import Toolbar from '../components/Toolbar/Toolbar'
+import PreviewPanel from './PreviewPanel/PreviewPanel';
+import EditorPanel from './EditorPanel/EditorPanel';
+import Header from '../components/Header/Header';
+import Dashboard from '../components/Dashboard/Dashboard';
+import Toolbar from '../components/Toolbar/Toolbar';
+import Modal from '../components/Modal/Modal';
+import Button from '../components/Button/Button';
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
 // pressing new and content in markup snapashot fire and alert
@@ -20,27 +22,38 @@ class App extends Component {
       lastMarkupVersion: 0,
       lastSaveDate: null,
       markupVersionsHistory: [],
-
-      versionSelectedFromHistory: ''
+      versionSelectedFromHistory: '',
+      showModal: false
     }
   }
 
   componentDidMount() {
-    this.rollbackData()
+    this.dataNeedsToBeRestoredFromLastSession()
+  }
+
+  dataNeedsToBeRestoredFromLastSession = () => {
+    const markupTextLogger = localStorage.getItem('markupTextLogger');
+    const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+
+    if ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory)) {
+      this.setState({ showModal: true })
+    }
   }
 
   rollbackData = () => {
     const markupTextLogger = localStorage.getItem('markupTextLogger');
-    if (markupTextLogger && markupTextLogger.length > 0) {
-      this.setState({ text: markupTextLogger });
-    }
+    const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    const lastMarkupSavedVersion = markupVersionsHistory['versions'][markupVersionsHistory['versions'].length - 1];
 
-    let markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    // console.log(markupVersionsHistory['versions'])
 
-    if (markupVersionsHistory) {
-      let lastMarkupSavedVersion = markupVersionsHistory['versions'][markupVersionsHistory['versions'].length - 1];
-      this.setState({ lastMarkupVersion: lastMarkupSavedVersion });
-    }
+    this.setState({
+      markupText: markupTextLogger,
+      lastMarkupVersion: lastMarkupSavedVersion,
+      markupVersionsHistory: markupVersionsHistory['versions'],
+      editingStatus: 'InProgress',
+      showModal: false
+    });
   }
 
   handleEditorChange = (e) => {
@@ -183,6 +196,14 @@ class App extends Component {
     this.setState({ markupText: markupTextFromHistory })
   }
 
+  showModal = (show) => {
+    if (show) {
+      this.setState({ showModal: true });
+    } else this.setState({ showModal: false })
+
+
+  }
+
   render() {
 
     const {
@@ -190,12 +211,23 @@ class App extends Component {
       markupText,
       markupVersionsHistory,
       lastMarkupVersion,
-      versionSelectedFromHistory
+      versionSelectedFromHistory,
+      showModal
     } = this.state;
+
+    const modalRollbackContent = (
+      <Modal
+        title={'Message:'}
+        message={'There is some content saved from the last session. Do you want to restore it?'}>
+        <Button type="primary" eventHandler={this.rollbackData}>YES</Button>
+        <Button type="secondary" eventHandler={() => this.showModal(false)}>NO</Button>
+      </Modal>
+    )
 
 
     return (
       <Fragment>
+        {(showModal) ? modalRollbackContent : null}
         <Header />
         <Dashboard text={markupText} />
         <div className="container">
@@ -210,14 +242,13 @@ class App extends Component {
           />
           <PreviewPanel rawText={markupText} />
           <Toolbar
-            status={editingStatus}
+            editingStatus={editingStatus}
             handleNewMarkupContent={this.handleNewMarkupContent}
             handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
             handleClearMarkupContent={this.handleClearMarkupContent}
           />
         </div>
-
-      </Fragment>
+      </Fragment >
     );
 
   }
