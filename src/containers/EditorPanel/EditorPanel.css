@@ -12,7 +12,7 @@
 #editorSection-header {
   display: flex;
   justify-content: space-between;
-  
+  margin-bottom: 10px;
 }
 
 #editorSection-header-title {
@@ -20,8 +20,6 @@
   flex-direction: row;
   justify-content: flex-end;
 }
-
-
 
 #editorSection-header-select {
   display: flex;
@@ -52,3 +50,7 @@
   font-size: 1rem;
 }
 
+#editorSection-workarea{
+  display: flex;
+  
+}

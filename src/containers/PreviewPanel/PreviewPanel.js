@@ -15,7 +15,7 @@ class PreviewPanel extends Component {
 
         return (
             <div id="previewSection">
-                <div id="previewSection-toolbar">
+                <div id="previewSection-header">
                     <h3>PREVIEW</h3>
                 </div>
                 <div dangerouslySetInnerHTML={this.createMarkup(rawText)} id="preview" >

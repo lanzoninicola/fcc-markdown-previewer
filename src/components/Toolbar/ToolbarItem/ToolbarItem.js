@@ -2,12 +2,12 @@ import React from 'react'
 import './ToolbarItem.css'
 
 
-const ToolbarItem = ({ label, icon, alt, eventHandler }) => {
+const ToolbarItem = ({ label, icon, eventHandler }) => {
     return (
         <div className="toolbar-item" onClick={eventHandler}>
-            <img className="toolbar-icon" src={icon} alt={alt} />
+            {icon}
             <p className="toolbar-label">{label}</p>
-        </div>
+        </div >
     )
 }
 

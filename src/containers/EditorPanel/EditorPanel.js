@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './EditorPanel.css'
 import EditorArea from './EditorArea/EditorArea'
-import Toolbar from '../../components/Toolbar/Toolbar'
+
 
 class EditorPanel extends Component {
 
@@ -9,15 +9,11 @@ class EditorPanel extends Component {
     render() {
 
         const {
-            status,
             markupText,
             handleEditorChange,
             lastMarkupVersion,
             versionSelectedFromHistory,
             markupVersionsHistory,
-            handleNewMarkupContent,
-            handleAddMarkupContentToHistory,
-            handleClearMarkupContent,
             handleMarkupVersionChange
         } = this.props;
 
@@ -38,12 +34,8 @@ class EditorPanel extends Component {
                         </div>
                         : null}
                 </div >
-                <Toolbar
-                    status={status}
-                    handleNewMarkupContent={handleNewMarkupContent}
-                    handleAddMarkupContentToHistory={handleAddMarkupContentToHistory}
-                    handleClearMarkupContent={handleClearMarkupContent}
-                />
+
+
                 <EditorArea
                     rawText={markupText}
                     handleEditorChange={handleEditorChange}

@@ -4,6 +4,7 @@ import PreviewPanel from './PreviewPanel/PreviewPanel'
 import EditorPanel from './EditorPanel/EditorPanel'
 import Header from '../components/Header/Header'
 import Dashboard from '../components/Dashboard/Dashboard'
+import Toolbar from '../components/Toolbar/Toolbar'
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
 // pressing new and content in markup snapashot fire and alert
@@ -192,7 +193,7 @@ class App extends Component {
       versionSelectedFromHistory
     } = this.state;
 
-    console.log('lastMarkupVersion', lastMarkupVersion)
+
     return (
       <Fragment>
         <Header />
@@ -205,13 +206,17 @@ class App extends Component {
             markupVersionsHistory={markupVersionsHistory}
             lastMarkupVersion={lastMarkupVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
-            handleNewMarkupContent={this.handleNewMarkupContent}
-            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
-            handleClearMarkupContent={this.handleClearMarkupContent}
             handleMarkupVersionChange={this.handleMarkupVersionChange}
           />
           <PreviewPanel rawText={markupText} />
+          <Toolbar
+            status={editingStatus}
+            handleNewMarkupContent={this.handleNewMarkupContent}
+            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
+            handleClearMarkupContent={this.handleClearMarkupContent}
+          />
         </div>
+
       </Fragment>
     );
 
