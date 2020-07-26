@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Editor.css'
+import './EditorPanel.css'
 import EditorArea from './EditorArea/EditorArea'
 import EditorToolbar from '../../components/EditorToolbar/EditorToolbar'
 
@@ -15,7 +15,7 @@ class EditorPanel extends Component {
             versionSelectedFromHistory,
             markupVersionsHistory,
             handleNewMarkupContent,
-            handleNewMarkupVersionHistory,
+            handleAddMarkupContentToHistory,
             handleClearMarkupContent,
             handleMarkupVersionChange
         } = this.props;
@@ -27,11 +27,11 @@ class EditorPanel extends Component {
         return (
             <div id="editorSection">
                 <div id="editorSection-header">
-                    <h3 id="editorSection-header-title">MARKUP</h3>
+                    <h3 id="editorSection-header-title">EDITOR</h3>
                     {markupVersionsHistory.length > 0 ?
                         <div id="editorSection-header-select">
                             <label htmlFor="markup-version" id="editorSection-header-select-label">Markup version:</label>
-                            <select value={`Version ${(versionSelectedFromHistory > 0) ? versionSelectedFromHistory : lastMarkupVersion}`} onChange={handleMarkupVersionChange}>
+                            <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastMarkupVersion}`} onChange={handleMarkupVersionChange}>
                                 {mkVersionsOptions}
                             </select>
                         </div>
@@ -40,7 +40,7 @@ class EditorPanel extends Component {
                 <div id="editorSection-toolbarArea">
                     <EditorToolbar
                         handleNewMarkupContent={handleNewMarkupContent}
-                        handleNewMarkupVersionHistory={handleNewMarkupVersionHistory}
+                        handleAddMarkupContentToHistory={handleAddMarkupContentToHistory}
                         handleClearMarkupContent={handleClearMarkupContent}
                     />
                 </div>

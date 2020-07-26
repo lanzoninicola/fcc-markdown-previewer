@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
-import Preview from './Preview/Preview'
+import PreviewPanel from './PreviewPanel/PreviewPanel'
 import EditorPanel from './EditorPanel/EditorPanel'
 import Header from '../components/Header/Header'
 import Dashboard from '../components/Dashboard/Dashboard'
@@ -28,9 +28,9 @@ class App extends Component {
   }
 
   rollbackData = () => {
-    const markupSnaphost = localStorage.getItem('markupSnaphost');
-    if (markupSnaphost && markupSnaphost.length > 0) {
-      this.setState({ text: markupSnaphost });
+    const markupTextLogger = localStorage.getItem('markupTextLogger');
+    if (markupTextLogger && markupTextLogger.length > 0) {
+      this.setState({ text: markupTextLogger });
     }
 
     let markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
@@ -42,53 +42,57 @@ class App extends Component {
   }
 
   handleEditorChange = (e) => {
-    localStorage.setItem('markupSnaphost', e.target.value)
+    localStorage.setItem('markupTextLogger', e.target.value)
     this.setState({ markupText: e.target.value });
   }
 
   handleNewMarkupContent = () => {
-    this.createNewMarkupSnapshot();
     this.clearMarkupContent();
+    this.resetMarkupTextLogger();
+    this.resetMarkupHistory();
+    this.resetMarkupVersion();
   }
 
   handleClearMarkupContent = () => {
     this.clearMarkupContent();
   }
 
-  handleNewMarkupVersionHistory = () => {
+  handleAddMarkupContentToHistory = () => {
     let newMarkupVersion;
 
     const [existsmarkupVersionsHistorySaved, markupVersionsHistory] = this.getMarkupVersionsHistorySaved()
 
     if (existsmarkupVersionsHistorySaved) {
-      newMarkupVersion = this.appendNewMarkupVersionHistory(this.state.lastMarkupVersion + 1, markupVersionsHistory)
-
+      newMarkupVersion = this.appendNewMarkupContentToHistory(this.state.lastMarkupVersion + 1, markupVersionsHistory)
       // increment the version based on saved version
       this.setState((state) => (
         {
           lastMarkupVersion: state.lastMarkupVersion + 1,
-          versionSelectedFromHistory: 0
+          versionSelectedFromHistory: null
         }
-
       ))
-
     } else {
       newMarkupVersion = this.createNewMarkupVersionHistory()
     }
 
     localStorage.setItem('markupVersionsHistory', JSON.stringify(newMarkupVersion))
-
-  }
-
-  createNewMarkupSnapshot = () => {
-    localStorage.setItem('markupSnaphost', '')
   }
 
   clearMarkupContent = () => {
     this.setState({ markupText: '' });
-    this.createNewMarkupSnapshot();
   }
 
+  resetMarkupTextLogger = () => {
+    localStorage.removeItem('markupTextLogger')
+  }
+
+  resetMarkupHistory = () => {
+    localStorage.removeItem('markupVersionsHistory')
+  }
+
+  resetMarkupVersion = () => {
+    this.setState({ lastMarkupVersion: 0 });
+  }
 
   getMarkupVersionsHistorySaved = () => {
     let markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
@@ -97,7 +101,7 @@ class App extends Component {
       return [true, markupVersionsHistory]
     }
 
-    return [false, { markupSnaphosts: {}, versions: [] }]
+    return [false, { markupTextLoggers: {}, versions: [] }]
   }
 
   createNewMarkupVersionHistory = () => {
@@ -106,7 +110,7 @@ class App extends Component {
     let newMarkupVersion = {
       markupSnaphosts: {
         0: {
-          markup: this.state.markupText,
+          markupText: this.state.markupText,
           date: saveDate
         }
       },
@@ -124,7 +128,7 @@ class App extends Component {
     return newMarkupVersion;
   }
 
-  appendNewMarkupVersionHistory = (newVersion, history) => {
+  appendNewMarkupContentToHistory = (newVersion, history) => {
     const { markupSnaphosts, versions } = history;
 
     const saveDate = new Date();
@@ -133,7 +137,7 @@ class App extends Component {
       markupSnaphosts: {
         ...markupSnaphosts,
         [newVersion]: {
-          markup: this.state.markupText,
+          markupText: this.state.markupText,
           date: saveDate
         }
       },
@@ -143,8 +147,6 @@ class App extends Component {
     let newMarkupVersionsHistory = [...this.state.markupVersionsHistory];
     newMarkupVersionsHistory.push(newVersion);
 
-    console.log('appendNewMarkupVersionHistory', newMarkupVersionsHistory)
-
     this.setState({
       lastSaveDate: saveDate,
       markupVersionsHistory: newMarkupVersionsHistory
@@ -153,13 +155,12 @@ class App extends Component {
     return newMarkupVersion;
   }
 
-
   removeMarkupVersionsHistory = () => {
     localStorage.removeItem('markupVersionsHistory')
   }
 
-  removeMarkupSnapshot = () => {
-    localStorage.removeItem('markupSnaphost')
+  removeMarkupTextLogger = () => {
+    localStorage.removeItem('markupTextLogger')
   }
 
   handleMarkupVersionChange = (e) => {
@@ -173,7 +174,7 @@ class App extends Component {
 
   restoreMarkupFromHistory = (versionNumber) => {
     const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
-    const markupTextFromHistory = markupVersionsHistory.markupSnaphosts[versionNumber].markup;
+    const markupTextFromHistory = markupVersionsHistory.markupSnaphosts[versionNumber].markupText;
 
     this.setState({ markupText: markupTextFromHistory })
   }
@@ -187,6 +188,7 @@ class App extends Component {
       versionSelectedFromHistory
     } = this.state;
 
+    console.log('lastMarkupVersion', lastMarkupVersion)
     return (
       <Fragment>
         <Header />
@@ -199,11 +201,11 @@ class App extends Component {
             lastMarkupVersion={lastMarkupVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
             handleNewMarkupContent={this.handleNewMarkupContent}
-            handleNewMarkupVersionHistory={this.handleNewMarkupVersionHistory}
+            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
             handleClearMarkupContent={this.handleClearMarkupContent}
             handleMarkupVersionChange={this.handleMarkupVersionChange}
           />
-          <Preview rawText={markupText} />
+          <PreviewPanel rawText={markupText} />
         </div>
       </Fragment>
     );

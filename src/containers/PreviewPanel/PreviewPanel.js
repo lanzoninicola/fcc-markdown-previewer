@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import './Preview.css'
+import './PreviewPanel.css'
 import marked from 'marked'
 
-class Preview extends Component {
+class PreviewPanel extends Component {
 
     createMarkup = (text) => {
         const markup = marked(text);
@@ -25,4 +25,4 @@ class Preview extends Component {
     }
 }
 
-export default Preview;
+export default PreviewPanel;

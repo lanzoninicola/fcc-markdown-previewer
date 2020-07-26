@@ -2,7 +2,7 @@ import React from 'react'
 import './EditorToolbar.css'
 
 
-const EditorToolbar = ({ handleNewMarkupContent, handleNewMarkupVersionHistory, handleClearMarkupContent }) => {
+const EditorToolbar = ({ handleNewMarkupContent, handleAddMarkupContentToHistory, handleClearMarkupContent }) => {
     return (
 
         <div id="toolbar">
@@ -13,7 +13,7 @@ const EditorToolbar = ({ handleNewMarkupContent, handleNewMarkupVersionHistory, 
                 />
                 <p className="toolbar-label">New</p>
             </div>
-            <div className="toolbar-item" onClick={handleNewMarkupVersionHistory}>
+            <div className="toolbar-item" onClick={handleAddMarkupContentToHistory}>
                 <img className="toolbar-icon"
                     src="https://img.icons8.com/material-outlined/25/000000/camera--v2.png"
                     alt='take snap of markup content'
