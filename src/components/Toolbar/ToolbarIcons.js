@@ -5,11 +5,6 @@ export const SvgNewIcon = ({ screenWidth }) => {
     let svgWidth = "30"
     let svgHeight = "30";
 
-    if (screenWidth <= 450) {
-        svgWidth = "150";
-        svgHeight = "150";
-    }
-
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -30,11 +25,6 @@ export const SvgSnapshotIcon = ({ screenWidth }) => {
 
     let svgWidth = "30"
     let svgHeight = "30";
-
-    if (screenWidth <= 450) {
-        svgWidth = "15";
-        svgHeight = "15";
-    }
 
     return (
         <svg
@@ -58,10 +48,7 @@ export const SvgClearIcon = ({ screenWidth }) => {
     let svgWidth = "30"
     let svgHeight = "30";
 
-    if (screenWidth <= 450) {
-        svgWidth = "15";
-        svgHeight = "15";
-    }
+
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

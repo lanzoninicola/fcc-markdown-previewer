@@ -78,7 +78,7 @@ class App extends Component {
       lastMarkupVersion: lastMarkupSavedVersion,
       markupVersionsHistory: markupVersionsHistory,
       editingStatus: 'InProgress',
-      showModal: false
+      showModalRollbackContent: false
     });
   }
 
