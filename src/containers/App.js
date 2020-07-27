@@ -7,6 +7,15 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
+import {
+  getMarkupTextLogger,
+  getMarkupVersionsHistory,
+  setMarkupTextLogger,
+  setMarkupVersionsHistory,
+  resetMarkupTextLogger,
+  resetMarkupVersionsHistory,
+  resetLocalStorageSession
+} from '../helper/helper'
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
 // pressing new and content in markup snapashot fire and alert
@@ -20,9 +29,8 @@ class App extends Component {
       editingStatus: 'idle',
       markupText: placeholder,
       lastMarkupVersion: 0,
-      lastSaveDate: null,
       markupVersionsHistory: [],
-      versionSelectedFromHistory: '',
+      versionSelectedFromHistory: 0,
       showModal: false
     }
   }
@@ -36,8 +44,8 @@ class App extends Component {
   }
 
   isThereDataInLocalStorageSession = () => {
-    const markupTextLogger = localStorage.getItem('markupTextLogger');
-    const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    const markupTextLogger = getMarkupTextLogger();
+    const markupVersionsHistory = getMarkupVersionsHistory();
 
     let result = false;
 
@@ -49,8 +57,8 @@ class App extends Component {
   }
 
   rollbackData = () => {
-    const markupTextLoggerData = localStorage.getItem('markupTextLogger');
-    const markupVersionsHistoryData = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    const markupTextLoggerData = getMarkupTextLogger();
+    const markupVersionsHistoryData = getMarkupVersionsHistory();
 
     let lastMarkupSavedVersion = 0;
     let markupVersionsHistory = [];
@@ -69,7 +77,7 @@ class App extends Component {
   }
 
   initSession = () => {
-    this.resetLocalStorageSession();
+    resetLocalStorageSession();
     this.setState({
       showModal: false,
       editingStatus: 'idle'
@@ -77,7 +85,7 @@ class App extends Component {
   }
 
   handleEditorChange = (e) => {
-    localStorage.setItem('markupTextLogger', e.target.value);
+    setMarkupTextLogger(e.target.value);
     this.setState({
       editingStatus: 'InProgress',
       markupText: e.target.value
@@ -86,8 +94,8 @@ class App extends Component {
 
   handleNewMarkupContent = () => {
     this.clearMarkupContent();
-    this.resetMarkupTextLogger();
-    this.resetMarkupHistory();
+    resetMarkupTextLogger();
+    resetMarkupVersionsHistory();
     this.resetMarkupVersion();
 
     this.setState({ editingStatus: 'New' })
@@ -115,25 +123,14 @@ class App extends Component {
       newMarkupVersion = this.createNewMarkupVersionHistory()
     }
 
-    localStorage.setItem('markupVersionsHistory', JSON.stringify(newMarkupVersion))
+    setMarkupVersionsHistory(newMarkupVersion);
   }
 
   clearMarkupContent = () => {
     this.setState({ markupText: '' });
   }
 
-  resetLocalStorageSession = () => {
-    this.resetMarkupTextLogger();
-    this.resetMarkupHistory();
-  }
 
-  resetMarkupTextLogger = () => {
-    localStorage.removeItem('markupTextLogger')
-  }
-
-  resetMarkupHistory = () => {
-    localStorage.removeItem('markupVersionsHistory')
-  }
 
   resetMarkupVersion = () => {
     this.setState({
@@ -143,7 +140,7 @@ class App extends Component {
   }
 
   getMarkupVersionsHistorySaved = () => {
-    let markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    let markupVersionsHistory = getMarkupVersionsHistory();
 
     if (markupVersionsHistory) {
       return [true, markupVersionsHistory]
@@ -213,19 +210,12 @@ class App extends Component {
 
 
   restoreMarkupFromHistory = (versionNumber) => {
-    const markupVersionsHistory = JSON.parse(localStorage.getItem('markupVersionsHistory'));
+    const markupVersionsHistory = getMarkupVersionsHistory();
     const markupTextFromHistory = markupVersionsHistory.markupSnaphosts[versionNumber].markupText;
 
     this.setState({ markupText: markupTextFromHistory })
   }
 
-  showModal = (show) => {
-    if (show) {
-      this.setState({ showModal: true });
-    } else this.setState({ showModal: false })
-
-
-  }
 
   render() {
 
@@ -242,7 +232,7 @@ class App extends Component {
       <Modal
         title={'Message:'}
         message={'There is some content saved from the last session. Do you want to restore it?'}>
-        <Button type="primary" eventHandler={() => this.rollbackData(true)}>YES</Button>
+        <Button type="primary" eventHandler={this.rollbackData}>YES</Button>
         <Button type="secondary" eventHandler={this.initSession}>NO</Button>
       </Modal>
     )
