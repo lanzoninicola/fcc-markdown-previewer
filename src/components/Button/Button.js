@@ -7,7 +7,7 @@ const Button = (props) => {
     const { type, eventHandler } = props;
 
     return (
-        <button className={`button-${type}`} onClick={eventHandler}>{props.children}</button>
+        <button className={`button button-${type}`} onClick={eventHandler}>{props.children}</button>
     )
 }
 

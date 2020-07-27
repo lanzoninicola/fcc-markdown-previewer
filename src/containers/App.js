@@ -85,7 +85,7 @@ class App extends Component {
   initSession = () => {
     resetLocalStorageSession();
     this.setState({
-      showModal: false,
+      showModalRollbackContent: false,
       editingStatus: 'idle'
     });
   }

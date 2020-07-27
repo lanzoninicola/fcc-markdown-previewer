@@ -15,7 +15,9 @@
 .header{
     display: flex;
     justify-content: space-between;
-    background-color: #006D77;
+    /* background-color: #006D77; */
+    background: rgb(0,109,119);
+    background: linear-gradient(90deg, rgba(0, 109, 119,1) 45%, rgba(1,118,189,1) 100%);
 }
 
 .header-title{
