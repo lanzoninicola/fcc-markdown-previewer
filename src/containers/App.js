@@ -32,13 +32,15 @@ class App extends Component {
       lastMarkupVersion: 0,
       markupVersionsHistory: [],
       versionSelectedFromHistory: 0,
-      showModalRollbackContent: false
+
+      showModalRollbackContent: false,
+
+      textSelected: ''
     }
   }
 
   componentDidMount() {
-
-    window.addEventListener("resize", this.setWindowDimensions());
+    document.addEventListener("resize", this.setWindowDimensions());
 
     if (this.isThereDataInLocalStorageSession()) {
       this.setState({ showModalRollbackContent: true })
@@ -48,7 +50,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.setWindowDimensions())
+    document.removeEventListener("resize", this.setWindowDimensions())
   }
 
   setWindowDimensions = () => {
@@ -136,8 +138,6 @@ class App extends Component {
     this.setState({ markupText: '' });
   }
 
-
-
   resetMarkupVersion = () => {
     this.setState({
       lastMarkupVersion: 0,
@@ -222,6 +222,18 @@ class App extends Component {
     this.setState({ markupText: markupTextFromHistory })
   }
 
+  handleTextSelection = () => {
+    // this does not work in Firefox due to its bug
+    const getTextSelected = document.onselectionchange = function () {
+      return document.getSelection().toString();
+    };
+
+    this.setState(
+      { textSelected: getTextSelected() }
+    )
+  }
+
+
 
   render() {
 
@@ -234,6 +246,8 @@ class App extends Component {
       versionSelectedFromHistory,
       showModalRollbackContent
     } = this.state;
+
+    console.log('state - textSelected:', this.state.textSelected)
 
     const modalRollbackContent = (
       <Modal
@@ -254,10 +268,11 @@ class App extends Component {
           <EditorPanel
             editingStatus={editingStatus}
             markupText={markupText}
-            handleEditorChange={this.handleEditorChange}
             markupVersionsHistory={markupVersionsHistory}
             lastMarkupVersion={lastMarkupVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
+            handleEditorChange={this.handleEditorChange}
+            handleTextSelection={this.handleTextSelection}
             handleMarkupVersionChange={this.handleMarkupVersionChange}
           />
           <PreviewPanel rawText={markupText} />

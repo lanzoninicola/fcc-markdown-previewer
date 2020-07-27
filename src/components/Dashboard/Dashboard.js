@@ -3,9 +3,10 @@ import './Dashboard.css'
 
 
 const Dashboard = ({ text }) => {
+
     return (
         <div id="dashboard">
-            <p>{`Number of characters: ${text.length}`}</p>
+            <p>Number of characters: <strong>{text.length}</strong></p>
         </div>
     )
 }

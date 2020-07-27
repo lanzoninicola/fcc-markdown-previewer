@@ -15,8 +15,6 @@
     resize: none;
   }
 
-
-
   #editor:focus {
     outline: none;
     border: solid 3px #6E7E85;

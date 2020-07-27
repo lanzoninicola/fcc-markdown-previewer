@@ -4,17 +4,15 @@ import EditorArea from './EditorArea/EditorArea'
 
 
 class EditorPanel extends Component {
-
-
     render() {
-
         const {
             editingStatus,
             markupText,
-            handleEditorChange,
             lastMarkupVersion,
             versionSelectedFromHistory,
             markupVersionsHistory,
+            handleEditorChange,
+            handleTextSelection,
             handleMarkupVersionChange
         } = this.props;
 
@@ -22,7 +20,6 @@ class EditorPanel extends Component {
             return <option key={i}>{`Version ${mkVersion}`}</option>
         })
 
-        console.log('editorpanel - markupVersionsHistory', markupVersionsHistory)
         return (
             <div id="editorSection">
                 <div id="editorSection-header">
@@ -36,12 +33,11 @@ class EditorPanel extends Component {
                         </div>
                         : null}
                 </div >
-
-
                 <EditorArea
                     editingStatus={editingStatus}
                     rawText={markupText}
                     handleEditorChange={handleEditorChange}
+                    handleTextSelection={handleTextSelection}
                 />
 
             </div >
@@ -52,3 +48,24 @@ class EditorPanel extends Component {
 
 
 export default EditorPanel;
+
+
+// let text = 'Nicola abita a Valeggio con Mara';
+
+// let textSelected = 'Valeggio con';
+
+// let startSelection = text.search(textSelected);
+// //startSelection
+// let endSelection = startSelection + textSelected.length +1;
+
+// //endSelection
+
+// let textToArray = [];
+// textToArray.push(...text.split(""))
+
+// textToArray.splice(startSelection, 0, "***")
+
+// textToArray.splice(endSelection, 0, "***")
+
+// textToArray.join("")
+

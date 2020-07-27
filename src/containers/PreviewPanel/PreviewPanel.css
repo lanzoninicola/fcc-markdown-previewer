@@ -25,6 +25,10 @@
   margin-bottom: 10px;
 }
 
+#preview code {
+  background-color: whitesmoke;
+ }
+
 @media screen and (max-width: 992px) {
   #previewSection {
     width: auto;
