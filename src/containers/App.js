@@ -31,13 +31,13 @@ class App extends Component {
       lastMarkupVersion: 0,
       markupVersionsHistory: [],
       versionSelectedFromHistory: 0,
-      showModal: false
+      showModalRollbackContent: false
     }
   }
 
   componentDidMount() {
     if (this.isThereDataInLocalStorageSession()) {
-      this.setState({ showModal: true })
+      this.setState({ showModalRollbackContent: true })
     } else {
       this.initSession()
     }
@@ -47,13 +47,7 @@ class App extends Component {
     const markupTextLogger = getMarkupTextLogger();
     const markupVersionsHistory = getMarkupVersionsHistory();
 
-    let result = false;
-
-    if ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory)) {
-      result = true;
-    }
-
-    return result;
+    return ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory));
   }
 
   rollbackData = () => {
@@ -225,7 +219,7 @@ class App extends Component {
       markupVersionsHistory,
       lastMarkupVersion,
       versionSelectedFromHistory,
-      showModal
+      showModalRollbackContent
     } = this.state;
 
     const modalRollbackContent = (
@@ -240,13 +234,12 @@ class App extends Component {
 
     return (
       <Fragment>
-        {(showModal) ? modalRollbackContent : null}
+        {(showModalRollbackContent) ? modalRollbackContent : null}
         <Header />
         <Dashboard text={markupText} />
         <div className="container">
           <EditorPanel
             editingStatus={editingStatus}
-            status={editingStatus}
             markupText={markupText}
             handleEditorChange={this.handleEditorChange}
             markupVersionsHistory={markupVersionsHistory}
