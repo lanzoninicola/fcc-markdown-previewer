@@ -27,13 +27,11 @@
 
 #title {
     margin: 0px;
-    
     padding: 10px;
     color: #EDF6F9;
     font-family: 'Hind';
     font-weight: 100;
     font-size: 1.5rem;
-    
 }
 
 
@@ -47,3 +45,13 @@
 .header-toolbar p {
     margin-right: 30px;
 }
+
+
+@media screen and (max-width: 450px) {
+    #title {
+        padding-top: 12px;
+        font-size: 0.8rem;
+        width: 50px;
+        line-height: 1rem;
+    }
+  }

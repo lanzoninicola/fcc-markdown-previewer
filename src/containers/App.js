@@ -26,6 +26,7 @@ class App extends Component {
     super(props)
 
     this.state = {
+      screenWidth: 0,
       editingStatus: 'idle',
       markupText: placeholder,
       lastMarkupVersion: 0,
@@ -36,11 +37,22 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    window.addEventListener("resize", this.setWindowDimensions());
+
     if (this.isThereDataInLocalStorageSession()) {
       this.setState({ showModalRollbackContent: true })
     } else {
       this.initSession()
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.setWindowDimensions())
+  }
+
+  setWindowDimensions = () => {
+    this.setState({ screenWidth: window.innerWidth });
   }
 
   isThereDataInLocalStorageSession = () => {
@@ -214,6 +226,7 @@ class App extends Component {
   render() {
 
     const {
+      screenWidth,
       editingStatus,
       markupText,
       markupVersionsHistory,
@@ -249,6 +262,7 @@ class App extends Component {
           />
           <PreviewPanel rawText={markupText} />
           <Toolbar
+            screenWidth={screenWidth}
             editingStatus={editingStatus}
             handleNewMarkupContent={this.handleNewMarkupContent}
             handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
