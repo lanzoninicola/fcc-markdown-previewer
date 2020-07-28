@@ -1,35 +1,25 @@
 import React from 'react'
 import './Toolbar.css'
 import ToolbarItem from './ToolbarItem/ToolbarItem'
-import { SvgNewIcon, SvgSnapshotIcon, SvgClearIcon } from './ToolbarIcons'
+import { getToolbarConfig } from './ToolbarConfig/ToolbarIConfig'
 
-const Toolbar = ({ editingStatus, handleNewMarkupContent, handleAddMarkupContentToHistory, handleClearMarkupContent, screenWidth }) => {
+const Toolbar = ({
+    editingStatus,
+    handleNewMarkupContent,
+    handleAddMarkupContentToHistory,
+    handleClearMarkupContent,
+    handleTextFormatting,
+}) => {
 
-    const toolbarItems = [
-        {
-            label: 'New',
-            icon: <SvgNewIcon screenWidth={screenWidth} />,
-            alt: 'New markup content',
-            disabled: false,
-            eventHandler: handleNewMarkupContent
-        },
-        {
-            label: 'Snapshot',
-            icon: <SvgSnapshotIcon screenWidth={screenWidth} />,
-            alt: 'Take a snapshot of markup text',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleAddMarkupContentToHistory
-        },
-        {
-            label: 'Clear',
-            icon: <SvgClearIcon screenWidth={screenWidth} />,
-            alt: 'Remove Markup Content',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleClearMarkupContent
-        }
-    ]
+    const toolbarItems = getToolbarConfig({
+        editingStatus,
+        handleNewMarkupContent,
+        handleAddMarkupContentToHistory,
+        handleClearMarkupContent,
+        handleTextFormatting,
+    });
 
-    const toolbarItemsRender = toolbarItems.map((item, i) => {
+    const renderToolbarItems = toolbarItems.map((item, i) => {
         let toolbarItem = null;
 
         if (item.disabled === false) {
@@ -46,7 +36,7 @@ const Toolbar = ({ editingStatus, handleNewMarkupContent, handleAddMarkupContent
 
     return (
         <div id="toolbarArea">
-            <div id="toolbar">{toolbarItemsRender}</div>
+            <div id="toolbar">{renderToolbarItems}</div>
         </div>
     )
 }

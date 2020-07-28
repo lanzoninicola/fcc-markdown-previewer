@@ -35,12 +35,19 @@ class App extends Component {
 
       showModalRollbackContent: false,
 
-      textSelected: ''
+      textSelection: {
+        // textSelected: '',
+        startSelection: 0,
+        endSelection: 0
+      }
     }
+
+    this.textArea = React.createRef();
+
   }
 
   componentDidMount() {
-    document.addEventListener("resize", this.setWindowDimensions());
+    // document.addEventListener("resize", this.setWindowDimensions());
 
     if (this.isThereDataInLocalStorageSession()) {
       this.setState({ showModalRollbackContent: true })
@@ -50,7 +57,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener("resize", this.setWindowDimensions())
+    // document.removeEventListener("resize", this.setWindowDimensions())
   }
 
   setWindowDimensions = () => {
@@ -223,17 +230,188 @@ class App extends Component {
   }
 
   handleTextSelection = () => {
-    // this does not work in Firefox due to its bug
-    const getTextSelected = document.onselectionchange = function () {
-      return document.getSelection().toString();
-    };
+    const { textSelection, markupText } = this.state;
+
+    let newTextSelection = { ...textSelection };
+
+    let startSelection = this.textArea.current.selectionStart;
+    let endSelection = this.textArea.current.selectionEnd;
+
+    if (markupText[startSelection] === " ") { startSelection = startSelection + 1 }
+    if (markupText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
+
+    newTextSelection.startSelection = startSelection;
+    newTextSelection.endSelection = endSelection;
 
     this.setState(
-      { textSelected: getTextSelected() }
+      { textSelection: newTextSelection }
+    )
+
+  }
+
+  handleTextFormatting = (formattingType) => {
+    const { textSelection, markupText } = this.state;
+    let textToFormat = [];
+    textToFormat.push(...markupText.split(""))
+    let markupTextPostFormatting = '';
+
+    console.log('handleTextFormatting', textSelection)
+
+    if (textSelection.startSelection !== textSelection.endSelection) {
+
+
+      switch (formattingType) {
+        case 'H1':
+          markupTextPostFormatting = this.setH1(textToFormat);
+          break;
+        case 'H2':
+          markupTextPostFormatting = this.setH2(textToFormat);
+          break;
+        case 'H3':
+          markupTextPostFormatting = this.setH3(textToFormat);
+          break;
+        case 'BOLD':
+          markupTextPostFormatting = this.setBold(textToFormat);
+          break;
+        case 'ITALIC':
+          markupTextPostFormatting = this.setItalic(textToFormat);
+          break;
+        case 'STRIKETROUGH':
+          markupTextPostFormatting = this.setStrikeThrough(textToFormat);
+          break;
+        case 'CODE':
+          markupTextPostFormatting = this.setCode(textToFormat);
+          break;
+        case 'BLOCKCODE':
+          markupTextPostFormatting = this.setBlockCode(textToFormat);
+          break;
+        case 'LINK':
+          markupTextPostFormatting = this.setLink(textToFormat);
+          break;
+        case 'LIST':
+          markupTextPostFormatting = this.setList(textToFormat);
+          break;
+        case 'NUMBERS':
+          markupTextPostFormatting = this.setNumbers(textToFormat);
+          break;
+        case 'IMAGE':
+          markupTextPostFormatting = this.setImage(textToFormat);
+          break;
+        case 'TABLE':
+          markupTextPostFormatting = this.setTable(textToFormat);
+          break;
+        default:
+          break;
+      }
+    }
+
+    switch (formattingType) {
+      case 'IMAGE':
+        markupTextPostFormatting = this.setImage(textToFormat);
+        break;
+      case 'TABLE':
+        markupTextPostFormatting = this.setTable(textToFormat);
+        break;
+      default:
+        break;
+    }
+
+
+    setMarkupTextLogger(markupTextPostFormatting);
+
+    this.setState(
+      { markupText: markupTextPostFormatting }
     )
   }
 
+  setH1 = (text) => {
+    const { startSelection } = this.state.textSelection;
+    text.splice(startSelection, 0, "# ");
+    return text.join("");
+  }
 
+  setH2 = (text) => {
+    const { startSelection } = this.state.textSelection;
+    text.splice(startSelection, 0, "## ");
+    return text.join("");
+  }
+
+  setH3 = (text) => {
+    const { startSelection } = this.state.textSelection;
+    text.splice(startSelection, 0, "### ");
+    return text.join("");
+  }
+
+  setBold = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "**");
+    text.splice(startSelection, 0, "**");
+    return text.join("");
+  }
+
+  setItalic = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "_");
+    text.splice(startSelection, 0, "_");
+    return text.join("");
+  }
+
+  setStrikeThrough = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "~~");
+    text.splice(startSelection, 0, "~~");
+    return text.join("");
+  }
+
+  setCode = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "`");
+    text.splice(startSelection, 0, "`");
+    return text.join("");
+  }
+
+  setBlockCode = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "```");
+    text.splice(startSelection, 0, "```");
+    return text.join("");
+  }
+
+  setLink = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, ")");
+    text.splice(startSelection, 0, "[links](");
+    return text.join("");
+  }
+
+  setList = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "");
+    text.splice(startSelection, 0, "- ");
+    return text.join("");
+  }
+
+  setNumbers = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "");
+    text.splice(startSelection, 0, "1. ");
+    return text.join("");
+  }
+
+  setImage = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    console.log('setImage', startSelection)
+    text.splice(endSelection, 0, "");
+    text.splice(startSelection, 0, "![<insert an image description>](<insert the URL of image>)");
+    return text.join("");
+  }
+
+  setTable = (text) => {
+    const { startSelection, endSelection } = this.state.textSelection;
+    text.splice(endSelection, 0, "");
+    text.splice(startSelection, 0, "1. ");
+    return text.join("");
+  }
 
   render() {
 
@@ -247,7 +425,7 @@ class App extends Component {
       showModalRollbackContent
     } = this.state;
 
-    console.log('state - textSelected:', this.state.textSelected)
+    console.log(this.state.textSelection)
 
     const modalRollbackContent = (
       <Modal
@@ -274,6 +452,7 @@ class App extends Component {
             handleEditorChange={this.handleEditorChange}
             handleTextSelection={this.handleTextSelection}
             handleMarkupVersionChange={this.handleMarkupVersionChange}
+            refsTextArea={this.textArea}
           />
           <PreviewPanel rawText={markupText} />
           <Toolbar
@@ -282,6 +461,7 @@ class App extends Component {
             handleNewMarkupContent={this.handleNewMarkupContent}
             handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
             handleClearMarkupContent={this.handleClearMarkupContent}
+            handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
           />
         </div>
       </Fragment >
