@@ -251,7 +251,7 @@ class App extends Component {
 
     const modalRollbackContent = (
       <Modal
-        title={'Message:'}
+        title={'Welcome back...'}
         message={'There is some content saved from the last session. Do you want to restore it?'}>
         <Button type="primary" eventHandler={this.rollbackData}>YES</Button>
         <Button type="secondary" eventHandler={this.initSession}>NO</Button>

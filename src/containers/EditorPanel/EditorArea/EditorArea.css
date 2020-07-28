@@ -2,20 +2,30 @@
     box-sizing: border-box;
     border: none;
     width: 100%;
-    min-height: 100vh;
-    padding: 30px;
+    height: 100%;
+    padding: 20px;
     background-color: white;
     border-radius: 0.7%;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    font-size: 15px;
   }
 
   textarea {
     width: 100%;
     resize: none;
+    font-family: 'Hind', Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 21px;
   }
 
   #editor:focus {
     outline: none;
     border: solid 3px #6E7E85;
   }
+
+
+  @media screen and (max-width: 450px) {
+    #editor {
+      height: 100vh;
+    }
+  }
+  

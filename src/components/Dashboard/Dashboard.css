@@ -1,6 +1,19 @@
 #dashboard {
     display: flex;
     justify-content: center;
-    font-family: 'Hind';
-    font-weight: 200;
+
+    background-color: rgb(136, 82, 127, 0.8);
+}
+
+.dashboard-text {
+    padding: 3px;
+    margin: 0px;
+    font-family: 'Hind', Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    color: white;
+}
+
+.dashboard-text strong {
+    font-weight: 600;
 }
