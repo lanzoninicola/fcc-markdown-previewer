@@ -12,6 +12,20 @@
        url('../asset/fonts/hind-v10-latin-regular.svg#Hind') format('svg'); /* Legacy iOS */
 }
 
+/* roboto-slab-regular - latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../asset/fonts/roboto-slab-v12-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../asset/fonts/roboto-slab-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../asset/fonts/roboto-slab-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../asset/fonts/roboto-slab-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../asset/fonts/roboto-slab-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../asset/fonts/roboto-slab-v12-latin-regular.svg#RobotoSlab') format('svg'); /* Legacy iOS */
+}
+
 
 /* alegreya-sans-regular - latin */
 @font-face {

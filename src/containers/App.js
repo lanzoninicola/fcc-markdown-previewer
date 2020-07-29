@@ -314,7 +314,6 @@ class App extends Component {
         break;
     }
 
-
     setMarkupTextLogger(markupTextPostFormatting);
 
     this.setState(

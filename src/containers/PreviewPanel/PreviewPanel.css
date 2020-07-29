@@ -17,13 +17,14 @@
   background-color:#fbfbfb;
   border-radius: 0.7%;
   /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
-  font-family: 'Hind', Helvetica, sans-serif;
+  
   font-size: 18px;
 }
 
 #preview-panel-header {
   display: flex;
   justify-content: space-between;
+  font-family: 'Hind', Helvetica, sans-serif;
   margin-bottom: 10px;
 }
 
