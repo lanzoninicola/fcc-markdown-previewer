@@ -4,6 +4,7 @@ import ToolbarItem from './ToolbarItem/ToolbarItem'
 import { getToolbarConfig } from './ToolbarConfig/ToolbarIConfig'
 
 const Toolbar = ({
+    screenWidth,
     editingStatus,
     handleNewMarkupContent,
     handleAddMarkupContentToHistory,
@@ -12,6 +13,7 @@ const Toolbar = ({
 }) => {
 
     const toolbarItems = getToolbarConfig({
+        screenWidth,
         editingStatus,
         handleNewMarkupContent,
         handleAddMarkupContentToHistory,
@@ -25,6 +27,7 @@ const Toolbar = ({
         if (item.disabled === false) {
             toolbarItem = <ToolbarItem
                 key={i}
+                screenWidth={screenWidth}
                 label={item.label}
                 icon={item.icon}
                 disabled={item.disabled}
@@ -34,10 +37,12 @@ const Toolbar = ({
         return toolbarItem;
     })
 
+    let toolbarPositionStyle = (screenWidth) < 1400 ? 'top' : 'bottom';
+
     return (
-        <div id="toolbarArea">
+        <div className={`toolbarArea-${toolbarPositionStyle}`}>
             <div id="toolbar">{renderToolbarItems}</div>
-        </div>
+        </div >
     )
 }
 

@@ -22,12 +22,12 @@ class EditorPanel extends Component {
         })
 
         return (
-            <div id="editorSection">
-                <div id="editorSection-header">
-                    <h3 id="editorSection-header-title">EDITOR</h3>
+            <div id="editor-panel">
+                <div id="editor-panel-header">
+                    <h3 id="editor-panel-header-title">EDITOR</h3>
                     {markupVersionsHistory.length > 0 && editingStatus === 'InProgress' ?
-                        <div id="editorSection-header-select">
-                            <label htmlFor="markup-version" id="editorSection-header-select-label">Markup version:</label>
+                        <div id="editor-panel-header-select">
+                            <label htmlFor="markup-version" id="editor-panel-header-select-label">Markup version:</label>
                             <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastMarkupVersion}`} onChange={handleMarkupVersionChange}>
                                 {mkVersionsOptions}
                             </select>

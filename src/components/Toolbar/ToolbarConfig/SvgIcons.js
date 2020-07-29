@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SvgIcons = ({ iconType }) => {
+const SvgIcons = ({ screenWidth, iconType }) => {
 
     let pathValue = null;
 
@@ -58,8 +58,8 @@ const SvgIcons = ({ iconType }) => {
             break;
     }
 
-    let svgWidth = "30"
-    let svgHeight = "30";
+    let svgWidth = (screenWidth <= 950) ? "15" : "30";
+    let svgHeight = (screenWidth <= 950) ? "15" : "30";
 
     return (
         <svg

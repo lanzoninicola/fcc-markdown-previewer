@@ -47,7 +47,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // document.addEventListener("resize", this.setWindowDimensions());
+    document.addEventListener("resize", this.setWindowDimensions());
 
     if (this.isThereDataInLocalStorageSession()) {
       this.setState({ showModalRollbackContent: true })
@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // document.removeEventListener("resize", this.setWindowDimensions())
+    document.removeEventListener("resize", this.setWindowDimensions())
   }
 
   setWindowDimensions = () => {
@@ -257,9 +257,7 @@ class App extends Component {
 
     console.log('handleTextFormatting', textSelection)
 
-    if (textSelection.startSelection !== textSelection.endSelection) {
-
-
+    if (this.someTextHasBeenHighlited) {
       switch (formattingType) {
         case 'H1':
           markupTextPostFormatting = this.setH1(textToFormat);
@@ -323,6 +321,13 @@ class App extends Component {
       { markupText: markupTextPostFormatting }
     )
   }
+
+
+  someTextHasBeenHighlited = () => {
+    const { textSelection } = this.state;
+    return textSelection.startSelection !== textSelection.endSelection
+  }
+
 
   setH1 = (text) => {
     const { startSelection } = this.state.textSelection;
@@ -436,13 +441,22 @@ class App extends Component {
       </Modal>
     )
 
-
     return (
       <Fragment>
         {(showModalRollbackContent) ? modalRollbackContent : null}
         <Header />
-        <Dashboard text={markupText} />
-        <div className="container">
+        <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
+          <Dashboard text={markupText} />
+          <Toolbar
+            screenWidth={screenWidth}
+            editingStatus={editingStatus}
+            handleNewMarkupContent={this.handleNewMarkupContent}
+            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
+            handleClearMarkupContent={this.handleClearMarkupContent}
+            handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
+          />
+        </div>
+        <div className="container" style={{ flexDirection: (screenWidth < 950) ? "column" : "row" }}>
           <EditorPanel
             editingStatus={editingStatus}
             markupText={markupText}
@@ -455,14 +469,6 @@ class App extends Component {
             refsTextArea={this.textArea}
           />
           <PreviewPanel rawText={markupText} />
-          <Toolbar
-            screenWidth={screenWidth}
-            editingStatus={editingStatus}
-            handleNewMarkupContent={this.handleNewMarkupContent}
-            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
-            handleClearMarkupContent={this.handleClearMarkupContent}
-            handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
-          />
         </div>
       </Fragment >
     );

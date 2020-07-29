@@ -1,8 +1,8 @@
 #dashboard {
     display: flex;
     justify-content: center;
-
-    background-color: rgb(136, 82, 127, 0.8);
+    /* background-color: rgb(136, 82, 127, 0.8); */
+    width: 100%;
 }
 
 .dashboard-text {
@@ -11,7 +11,8 @@
     font-family: 'Hind', Helvetica, sans-serif;
     font-weight: 100;
     font-size: 14px;
-    color: white;
+    color: rgba(1,118,189,0.9);
+    /* color: white; */
 }
 
 .dashboard-text strong {

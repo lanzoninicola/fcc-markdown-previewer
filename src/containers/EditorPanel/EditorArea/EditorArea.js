@@ -13,7 +13,8 @@ const EditorArea = ({ editingStatus, rawText, handleEditorChange, handleTextSele
             onClick={handleTextSelection}
             onSelect={handleTextSelection}
             value={rawText}
-            readOnly={readonly}>
+            readOnly={readonly}
+            placeholder="Start here...">
         </textarea>
     )
 }

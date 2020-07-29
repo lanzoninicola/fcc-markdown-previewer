@@ -1,3 +1,18 @@
+/* hind-regular - latin */
+@font-face {
+  font-family: 'Hind';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../asset/fonts/hind-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Hind Regular'), local('Hind-Regular'),
+       url('../asset/fonts/hind-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../asset/fonts/hind-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../asset/fonts/hind-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../asset/fonts/hind-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../asset/fonts/hind-v10-latin-regular.svg#Hind') format('svg'); /* Legacy iOS */
+}
+
+
 /* alegreya-sans-regular - latin */
 @font-face {
   font-family: 'Alegreya Sans';
@@ -14,7 +29,6 @@
 
 .container {
   display: flex;
-  flex-direction: row;
   justify-content: center;
 }
 
@@ -25,7 +39,7 @@ h3 {
   font-size: 1rem;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 450px) {
   .container {
     display: flex;
     flex-direction: column;
