@@ -8,6 +8,7 @@ export const getToolbarConfig = ({
     handleAddMarkupContentToHistory,
     handleClearMarkupContent,
     handleTextFormatting,
+    handleInsertImage
 }) => {
     const toolbarItems = [
         {
@@ -119,7 +120,7 @@ export const getToolbarConfig = ({
             icon: <SvgIcons iconType={'IMAGE'} screenWidth={screenWidth} />,
             alt: 'Image',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('IMAGE')
+            eventHandler: handleInsertImage
         },
         {
             label: 'TABLE',

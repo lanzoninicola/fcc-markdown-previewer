@@ -29,11 +29,14 @@ class App extends Component {
       screenWidth: 0,
       editingStatus: 'idle',
       markupText: placeholder,
+      markupImageDescription: '',
+      markupImageURL: '',
       lastMarkupVersion: 0,
       markupVersionsHistory: [],
       versionSelectedFromHistory: 0,
 
       showModalRollbackContent: false,
+      showModalInsertImage: false,
 
       textSelection: {
         // textSelected: '',
@@ -292,21 +295,12 @@ class App extends Component {
         case 'NUMBERS':
           markupTextPostFormatting = this.setNumbers(textToFormat);
           break;
-        case 'IMAGE':
-          markupTextPostFormatting = this.setImage(textToFormat);
-          break;
-        case 'TABLE':
-          markupTextPostFormatting = this.setTable(textToFormat);
-          break;
         default:
           break;
       }
     }
 
     switch (formattingType) {
-      case 'IMAGE':
-        markupTextPostFormatting = this.setImage(textToFormat);
-        break;
       case 'TABLE':
         markupTextPostFormatting = this.setTable(textToFormat);
         break;
@@ -402,12 +396,30 @@ class App extends Component {
     return text.join("");
   }
 
-  setImage = (text) => {
+  handleInsertImage = () => {
+    this.setState({ showModalInsertImage: true })
+  }
+
+  setImage = () => {
+    const { markupText } = this.state;
     const { startSelection, endSelection } = this.state.textSelection;
-    console.log('setImage', startSelection)
-    text.splice(endSelection, 0, "");
-    text.splice(startSelection, 0, "![<insert an image description>](<insert the URL of image>)");
-    return text.join("");
+
+    let textToFormat = [];
+    textToFormat.push(...markupText.split(""))
+    let markupTextPostFormatting = '';
+
+    let imageMarkupText = `![${this.state.markupImageDescription}](${this.state.markupImageURL})`;
+
+    textToFormat.splice(endSelection, 0, "");
+    textToFormat.splice(startSelection, 0, imageMarkupText);
+    markupTextPostFormatting = textToFormat.join("");
+
+    this.setState(
+      {
+        markupText: markupTextPostFormatting,
+        showModalInsertImage: false
+      }
+    )
   }
 
   setTable = (text) => {
@@ -415,6 +427,14 @@ class App extends Component {
     text.splice(endSelection, 0, "");
     text.splice(startSelection, 0, "1. ");
     return text.join("");
+  }
+
+  handleInputImageDescription = (e) => {
+    this.setState({ markupImageDescription: e.target.value })
+  }
+
+  handleInputImageURL = (e) => {
+    this.setState({ markupImageURL: e.target.value })
   }
 
   render() {
@@ -426,7 +446,11 @@ class App extends Component {
       markupVersionsHistory,
       lastMarkupVersion,
       versionSelectedFromHistory,
-      showModalRollbackContent
+      showModalRollbackContent,
+      showModalInsertImage,
+      markupImageDescription,
+      markupImageURL
+
     } = this.state;
 
     console.log(this.state.textSelection)
@@ -440,9 +464,34 @@ class App extends Component {
       </Modal>
     )
 
+    const modalInsertImage = (
+      <Modal
+        title={'Select an image'}
+        inputs={[
+          {
+            value: markupImageDescription,
+            placeholder: "Type a description",
+            label: "Description",
+            onChangeEventHandler: this.handleInputImageDescription,
+            required: true
+          },
+          {
+            value: markupImageURL,
+            placeholder: "Paste the image URL",
+            label: "Image URL",
+            onChangeEventHandler: this.handleInputImageURL,
+            required: true
+          }
+        ]}
+      >,
+        <Button type="primary" eventHandler={this.setImage}>OK</Button>
+      </Modal >
+    )
+
     return (
       <Fragment>
-        {(showModalRollbackContent) ? modalRollbackContent : null}
+        {showModalInsertImage ? modalInsertImage : null}
+        {showModalRollbackContent ? modalRollbackContent : null}
         <Header />
         <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
           <Dashboard text={markupText} />
@@ -453,6 +502,7 @@ class App extends Component {
             handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
             handleClearMarkupContent={this.handleClearMarkupContent}
             handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
+            handleInsertImage={this.handleInsertImage}
           />
         </div>
         <div className="container" style={{ flexDirection: (screenWidth < 950) ? "column" : "row" }}>

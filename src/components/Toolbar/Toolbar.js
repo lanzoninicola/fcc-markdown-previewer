@@ -10,6 +10,7 @@ const Toolbar = ({
     handleAddMarkupContentToHistory,
     handleClearMarkupContent,
     handleTextFormatting,
+    handleInsertImage
 }) => {
 
     const toolbarItems = getToolbarConfig({
@@ -19,6 +20,7 @@ const Toolbar = ({
         handleAddMarkupContentToHistory,
         handleClearMarkupContent,
         handleTextFormatting,
+        handleInsertImage
     });
 
     const renderToolbarItems = toolbarItems.map((item, i) => {
