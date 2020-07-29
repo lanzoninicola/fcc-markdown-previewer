@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
+import Form from '../components/Form/Form'
 import {
   getMarkupTextLogger,
   getMarkupVersionsHistory,
@@ -249,7 +250,6 @@ class App extends Component {
     this.setState(
       { textSelection: newTextSelection }
     )
-
   }
 
   handleTextFormatting = (formattingType) => {
@@ -414,6 +414,8 @@ class App extends Component {
     textToFormat.splice(startSelection, 0, imageMarkupText);
     markupTextPostFormatting = textToFormat.join("");
 
+    setMarkupTextLogger(markupTextPostFormatting);
+
     this.setState(
       {
         markupText: markupTextPostFormatting,
@@ -424,8 +426,11 @@ class App extends Component {
 
   setTable = (text) => {
     const { startSelection, endSelection } = this.state.textSelection;
+
+    const tableMarkupText = "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r"
+
     text.splice(endSelection, 0, "");
-    text.splice(startSelection, 0, "1. ");
+    text.splice(startSelection, 0, tableMarkupText);
     return text.join("");
   }
 
@@ -450,10 +455,7 @@ class App extends Component {
       showModalInsertImage,
       markupImageDescription,
       markupImageURL
-
     } = this.state;
-
-    console.log(this.state.textSelection)
 
     const modalRollbackContent = (
       <Modal
@@ -464,9 +466,9 @@ class App extends Component {
       </Modal>
     )
 
-    const modalInsertImage = (
-      <Modal
-        title={'Select an image'}
+    const formInsertImage = (
+      <Form
+        title={'Insert the following information:'}
         inputs={[
           {
             value: markupImageDescription,
@@ -485,12 +487,12 @@ class App extends Component {
         ]}
       >,
         <Button type="primary" eventHandler={this.setImage}>OK</Button>
-      </Modal >
+      </Form >
     )
 
     return (
       <Fragment>
-        {showModalInsertImage ? modalInsertImage : null}
+        {showModalInsertImage ? formInsertImage : null}
         {showModalRollbackContent ? modalRollbackContent : null}
         <Header />
         <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
