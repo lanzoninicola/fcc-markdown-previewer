@@ -1,7 +1,8 @@
-.preview-render-github h1, h2, h3, p {
-  /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji; */
-  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+.preview-render-github {
+  padding-left: 15px;
+    /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji; */
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
 }
 
 .preview-render-github h1, .preview-render-github h2 {
@@ -10,7 +11,10 @@
 }
 
 .preview-render-github h1 {
-  font-size: 16px;
+  font-size: 2em;
+  margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
 }
 
 .preview-render-github h2 {
@@ -21,14 +25,19 @@
 }
 
 .preview-render-github h3 {
-  font-size: 16px;
+  font-size: 1.25em;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .preview-render-github p {
-  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
-
-
 
 .preview-render-github code {
     background-color: whitesmoke;
@@ -36,31 +45,74 @@
 
 
 .preview-render-github pre {
-  padding: 10px;
-  background-color: whitesmoke;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.preview-render-github a {
+  color: #0366d6;
+  text-decoration: none;
 }
 
 .preview-render-github blockquote {
-  border-left: 5px solid rgb(128, 128, 128, 0.4);
-  padding-left: 20px;
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: .25em solid #dfe2e5;
+  margin: 0px;
+}
+
+.preview-render-github table {
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-color: grey;
+}
+
+.preview-render-github table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+  font-weight: 600;
+}
+
+.preview-render-github table td {
+  display: table-cell;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.preview-render-github tr:nth-child(even){background-color: rgb(246,248,250)}
+
+.preview-render-github ul {
+  padding-left: 2em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.preview-render-github ol {
+  padding-left: 2em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.preview-render-github li+li {
+  margin-top: .25em;
 }
 
 
+@media screen and (max-width: 992px) {
+  #preview-render code {
+  font-size: 0.6rem;
+ }
 
-
-.preview-render-github table td, table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-.preview-render-github table tr:nth-child(even){background-color: #f2f2f2;}
-  
-.preview-render-github table tr:hover {background-color: #ddd;}
-  
-.preview-render-github table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background: rgb(0,109,119);
-  color: white;
+ #preview-render img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+ }
 }
