@@ -9,19 +9,19 @@ import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
 import Form from '../components/Form/Form'
 import {
-  getMarkupTextLogger,
-  getMarkupVersionsHistory,
-  setMarkupTextLogger,
-  setMarkupVersionsHistory,
-  resetMarkupTextLogger,
-  resetMarkupVersionsHistory,
+  getmarkdownTextLogger,
+  getmarkdownVersionsHistory,
+  setmarkdownTextLogger,
+  setmarkdownVersionsHistory,
+  resetmarkdownTextLogger,
+  resetmarkdownVersionsHistory,
   resetLocalStorageSession
 } from '../helper/helper'
 
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
-// pressing new and content in markup snapashot fire and alert
-// pressing CLEAR and content in markup snapashot fire and alert
+// pressing new and content in markdown snapashot fire and alert
+// pressing CLEAR and content in markdown snapashot fire and alert
 
 class App extends Component {
   constructor(props) {
@@ -30,11 +30,11 @@ class App extends Component {
     this.state = {
       screenWidth: 0,
       editingStatus: 'idle',
-      markupText: placeholder,
-      markupImageDescription: '',
-      markupImageURL: '',
-      lastMarkupVersion: 0,
-      markupVersionsHistory: [],
+      markdownText: placeholder,
+      markdownImageDescription: '',
+      markdownImageURL: '',
+      lastmarkdownVersion: 0,
+      markdownVersionsHistory: [],
       versionSelectedFromHistory: 0,
 
       showModalRollbackContent: false,
@@ -70,27 +70,27 @@ class App extends Component {
   }
 
   isThereDataInLocalStorageSession = () => {
-    const markupTextLogger = getMarkupTextLogger();
-    const markupVersionsHistory = getMarkupVersionsHistory();
+    const markdownTextLogger = getmarkdownTextLogger();
+    const markdownVersionsHistory = getmarkdownVersionsHistory();
 
-    return ((markupTextLogger && markupTextLogger.length > 0) || (markupVersionsHistory));
+    return ((markdownTextLogger && markdownTextLogger.length > 0) || (markdownVersionsHistory));
   }
 
   rollbackData = () => {
-    const markupTextLoggerData = getMarkupTextLogger();
-    const markupVersionsHistoryData = getMarkupVersionsHistory();
+    const markdownTextLoggerData = getmarkdownTextLogger();
+    const markdownVersionsHistoryData = getmarkdownVersionsHistory();
 
-    let lastMarkupSavedVersion = 0;
-    let markupVersionsHistory = [];
-    if (markupVersionsHistoryData) {
-      lastMarkupSavedVersion = markupVersionsHistoryData['versions'][markupVersionsHistoryData['versions'].length - 1];
-      markupVersionsHistory = markupVersionsHistoryData['versions'];
+    let lastmarkdownSavedVersion = 0;
+    let markdownVersionsHistory = [];
+    if (markdownVersionsHistoryData) {
+      lastmarkdownSavedVersion = markdownVersionsHistoryData['versions'][markdownVersionsHistoryData['versions'].length - 1];
+      markdownVersionsHistory = markdownVersionsHistoryData['versions'];
     }
 
     this.setState({
-      markupText: markupTextLoggerData,
-      lastMarkupVersion: lastMarkupSavedVersion,
-      markupVersionsHistory: markupVersionsHistory,
+      markdownText: markdownTextLoggerData,
+      lastmarkdownVersion: lastmarkdownSavedVersion,
+      markdownVersionsHistory: markdownVersionsHistory,
       editingStatus: 'InProgress',
       showModalRollbackContent: false
     });
@@ -105,145 +105,145 @@ class App extends Component {
   }
 
   handleEditorChange = (e) => {
-    setMarkupTextLogger(e.target.value);
+    setmarkdownTextLogger(e.target.value);
     this.setState({
       editingStatus: 'InProgress',
-      markupText: e.target.value
+      markdownText: e.target.value
     });
   }
 
-  handleNewMarkupContent = () => {
-    this.clearMarkupContent();
-    resetMarkupTextLogger();
-    resetMarkupVersionsHistory();
-    this.resetMarkupVersion();
+  handleNewmarkdownContent = () => {
+    this.clearmarkdownContent();
+    resetmarkdownTextLogger();
+    resetmarkdownVersionsHistory();
+    this.resetmarkdownVersion();
 
     this.setState({ editingStatus: 'New' })
   }
 
-  handleClearMarkupContent = () => {
-    this.clearMarkupContent();
+  handleClearmarkdownContent = () => {
+    this.clearmarkdownContent();
   }
 
-  handleAddMarkupContentToHistory = () => {
-    let newMarkupVersion;
+  handleAddmarkdownContentToHistory = () => {
+    let newmarkdownVersion;
 
-    const [existsmarkupVersionsHistorySaved, markupVersionsHistory] = this.getMarkupVersionsHistorySaved()
+    const [existsmarkdownVersionsHistorySaved, markdownVersionsHistory] = this.getmarkdownVersionsHistorySaved()
 
-    if (existsmarkupVersionsHistorySaved) {
-      newMarkupVersion = this.appendNewMarkupContentToHistory(this.state.lastMarkupVersion + 1, markupVersionsHistory)
+    if (existsmarkdownVersionsHistorySaved) {
+      newmarkdownVersion = this.appendNewmarkdownContentToHistory(this.state.lastmarkdownVersion + 1, markdownVersionsHistory)
       // increment the version based on saved version
       this.setState((state) => (
         {
-          lastMarkupVersion: state.lastMarkupVersion + 1,
+          lastmarkdownVersion: state.lastmarkdownVersion + 1,
           versionSelectedFromHistory: null
         }
       ))
     } else {
-      newMarkupVersion = this.createNewMarkupVersionHistory()
+      newmarkdownVersion = this.createNewmarkdownVersionHistory()
     }
 
-    setMarkupVersionsHistory(newMarkupVersion);
+    setmarkdownVersionsHistory(newmarkdownVersion);
   }
 
-  clearMarkupContent = () => {
-    this.setState({ markupText: '' });
+  clearmarkdownContent = () => {
+    this.setState({ markdownText: '' });
   }
 
-  resetMarkupVersion = () => {
+  resetmarkdownVersion = () => {
     this.setState({
-      lastMarkupVersion: 0,
-      markupVersionsHistory: []
+      lastmarkdownVersion: 0,
+      markdownVersionsHistory: []
     });
   }
 
-  getMarkupVersionsHistorySaved = () => {
-    let markupVersionsHistory = getMarkupVersionsHistory();
+  getmarkdownVersionsHistorySaved = () => {
+    let markdownVersionsHistory = getmarkdownVersionsHistory();
 
-    if (markupVersionsHistory) {
-      return [true, markupVersionsHistory]
+    if (markdownVersionsHistory) {
+      return [true, markdownVersionsHistory]
     }
 
-    return [false, { markupTextLoggers: {}, versions: [] }]
+    return [false, { markdownTextLoggers: {}, versions: [] }]
   }
 
-  createNewMarkupVersionHistory = () => {
+  createNewmarkdownVersionHistory = () => {
     const saveDate = new Date();
 
-    let newMarkupVersion = {
-      markupSnaphosts: {
+    let newmarkdownVersion = {
+      markdownSnaphosts: {
         0: {
-          markupText: this.state.markupText,
+          markdownText: this.state.markdownText,
           date: saveDate
         }
       },
       versions: [0]
     }
 
-    let newMarkupVersionsHistory = [...this.state.markupVersionsHistory];
-    newMarkupVersionsHistory.push(0);
+    let newmarkdownVersionsHistory = [...this.state.markdownVersionsHistory];
+    newmarkdownVersionsHistory.push(0);
 
     this.setState({
       lastSaveDate: saveDate,
-      markupVersionsHistory: newMarkupVersionsHistory
+      markdownVersionsHistory: newmarkdownVersionsHistory
     })
 
-    return newMarkupVersion;
+    return newmarkdownVersion;
   }
 
-  appendNewMarkupContentToHistory = (newVersion, history) => {
-    const { markupSnaphosts, versions } = history;
+  appendNewmarkdownContentToHistory = (newVersion, history) => {
+    const { markdownSnaphosts, versions } = history;
 
     const saveDate = new Date();
 
-    let newMarkupVersion = {
-      markupSnaphosts: {
-        ...markupSnaphosts,
+    let newmarkdownVersion = {
+      markdownSnaphosts: {
+        ...markdownSnaphosts,
         [newVersion]: {
-          markupText: this.state.markupText,
+          markdownText: this.state.markdownText,
           date: saveDate
         }
       },
       versions: [...versions, newVersion]
     }
 
-    let newMarkupVersionsHistory = [...this.state.markupVersionsHistory];
-    newMarkupVersionsHistory.push(newVersion);
+    let newmarkdownVersionsHistory = [...this.state.markdownVersionsHistory];
+    newmarkdownVersionsHistory.push(newVersion);
 
     this.setState({
       lastSaveDate: saveDate,
-      markupVersionsHistory: newMarkupVersionsHistory
+      markdownVersionsHistory: newmarkdownVersionsHistory
     })
 
-    return newMarkupVersion;
+    return newmarkdownVersion;
   }
 
-  handleMarkupVersionChange = (e) => {
+  handlemarkdownVersionChange = (e) => {
     let versionSelectedFromHistory = e.target.value;
     const versionNumber = versionSelectedFromHistory.substring(8, 99);
-    this.restoreMarkupFromHistory(versionNumber);
+    this.restoremarkdownFromHistory(versionNumber);
 
     this.setState({ versionSelectedFromHistory: versionNumber })
   }
 
 
-  restoreMarkupFromHistory = (versionNumber) => {
-    const markupVersionsHistory = getMarkupVersionsHistory();
-    const markupTextFromHistory = markupVersionsHistory.markupSnaphosts[versionNumber].markupText;
+  restoremarkdownFromHistory = (versionNumber) => {
+    const markdownVersionsHistory = getmarkdownVersionsHistory();
+    const markdownTextFromHistory = markdownVersionsHistory.markdownSnaphosts[versionNumber].markdownText;
 
-    this.setState({ markupText: markupTextFromHistory })
+    this.setState({ markdownText: markdownTextFromHistory })
   }
 
   handleTextSelection = () => {
-    const { textSelection, markupText } = this.state;
+    const { textSelection, markdownText } = this.state;
 
     let newTextSelection = { ...textSelection };
 
     let startSelection = this.textAreaRef.current.selectionStart;
     let endSelection = this.textAreaRef.current.selectionEnd;
 
-    if (markupText[startSelection] === " ") { startSelection = startSelection + 1 }
-    if (markupText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
+    if (markdownText[startSelection] === " ") { startSelection = startSelection + 1 }
+    if (markdownText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
 
     newTextSelection.startSelection = startSelection;
     newTextSelection.endSelection = endSelection;
@@ -254,47 +254,47 @@ class App extends Component {
   }
 
   handleTextFormatting = (formattingType) => {
-    const { textSelection, markupText } = this.state;
+    const { textSelection, markdownText } = this.state;
     let textToFormat = [];
-    textToFormat.push(...markupText.split(""))
-    let markupTextPostFormatting = '';
+    textToFormat.push(...markdownText.split(""))
+    let markdownTextPostFormatting = '';
 
     console.log('handleTextFormatting', textSelection)
 
     if (this.someTextHasBeenHighlited()) {
       switch (formattingType) {
         case 'H1':
-          markupTextPostFormatting = this.setH1(textToFormat);
+          markdownTextPostFormatting = this.setH1(textToFormat);
           break;
         case 'H2':
-          markupTextPostFormatting = this.setH2(textToFormat);
+          markdownTextPostFormatting = this.setH2(textToFormat);
           break;
         case 'H3':
-          markupTextPostFormatting = this.setH3(textToFormat);
+          markdownTextPostFormatting = this.setH3(textToFormat);
           break;
         case 'BOLD':
-          markupTextPostFormatting = this.setBold(textToFormat);
+          markdownTextPostFormatting = this.setBold(textToFormat);
           break;
         case 'ITALIC':
-          markupTextPostFormatting = this.setItalic(textToFormat);
+          markdownTextPostFormatting = this.setItalic(textToFormat);
           break;
         case 'STRIKETROUGH':
-          markupTextPostFormatting = this.setStrikeThrough(textToFormat);
+          markdownTextPostFormatting = this.setStrikeThrough(textToFormat);
           break;
         case 'CODE':
-          markupTextPostFormatting = this.setCode(textToFormat);
+          markdownTextPostFormatting = this.setCode(textToFormat);
           break;
         case 'BLOCKCODE':
-          markupTextPostFormatting = this.setBlockCode(textToFormat);
+          markdownTextPostFormatting = this.setBlockCode(textToFormat);
           break;
         case 'LINK':
-          markupTextPostFormatting = this.setLink(textToFormat);
+          markdownTextPostFormatting = this.setLink(textToFormat);
           break;
         case 'LIST':
-          markupTextPostFormatting = this.setList(textToFormat);
+          markdownTextPostFormatting = this.setList(textToFormat);
           break;
         case 'NUMBERS':
-          markupTextPostFormatting = this.setNumbers(textToFormat);
+          markdownTextPostFormatting = this.setNumbers(textToFormat);
           break;
         default:
           break;
@@ -303,16 +303,16 @@ class App extends Component {
 
     switch (formattingType) {
       case 'TABLE':
-        markupTextPostFormatting = this.setTable(textToFormat);
+        markdownTextPostFormatting = this.setTable(textToFormat);
         break;
       default:
         break;
     }
 
-    setMarkupTextLogger(markupTextPostFormatting);
+    setmarkdownTextLogger(markdownTextPostFormatting);
 
     this.setState(
-      { markupText: markupTextPostFormatting }
+      { markdownText: markdownTextPostFormatting }
     )
   }
 
@@ -402,24 +402,24 @@ class App extends Component {
   }
 
   setImage = () => {
-    const { markupText } = this.state;
+    const { markdownText } = this.state;
     const { startSelection, endSelection } = this.state.textSelection;
 
     let textToFormat = [];
-    textToFormat.push(...markupText.split(""))
-    let markupTextPostFormatting = '';
+    textToFormat.push(...markdownText.split(""))
+    let markdownTextPostFormatting = '';
 
-    let imageMarkupText = `![${this.state.markupImageDescription}](${this.state.markupImageURL})`;
+    let imagemarkdownText = `![${this.state.markdownImageDescription}](${this.state.markdownImageURL})`;
 
     textToFormat.splice(endSelection, 0, "");
-    textToFormat.splice(startSelection, 0, imageMarkupText);
-    markupTextPostFormatting = textToFormat.join("");
+    textToFormat.splice(startSelection, 0, imagemarkdownText);
+    markdownTextPostFormatting = textToFormat.join("");
 
-    setMarkupTextLogger(markupTextPostFormatting);
+    setmarkdownTextLogger(markdownTextPostFormatting);
 
     this.setState(
       {
-        markupText: markupTextPostFormatting,
+        markdownText: markdownTextPostFormatting,
         showFormInsertImage: false
       }
     )
@@ -428,19 +428,19 @@ class App extends Component {
   setTable = (text) => {
     const { startSelection, endSelection } = this.state.textSelection;
 
-    const tableMarkupText = "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r"
+    const tablemarkdownText = "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r"
 
     text.splice(endSelection, 0, "");
-    text.splice(startSelection, 0, tableMarkupText);
+    text.splice(startSelection, 0, tablemarkdownText);
     return text.join("");
   }
 
   handleInputImageDescription = (e) => {
-    this.setState({ markupImageDescription: e.target.value })
+    this.setState({ markdownImageDescription: e.target.value })
   }
 
   handleInputImageURL = (e) => {
-    this.setState({ markupImageURL: e.target.value })
+    this.setState({ markdownImageURL: e.target.value })
   }
 
   render() {
@@ -448,14 +448,14 @@ class App extends Component {
     const {
       screenWidth,
       editingStatus,
-      markupText,
-      markupVersionsHistory,
-      lastMarkupVersion,
+      markdownText,
+      markdownVersionsHistory,
+      lastmarkdownVersion,
       versionSelectedFromHistory,
       showModalRollbackContent,
       showFormInsertImage,
-      markupImageDescription,
-      markupImageURL
+      markdownImageDescription,
+      markdownImageURL
     } = this.state;
 
     const modalRollbackContent = (
@@ -472,14 +472,14 @@ class App extends Component {
         title={'Insert the following information:'}
         inputs={[
           {
-            value: markupImageDescription,
+            value: markdownImageDescription,
             placeholder: "Type a description",
             label: "Description",
             onChangeEventHandler: this.handleInputImageDescription,
             required: true
           },
           {
-            value: markupImageURL,
+            value: markdownImageURL,
             placeholder: "Paste the image URL",
             label: "Image URL",
             onChangeEventHandler: this.handleInputImageURL,
@@ -497,13 +497,13 @@ class App extends Component {
         {showModalRollbackContent ? modalRollbackContent : null}
         <Header />
         <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
-          <Dashboard text={markupText} />
+          <Dashboard text={markdownText} />
           <Toolbar
             screenWidth={screenWidth}
             editingStatus={editingStatus}
-            handleNewMarkupContent={this.handleNewMarkupContent}
-            handleAddMarkupContentToHistory={this.handleAddMarkupContentToHistory}
-            handleClearMarkupContent={this.handleClearMarkupContent}
+            handleNewmarkdownContent={this.handleNewmarkdownContent}
+            handleAddmarkdownContentToHistory={this.handleAddmarkdownContentToHistory}
+            handleClearmarkdownContent={this.handleClearmarkdownContent}
             handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
             handleInsertImage={this.handleInsertImage}
           />
@@ -511,16 +511,16 @@ class App extends Component {
         <div className="container" style={{ flexDirection: (screenWidth < 950) ? "column" : "row" }}>
           <EditorPanel
             editingStatus={editingStatus}
-            markupText={markupText}
-            markupVersionsHistory={markupVersionsHistory}
-            lastMarkupVersion={lastMarkupVersion}
+            markdownText={markdownText}
+            markdownVersionsHistory={markdownVersionsHistory}
+            lastmarkdownVersion={lastmarkdownVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
             handleEditorChange={this.handleEditorChange}
             handleTextSelection={this.handleTextSelection}
-            handleMarkupVersionChange={this.handleMarkupVersionChange}
+            handlemarkdownVersionChange={this.handlemarkdownVersionChange}
             textAreaRef={this.textAreaRef}
           />
-          <PreviewPanel rawText={markupText} />
+          <PreviewPanel rawText={markdownText} />
         </div>
       </Fragment >
     );
@@ -530,7 +530,7 @@ class App extends Component {
 }
 
 const placeholder =
-  `# Welcome to my React markup Previewer!
+  `# Welcome to my React markdown Previewer!
 
 ## This is a sub-heading...
 ### And here's some other cool stuff:

@@ -6,9 +6,9 @@ import { getToolbarConfig } from './ToolbarConfig/ToolbarIConfig'
 const Toolbar = ({
     screenWidth,
     editingStatus,
-    handleNewMarkupContent,
-    handleAddMarkupContentToHistory,
-    handleClearMarkupContent,
+    handleNewmarkdownContent,
+    handleAddmarkdownContentToHistory,
+    handleClearmarkdownContent,
     handleTextFormatting,
     handleInsertImage
 }) => {
@@ -16,9 +16,9 @@ const Toolbar = ({
     const toolbarItems = getToolbarConfig({
         screenWidth,
         editingStatus,
-        handleNewMarkupContent,
-        handleAddMarkupContentToHistory,
-        handleClearMarkupContent,
+        handleNewmarkdownContent,
+        handleAddmarkdownContentToHistory,
+        handleClearmarkdownContent,
         handleTextFormatting,
         handleInsertImage
     });

@@ -4,9 +4,9 @@ import SvgIcons from '../ToolbarConfig/SvgIcons'
 export const getToolbarConfig = ({
     screenWidth,
     editingStatus,
-    handleNewMarkupContent,
-    handleAddMarkupContentToHistory,
-    handleClearMarkupContent,
+    handleNewmarkdownContent,
+    handleAddmarkdownContentToHistory,
+    handleClearmarkdownContent,
     handleTextFormatting,
     handleInsertImage
 }) => {
@@ -14,23 +14,23 @@ export const getToolbarConfig = ({
         {
             label: 'NEW',
             icon: <SvgIcons iconType={'NEW'} screenWidth={screenWidth} />,
-            alt: 'New markup content',
+            alt: 'New markdown content',
             disabled: false,
-            eventHandler: handleNewMarkupContent
+            eventHandler: handleNewmarkdownContent
         },
         {
             label: 'SNAPSHOT',
             icon: <SvgIcons iconType={'SNAPSHOT'} screenWidth={screenWidth} />,
-            alt: 'Take a snapshot of markup text',
+            alt: 'Take a snapshot of markdown text',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleAddMarkupContentToHistory
+            eventHandler: handleAddmarkdownContentToHistory
         },
         {
             label: 'CLEAR',
             icon: <SvgIcons iconType={'CLEAR'} screenWidth={screenWidth} />,
-            alt: 'Remove Markup Content',
+            alt: 'Remove markdown Content',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleClearMarkupContent
+            eventHandler: handleClearmarkdownContent
         },
         {
             label: '',
