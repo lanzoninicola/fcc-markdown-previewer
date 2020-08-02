@@ -1,0 +1,97 @@
+# 1. User Info
+
+GET https://api.github.com/user
+Authorization: token 66677f2a532bfc953be31b846ff9e3f6744d622e
+
+# {"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}
+
+###
+# 2. list of REPOS
+
+GET https://api.github.com/users/lanzoninicola/repos
+
+- array repo
+- loop array
+- choose repo
+- use reponame (name: xxxx) to build URL for p3
+
+###
+# 3. get branches of REPO
+# https://api.github.com/repos/lanzoninicola/{repo_name}/branches
+
+GET https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/branches
+Authorization: token 66677f2a532bfc953be31b846ff9e3f6744d622e
+
+- array branch
+- loop array
+- choose the branch
+- use SHA to build URL for p4
+
+###
+# 4. get file tree
+# https://api.github.com/repos/lanzoninicola/{repo_name}/git/trees/{sha}?recursive=1&ccess_token=66677f2a532bfc953be31b846ff9e3f6744d622e
+
+GET https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/trees/8b8a23bc5bea37ed62ff95796dc88032a0568670?recursive=1
+Authorization: token 66677f2a532bfc953be31b846ff9e3f6744d622e
+
+# {
+# "path": "README.md",
+# "mode": "100644",
+# "type": "blob",
+# "sha": "2003873d7fda212c47d1db60bcb31cefdd4c79c9",
+# "size": 1160,
+# "url": "https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/blobs/2003873d7fda212c47d1db60bcb31cefdd4c79c9"
+# },
+
+- identify ".md" files
+- list of ".md" files with path
+- get the URL from "url"
+- send the request for content
+
+###
+# 5. Content of .md file
+
+GET https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/blobs/2003873d7fda212c47d1db60bcb31cefdd4c79c9
+Authorization: token 66677f2a532bfc953be31b846ff9e3f6744d622e
+
+###
+
+# 6. Decode md content
+# using https://www.npmjs.com/package/js-base64
+
+###
+
+# 7. Commit changes
+
+@owner = lanzoninicola
+@repo = fcc-markdown-previewer
+@path = README.md
+
+PUT https://api.github.com/repos/{{owner}}/{{repo}}/contents/{{path}}
+Authorization: token 66677f2a532bfc953be31b846ff9e3f6744d622e
+
+{
+    "message": "File change from GITHUB API",
+    "path": "README.md",
+    "branch": "master",
+    "content": "VGhpcyBpcyBzb29vIGNvb29vbA==",
+    "sha": "2003873d7fda212c47d1db60bcb31cefdd4c79c9"
+}
+
+
+# - get branch name (see p3)
+# - get sha (see p4)
+# - encode content
+# - user type message
+# - send the request
+
+# {
+#     "message": "", // Commit message - user must type the message
+#     "path": "", // file name 
+#     "branch": "", // Branch name
+#     "content": "", // new content file coded in Base64
+#     "sha": "" // info from file see data P4
+# }
+
+# RESPONSE
+# {"content":{"name":"README.md","path":"README.md","sha":"2003873d7fda212c47d1db60bcb31cefdd4c79c9","size":1160,"url":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/contents/README.md?ref=master","html_url":"https://github.com/lanzoninicola/fcc-markdown-previewer/blob/master/README.md","git_url":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/blobs/2003873d7fda212c47d1db60bcb31cefdd4c79c9","download_url":"https://raw.githubusercontent.com/lanzoninicola/fcc-markdown-previewer/master/README.md","type":"file","_links":{"self":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/contents/README.md?ref=master","git":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/blobs/2003873d7fda212c47d1db60bcb31cefdd4c79c9","html":"https://github.com/lanzoninicola/fcc-markdown-previewer/blob/master/README.md"}},"commit":{"sha":"5134f16a15bb8e5c84b896575bde20fac130c033","node_id":"MDY6Q29tbWl0MjgxNjg3MjQ5OjUxMzRmMTZhMTViYjhlNWM4NGI4OTY1NzViZGUyMGZhYzEzMGMwMzM=","url":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/commits/5134f16a15bb8e5c84b896575bde20fac130c033","html_url":"https://github.com/lanzoninicola/fcc-markdown-previewer/commit/5134f16a15bb8e5c84b896575bde20fac130c033","author":{"name":"Nicola Lanzoni","email":"lanzoni.nicola@gmail.com","date":"2020-08-02T14:37:59Z"},"committer":{"name":"Nicola Lanzoni","email":"lanzoni.nicola@gmail.com","date":"2020-08-02T14:37:59Z"},"tree":{"sha":"37aa62f5579b1591208253865e444f27d11643eb","url":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/trees/37aa62f5579b1591208253865e444f27d11643eb"},"message":"File change from GITHUB API","parents":[{"sha":"8b8a23bc5bea37ed62ff95796dc88032a0568670","url":"https://api.github.com/repos/lanzoninicola/fcc-markdown-previewer/git/commits/8b8a23bc5bea37ed62ff95796dc88032a0568670","html_url":"https://github.com/lanzoninicola/fcc-markdown-previewer/commit/8b8a23bc5bea37ed62ff95796dc88032a0568670"}],"verification":{"verified":false,"reason":"unsigned","signature":null,"payload":null}}}

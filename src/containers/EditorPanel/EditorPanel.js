@@ -14,7 +14,7 @@ class EditorPanel extends Component {
             handleEditorChange,
             handleTextSelection,
             handleMarkupVersionChange,
-            refsTextArea
+            textAreaRef
         } = this.props;
 
         const mkVersionsOptions = markupVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
@@ -39,7 +39,7 @@ class EditorPanel extends Component {
                     rawText={markupText}
                     handleEditorChange={handleEditorChange}
                     handleTextSelection={handleTextSelection}
-                    refsTextArea={refsTextArea}
+                    textAreaRef={textAreaRef}
                 />
 
             </div >

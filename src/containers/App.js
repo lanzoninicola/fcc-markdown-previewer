@@ -18,6 +18,7 @@ import {
   resetLocalStorageSession
 } from '../helper/helper'
 
+
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
 // pressing new and content in markup snapashot fire and alert
 // pressing CLEAR and content in markup snapashot fire and alert
@@ -37,7 +38,7 @@ class App extends Component {
       versionSelectedFromHistory: 0,
 
       showModalRollbackContent: false,
-      showModalInsertImage: false,
+      showFormInsertImage: false,
 
       textSelection: {
         // textSelected: '',
@@ -46,7 +47,7 @@ class App extends Component {
       }
     }
 
-    this.textArea = React.createRef();
+    this.textAreaRef = React.createRef();
 
   }
 
@@ -238,8 +239,8 @@ class App extends Component {
 
     let newTextSelection = { ...textSelection };
 
-    let startSelection = this.textArea.current.selectionStart;
-    let endSelection = this.textArea.current.selectionEnd;
+    let startSelection = this.textAreaRef.current.selectionStart;
+    let endSelection = this.textAreaRef.current.selectionEnd;
 
     if (markupText[startSelection] === " ") { startSelection = startSelection + 1 }
     if (markupText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
@@ -260,7 +261,7 @@ class App extends Component {
 
     console.log('handleTextFormatting', textSelection)
 
-    if (this.someTextHasBeenHighlited) {
+    if (this.someTextHasBeenHighlited()) {
       switch (formattingType) {
         case 'H1':
           markupTextPostFormatting = this.setH1(textToFormat);
@@ -397,7 +398,7 @@ class App extends Component {
   }
 
   handleInsertImage = () => {
-    this.setState({ showModalInsertImage: true })
+    this.setState({ showFormInsertImage: true })
   }
 
   setImage = () => {
@@ -419,7 +420,7 @@ class App extends Component {
     this.setState(
       {
         markupText: markupTextPostFormatting,
-        showModalInsertImage: false
+        showFormInsertImage: false
       }
     )
   }
@@ -452,7 +453,7 @@ class App extends Component {
       lastMarkupVersion,
       versionSelectedFromHistory,
       showModalRollbackContent,
-      showModalInsertImage,
+      showFormInsertImage,
       markupImageDescription,
       markupImageURL
     } = this.state;
@@ -492,7 +493,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        {showModalInsertImage ? formInsertImage : null}
+        {showFormInsertImage ? formInsertImage : null}
         {showModalRollbackContent ? modalRollbackContent : null}
         <Header />
         <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
@@ -517,7 +518,7 @@ class App extends Component {
             handleEditorChange={this.handleEditorChange}
             handleTextSelection={this.handleTextSelection}
             handleMarkupVersionChange={this.handleMarkupVersionChange}
-            refsTextArea={this.textArea}
+            textAreaRef={this.textAreaRef}
           />
           <PreviewPanel rawText={markupText} />
         </div>
