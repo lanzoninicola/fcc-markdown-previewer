@@ -21,7 +21,7 @@ class PreviewPanel extends Component {
         require('./PreviewRenderDefault.css')
     }
 
-    createMarkup = (text) => {
+    createmarkdown = (text) => {
         marked.setOptions({
             renderer: new marked.Renderer(),
             highlight: null,
@@ -35,8 +35,8 @@ class PreviewPanel extends Component {
         });
 
 
-        const markup = marked(text);
-        return { __html: markup };
+        const markdown = marked(text);
+        return { __html: markdown };
     }
 
     handleStyleChange = (e) => {
@@ -72,13 +72,13 @@ class PreviewPanel extends Component {
                 <div id="preview-panel-header">
                     <h3>PREVIEW</h3>
                     <div id="preview-panel-header-select">
-                        <label htmlFor="markup-version" id="preview-panel-header-select-label">Style:</label>
+                        <label htmlFor="markdown-version" id="preview-panel-header-select-label">Style:</label>
                         <select value={this.state.style} onChange={this.handleStyleChange}>
                             {stylesOptions}
                         </select>
                     </div>
                 </div>
-                <div dangerouslySetInnerHTML={this.createMarkup(rawText)} id="preview-render" className={previewRenderClassName} >
+                <div dangerouslySetInnerHTML={this.createmarkdown(rawText)} id="preview-render" className={previewRenderClassName} >
                 </div>
             </div>
         )

@@ -7,17 +7,17 @@ class EditorPanel extends Component {
     render() {
         const {
             editingStatus,
-            markupText,
-            lastMarkupVersion,
+            markdownText,
+            lastmarkdownVersion,
             versionSelectedFromHistory,
-            markupVersionsHistory,
+            markdownVersionsHistory,
             handleEditorChange,
             handleTextSelection,
-            handleMarkupVersionChange,
-            refsTextArea
+            handlemarkdownVersionChange,
+            textAreaRef
         } = this.props;
 
-        const mkVersionsOptions = markupVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
+        const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
             return <option key={i}>{`Version ${mkVersion}`}</option>
         })
 
@@ -25,10 +25,10 @@ class EditorPanel extends Component {
             <div id="editor-panel">
                 <div id="editor-panel-header">
                     <h3 id="editor-panel-header-title">EDITOR</h3>
-                    {markupVersionsHistory.length > 0 && editingStatus === 'InProgress' ?
+                    {markdownVersionsHistory.length > 0 && editingStatus === 'InProgress' ?
                         <div id="editor-panel-header-select">
-                            <label htmlFor="markup-version" id="editor-panel-header-select-label">Markup version:</label>
-                            <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastMarkupVersion}`} onChange={handleMarkupVersionChange}>
+                            <label htmlFor="markdown-version" id="editor-panel-header-select-label">markdown version:</label>
+                            <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastmarkdownVersion}`} onChange={handlemarkdownVersionChange}>
                                 {mkVersionsOptions}
                             </select>
                         </div>
@@ -36,10 +36,10 @@ class EditorPanel extends Component {
                 </div >
                 <EditorArea
                     editingStatus={editingStatus}
-                    rawText={markupText}
+                    rawText={markdownText}
                     handleEditorChange={handleEditorChange}
                     handleTextSelection={handleTextSelection}
-                    refsTextArea={refsTextArea}
+                    textAreaRef={textAreaRef}
                 />
 
             </div >

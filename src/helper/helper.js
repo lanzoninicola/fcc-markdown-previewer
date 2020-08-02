@@ -1,35 +1,35 @@
-const MARKUPVERSIONSHISTORY = 'markupVersionsHistory';
-const MARKUPTEXTLOGGER = 'markupTextLogger'
+const markdownVERSIONSHISTORY = 'markdownVersionsHistory';
+const markdownTEXTLOGGER = 'markdownTextLogger'
 
 
-export const getMarkupTextLogger = () => {
-    const markupTextLogger = localStorage.getItem(MARKUPTEXTLOGGER);
-    return markupTextLogger;
+export const getmarkdownTextLogger = () => {
+    const markdownTextLogger = localStorage.getItem(markdownTEXTLOGGER);
+    return markdownTextLogger;
 }
 
-export const getMarkupVersionsHistory = () => {
-    const markupVersionsHistory = localStorage.getItem(MARKUPVERSIONSHISTORY);
-    const markupVersionsHistoryParsed = JSON.parse(markupVersionsHistory);
-    return markupVersionsHistoryParsed;
+export const getmarkdownVersionsHistory = () => {
+    const markdownVersionsHistory = localStorage.getItem(markdownVERSIONSHISTORY);
+    const markdownVersionsHistoryParsed = JSON.parse(markdownVersionsHistory);
+    return markdownVersionsHistoryParsed;
 }
 
-export const setMarkupTextLogger = (data) => {
-    localStorage.setItem(MARKUPTEXTLOGGER, data);
+export const setmarkdownTextLogger = (data) => {
+    localStorage.setItem(markdownTEXTLOGGER, data);
 }
 
-export const setMarkupVersionsHistory = (data) => {
-    localStorage.setItem(MARKUPVERSIONSHISTORY, JSON.stringify(data));
+export const setmarkdownVersionsHistory = (data) => {
+    localStorage.setItem(markdownVERSIONSHISTORY, JSON.stringify(data));
 }
 
-export const resetMarkupTextLogger = () => {
-    localStorage.removeItem(MARKUPTEXTLOGGER);
+export const resetmarkdownTextLogger = () => {
+    localStorage.removeItem(markdownTEXTLOGGER);
 }
 
-export const resetMarkupVersionsHistory = () => {
-    localStorage.removeItem(MARKUPVERSIONSHISTORY);
+export const resetmarkdownVersionsHistory = () => {
+    localStorage.removeItem(markdownVERSIONSHISTORY);
 }
 
 export const resetLocalStorageSession = () => {
-    resetMarkupTextLogger();
-    resetMarkupVersionsHistory();
+    resetmarkdownTextLogger();
+    resetmarkdownVersionsHistory();
 }

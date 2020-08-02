@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 
-const Header = ({ storeMarkupVersionHistory }) => {
+const Header = ({ storemarkdownVersionHistory }) => {
     return (
         <div className="header">
             <div className="header-title">
