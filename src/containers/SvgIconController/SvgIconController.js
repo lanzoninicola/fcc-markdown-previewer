@@ -19,8 +19,10 @@ class SvgIconController extends Component {
 
         const { name } = this.props;
         let iconFromCatalog = getIcon(name);
-        let newState = { ...this.state, iconLabel: iconFromCatalog.label, iconPath: iconFromCatalog.svgPathValue };
-        this.setState(newState)
+        this.setState({
+            iconLabel: iconFromCatalog.label,
+            iconPath: iconFromCatalog.svgPathValue
+        })
     }
 
     shouldComponentUpdate(nextState) {
@@ -39,8 +41,6 @@ class SvgIconController extends Component {
 
         const { iconPath } = this.state;
         const { color } = this.props
-
-        console.log(this.screenWidth)
 
         let svgWidth = (this.screenWidth <= 950) ? "15" : "30";
         let svgHeight = (this.screenWidth <= 950) ? "15" : "30";

@@ -15,7 +15,8 @@ class EditorPanel extends Component {
             handleEditorChange,
             handleTextSelection,
             handlemarkdownVersionChange,
-            textAreaRef
+            textAreaRef,
+            handleFocusMode
         } = this.props;
 
         const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
@@ -36,7 +37,7 @@ class EditorPanel extends Component {
                             </div>
                             : null}
 
-                        <div className="editor-panel-header-toolbar-item">
+                        <div className="editor-panel-header-toolbar-item" onClick={handleFocusMode}>
                             <SvgIconController name={'FOCUS'} color={'#006d77'} />
                         </div>
                     </div>

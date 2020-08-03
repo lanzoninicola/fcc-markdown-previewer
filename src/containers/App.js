@@ -47,7 +47,9 @@ class App extends Component {
         // textSelected: '',
         startSelection: 0,
         endSelection: 0
-      }
+      },
+
+      focusMode: false
     }
 
     this.textAreaRef = React.createRef();
@@ -446,6 +448,10 @@ class App extends Component {
     this.setState({ markdownImageURL: e.target.value })
   }
 
+  handleFocusMode = () => {
+    this.setState({ focusMode: !this.state.focusMode })
+  }
+
   render() {
 
     const {
@@ -458,7 +464,8 @@ class App extends Component {
       showModalRollbackContent,
       showFormInsertImage,
       markdownImageDescription,
-      markdownImageURL
+      markdownImageURL,
+      focusMode
     } = this.state;
 
     const modalRollbackContent = (
@@ -498,9 +505,9 @@ class App extends Component {
       <Fragment>
         {showFormInsertImage ? formInsertImage : null}
         {showModalRollbackContent ? modalRollbackContent : null}
-        <Header />
+        {(!focusMode) ? <Header /> : null}
         <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
-          <Dashboard text={markdownText} />
+          {(!focusMode) ? <Dashboard text={markdownText} /> : null}
           <Toolbar
             screenWidth={screenWidth}
             editingStatus={editingStatus}
@@ -511,7 +518,11 @@ class App extends Component {
             handleInsertImage={this.handleInsertImage}
           />
         </div>
-        <div className="container" style={{ flexDirection: (screenWidth < 950) ? "column" : "row" }}>
+        <div className="container"
+          style={{
+            flexDirection: (screenWidth < 950) ? "column" : "row",
+            backgroundColor: (!focusMode) ? "none" : "rgb(0,0,0,0.8)"
+          }}>
           <EditorPanel
             editingStatus={editingStatus}
             markdownText={markdownText}
@@ -522,8 +533,9 @@ class App extends Component {
             handleTextSelection={this.handleTextSelection}
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
             textAreaRef={this.textAreaRef}
+            handleFocusMode={this.handleFocusMode}
           />
-          <PreviewPanel rawText={markdownText} />
+          {(!focusMode) ? <PreviewPanel rawText={markdownText} /> : null}
         </div>
       </Fragment >
     );
