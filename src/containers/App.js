@@ -22,6 +22,9 @@ import {
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
 // pressing new and content in markdown snapashot fire and alert
 // pressing CLEAR and content in markdown snapashot fire and alert
+// NOTIFICATION BACKGROUND
+// background: rgb(255,255,255);
+// background: linear-gradient(45deg, rgba(255,255,255,0) 44%, rgba(10,131,136,1) 76%);
 
 class App extends Component {
   constructor(props) {

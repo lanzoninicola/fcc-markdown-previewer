@@ -1,8 +1,7 @@
 import React from 'react'
-import SvgIcons from '../ToolbarConfig/SvgIcons'
+import SvgIconController from '../../../containers/SvgIconController/SvgIconController'
 
 export const getToolbarConfig = ({
-    screenWidth,
     editingStatus,
     handleNewmarkdownContent,
     handleAddmarkdownContentToHistory,
@@ -13,118 +12,118 @@ export const getToolbarConfig = ({
     const toolbarItems = [
         {
             label: 'NEW',
-            icon: <SvgIcons iconType={'NEW'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'NEW'} color={'#ffffff'} />,
             alt: 'New markdown content',
             disabled: false,
             eventHandler: handleNewmarkdownContent
         },
         {
             label: 'SNAPSHOT',
-            icon: <SvgIcons iconType={'SNAPSHOT'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'SNAPSHOT'} color={'#ffffff'} />,
             alt: 'Take a snapshot of markdown text',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: handleAddmarkdownContentToHistory
         },
         {
             label: 'CLEAR',
-            icon: <SvgIcons iconType={'CLEAR'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'CLEAR'} color={'#ffffff'} />,
             alt: 'Remove markdown Content',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: handleClearmarkdownContent
         },
         {
             label: '',
-            icon: <SvgIcons iconType={'SEPARATOR'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'SEPARATOR'} color={'#ffffff'} />,
             alt: 'separator',
             disabled: editingStatus === 'idle' ? true : false
         },
         {
             label: 'H1',
-            icon: <SvgIcons iconType={'H1'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'H1'} color={'#ffffff'} />,
             alt: 'H1',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('H1')
         },
         {
             label: 'H2',
-            icon: <SvgIcons iconType={'H2'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'H2'} color={'#ffffff'} />,
             alt: 'H2',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('H2')
         },
         {
             label: 'H3',
-            icon: <SvgIcons iconType={'H3'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'H3'} color={'#ffffff'} />,
             alt: 'H3',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('H3')
         },
         {
             label: 'BOLD',
-            icon: <SvgIcons iconType={'BOLD'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'BOLD'} color={'#ffffff'} />,
             alt: 'Bold',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('BOLD')
         },
         {
             label: 'ITALIC',
-            icon: <SvgIcons iconType={'ITALIC'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'ITALIC'} color={'#ffffff'} />,
             alt: 'Italic',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('ITALIC')
         },
         {
             label: 'STRIKETROUGH',
-            icon: <SvgIcons iconType={'STRIKETROUGH'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'STRIKETROUGH'} color={'#ffffff'} />,
             alt: 'Striketrough',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('STRIKETROUGH')
         },
         {
             label: 'CODE',
-            icon: <SvgIcons iconType={'CODE'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'CODE'} color={'#ffffff'} />,
             alt: 'Code',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('CODE')
         },
         {
             label: 'BLOCKCODE',
-            icon: <SvgIcons iconType={'CODE'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'CODE'} color={'#ffffff'} />,
             alt: 'Block Code',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('BLOCKCODE')
         },
         {
             label: 'LINK',
-            icon: <SvgIcons iconType={'LINK'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'LINK'} color={'#ffffff'} />,
             alt: 'Block Code',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('LINK')
         },
         {
             label: 'LIST',
-            icon: <SvgIcons iconType={'LIST'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'LIST'} color={'#ffffff'} />,
             alt: 'List',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('LIST')
         },
         {
             label: 'NUMBERS',
-            icon: <SvgIcons iconType={'NUMBERS'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'NUMBERS'} color={'#ffffff'} />,
             alt: 'Numbers',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('NUMBERS')
         },
         {
             label: 'IMAGE',
-            icon: <SvgIcons iconType={'IMAGE'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'IMAGE'} color={'#ffffff'} />,
             alt: 'Image',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: handleInsertImage
         },
         {
             label: 'TABLE',
-            icon: <SvgIcons iconType={'TABLE'} screenWidth={screenWidth} />,
+            icon: <SvgIconController name={'TABLE'} color={'#ffffff'} />,
             alt: 'Table',
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => handleTextFormatting('TABLE')

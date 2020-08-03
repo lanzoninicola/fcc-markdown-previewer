@@ -14,7 +14,6 @@ const Toolbar = ({
 }) => {
 
     const toolbarItems = getToolbarConfig({
-        screenWidth,
         editingStatus,
         handleNewmarkdownContent,
         handleAddmarkdownContentToHistory,
@@ -39,7 +38,7 @@ const Toolbar = ({
         return toolbarItem;
     })
 
-    let toolbarPositionStyle = (screenWidth) < 1400 ? 'top' : 'bottom';
+    let toolbarPositionStyle = (screenWidth) < 1366 ? 'top' : 'bottom';
 
     return (
         <div className={`toolbarArea-${toolbarPositionStyle}`}>

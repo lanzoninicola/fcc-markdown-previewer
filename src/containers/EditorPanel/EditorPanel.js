@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './EditorPanel.css'
 import EditorArea from './EditorArea/EditorArea'
+import SvgIconController from '../SvgIconController/SvgIconController'
 
 
 class EditorPanel extends Component {
@@ -25,14 +26,20 @@ class EditorPanel extends Component {
             <div id="editor-panel">
                 <div id="editor-panel-header">
                     <h3 id="editor-panel-header-title">EDITOR</h3>
-                    {markdownVersionsHistory.length > 0 && editingStatus === 'InProgress' ?
-                        <div id="editor-panel-header-select">
-                            <label htmlFor="markdown-version" id="editor-panel-header-select-label">markdown version:</label>
-                            <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastmarkdownVersion}`} onChange={handlemarkdownVersionChange}>
-                                {mkVersionsOptions}
-                            </select>
+                    <div className="editor-panel-header-toolbar">
+                        {markdownVersionsHistory.length > 0 && editingStatus === 'InProgress' ?
+                            <div className="editor-panel-header-toolbar-item">
+                                <label htmlFor="markdown-version" id="editor-panel-header-toolbar-item-label">Markdown version:</label>
+                                <select value={`Version ${(versionSelectedFromHistory >= 0) ? versionSelectedFromHistory : lastmarkdownVersion}`} onChange={handlemarkdownVersionChange}>
+                                    {mkVersionsOptions}
+                                </select>
+                            </div>
+                            : null}
+
+                        <div className="editor-panel-header-toolbar-item">
+                            <SvgIconController name={'FOCUS'} color={'#006d77'} />
                         </div>
-                        : null}
+                    </div>
                 </div >
                 <EditorArea
                     editingStatus={editingStatus}
@@ -47,27 +54,4 @@ class EditorPanel extends Component {
     }
 }
 
-
-
 export default EditorPanel;
-
-
-// let text = 'Nicola abita a Valeggio con Mara';
-
-// let textSelected = 'Valeggio con';
-
-// let startSelection = text.search(textSelected);
-// //startSelection
-// let endSelection = startSelection + textSelected.length +1;
-
-// //endSelection
-
-// let textToArray = [];
-// textToArray.push(...text.split(""))
-
-// textToArray.splice(startSelection, 0, "***")
-
-// textToArray.splice(endSelection, 0, "***")
-
-// textToArray.join("")
-
