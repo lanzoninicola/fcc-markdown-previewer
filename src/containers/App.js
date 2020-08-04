@@ -450,7 +450,8 @@ class App extends Component {
     this.setState({ markdownImageURL: e.target.value })
   }
 
-  handleFocusMode = () => {
+  handleFocusMode = (e) => {
+    console.log(e.target.value)
     this.setState({ focusMode: !this.state.focusMode })
   }
 

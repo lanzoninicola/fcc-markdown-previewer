@@ -16,7 +16,8 @@ class EditorPanel extends Component {
             handleTextSelection,
             handlemarkdownVersionChange,
             textAreaRef,
-            handleContextMenu
+            handleContextMenu,
+            handleFocusMode
         } = this.props;
 
         const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
@@ -38,7 +39,7 @@ class EditorPanel extends Component {
                             : null}
 
                         <div className="editor-panel-header-toolbar-item" >
-                            <Menu context={'EditorPanel'} />
+                            <Menu context={{ component: 'EditorPanel', eventHandler: handleFocusMode }} />
                         </div>
                     </div>
                 </div >
