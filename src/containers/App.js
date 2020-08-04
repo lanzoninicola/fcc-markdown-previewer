@@ -450,9 +450,14 @@ class App extends Component {
     this.setState({ markdownImageURL: e.target.value })
   }
 
-  handleFocusMode = (e) => {
-    console.log(e.target.value)
-    this.setState({ focusMode: !this.state.focusMode })
+  handleFocusMode = (status) => {
+    this.setState({ focusMode: status })
+  }
+
+  handleHideGridNumbers = (foo) => {
+    console.log('handleHideGridNumbers', foo)
+
+    // this.setState({ focusMode: !this.state.focusMode })
   }
 
   render() {
@@ -540,6 +545,7 @@ class App extends Component {
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
             textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
+            handleHideGridNumbers={this.handleHideGridNumbers}
           />
           {(!focusMode) ? <PreviewPanel rawText={markdownText} /> : null}
         </div>

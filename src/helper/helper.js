@@ -1,35 +1,41 @@
-const markdownVERSIONSHISTORY = 'markdownVersionsHistory';
-const markdownTEXTLOGGER = 'markdownTextLogger'
+const MARKDOWNVERSIONSHISTORY = 'markdownVersionsHistory';
+const MARKDOWNTEXTLOGGER = 'markdownTextLogger';
+const FOCUSMODE = 'focusMode';
 
 
 export const getmarkdownTextLogger = () => {
-    const markdownTextLogger = localStorage.getItem(markdownTEXTLOGGER);
+    const markdownTextLogger = localStorage.getItem(MARKDOWNTEXTLOGGER);
     return markdownTextLogger;
 }
 
 export const getmarkdownVersionsHistory = () => {
-    const markdownVersionsHistory = localStorage.getItem(markdownVERSIONSHISTORY);
+    const markdownVersionsHistory = localStorage.getItem(MARKDOWNVERSIONSHISTORY);
     const markdownVersionsHistoryParsed = JSON.parse(markdownVersionsHistory);
     return markdownVersionsHistoryParsed;
 }
 
 export const setmarkdownTextLogger = (data) => {
-    localStorage.setItem(markdownTEXTLOGGER, data);
+    localStorage.setItem(MARKDOWNTEXTLOGGER, data);
 }
 
 export const setmarkdownVersionsHistory = (data) => {
-    localStorage.setItem(markdownVERSIONSHISTORY, JSON.stringify(data));
+    localStorage.setItem(MARKDOWNVERSIONSHISTORY, JSON.stringify(data));
 }
 
 export const resetmarkdownTextLogger = () => {
-    localStorage.removeItem(markdownTEXTLOGGER);
+    localStorage.removeItem(MARKDOWNTEXTLOGGER);
 }
 
 export const resetmarkdownVersionsHistory = () => {
-    localStorage.removeItem(markdownVERSIONSHISTORY);
+    localStorage.removeItem(MARKDOWNVERSIONSHISTORY);
+}
+
+export const resetFocusMode = () => {
+    localStorage.removeItem(FOCUSMODE);
 }
 
 export const resetLocalStorageSession = () => {
     resetmarkdownTextLogger();
     resetmarkdownVersionsHistory();
+    resetFocusMode();
 }

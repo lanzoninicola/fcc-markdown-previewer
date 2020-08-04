@@ -12,8 +12,12 @@ class Menu extends Component {
         }
     }
 
-    handleContextMenu = () => {
-        this.setState({ showMenuContext: !this.state.showMenuContext })
+    handleOpenContextMenu = () => {
+        this.setState({ showMenuContext: true })
+    }
+
+    handleCloseContextMenu = () => {
+        this.setState({ showMenuContext: false })
     }
 
     render() {
@@ -21,10 +25,23 @@ class Menu extends Component {
         const { showMenuContext } = this.state;
 
         return (
-            <div id="menu" onClick={this.handleContextMenu}>
-                <SvgIcon name={'settings'} color={'#006d77'} bigIcon={true} />
-                {showMenuContext && <ContextMenu context={this.props.context} />}
+            <div id="menu" >
+                <div id="menu-icon" onClick={this.handleOpenContextMenu}>
+                    <SvgIcon
+                        name={'settings'}
+                        color={'#006d77'}
+                        bigIcon={true}
+                    />
+                </div>
+                {showMenuContext &&
+                    <ContextMenu
+                        menuItems={this.props.menuItems}
+                        handleCloseContextMenu={this.handleCloseContextMenu}
+                    />}
+
             </div>
+
+
         )
     }
 }

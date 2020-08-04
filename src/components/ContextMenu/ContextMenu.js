@@ -1,38 +1,24 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './ContextMenu.css'
 import ContextMenuOption from '../ContextMenuOption/ContextMenuOption';
 
-const ContextMenu = ({ context }) => {
+const ContextMenu = ({ menuItems, handleCloseContextMenu }) => {
 
-    let options = [];
-
-    const setEditorPanelOptions = () => {
-        let editorPanelOptions = [
-            {
-                label: 'FOCUS MODE',
-                eventHandler: context.eventHandler
-            }
-        ];
-        options = [...editorPanelOptions];
-        return options;
-    }
-
-    switch (context.component) {
-        case 'EditorPanel':
-            setEditorPanelOptions();
-            break;
-
-        default:
-            break;
-    }
-
-    let optionsMenu = options.map((option, index) => {
-        return <ContextMenuOption id={index} label={option.label} eventHandler={option.eventHandler} />
+    let optionsMenu = menuItems.map((menuItem, index) => {
+        return <ContextMenuOption
+            key={index}
+            name={menuItem.name}
+            label={menuItem.label}
+            eventHandler={menuItem.eventHandler}
+        />
     })
 
     return (
-        <div id="contextmenu">
-            {optionsMenu}
+        <div id="context-menu">
+            <Fragment>
+                {optionsMenu}
+                <p id="context-menu-close" onClick={handleCloseContextMenu}>Close</p>
+            </Fragment>
         </div>
 
     )

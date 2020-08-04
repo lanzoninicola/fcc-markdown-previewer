@@ -16,13 +16,29 @@ class EditorPanel extends Component {
             handleTextSelection,
             handlemarkdownVersionChange,
             textAreaRef,
-            handleContextMenu,
-            handleFocusMode
+            handleFocusMode,
+            handleHideGridNumbers
         } = this.props;
 
         const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
             return <option key={i}>{`Version ${mkVersion}`}</option>
         })
+
+        const menuItems = [
+            {
+                component: 'EditorPanel',
+                name: 'focusMode',
+                label: 'FOCUS MODE',
+                eventHandler: handleFocusMode
+            }
+            // ,
+            // {
+            //     component: 'EditorPanel',
+            //     name: 'hideNumbers',
+            //     label: 'HIDE NUMBERS',
+            //     eventHandler: handleHideGridNumbers
+            // },
+        ]
 
         return (
             <div id="editor-panel">
@@ -39,7 +55,7 @@ class EditorPanel extends Component {
                             : null}
 
                         <div className="editor-panel-header-toolbar-item" >
-                            <Menu context={{ component: 'EditorPanel', eventHandler: handleFocusMode }} />
+                            <Menu menuItems={menuItems} />
                         </div>
                     </div>
                 </div >
