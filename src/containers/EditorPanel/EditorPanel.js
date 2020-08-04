@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './EditorPanel.css'
 import EditorArea from './EditorArea/EditorArea'
-import SvgIconController from '../SvgIconController/SvgIconController'
+import Menu from '../../components/Menu/Menu'
 
 
 class EditorPanel extends Component {
@@ -16,7 +16,7 @@ class EditorPanel extends Component {
             handleTextSelection,
             handlemarkdownVersionChange,
             textAreaRef,
-            handleFocusMode
+            handleContextMenu
         } = this.props;
 
         const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
@@ -37,8 +37,8 @@ class EditorPanel extends Component {
                             </div>
                             : null}
 
-                        <div className="editor-panel-header-toolbar-item" onClick={handleFocusMode}>
-                            <SvgIconController name={'FOCUS'} color={'#006d77'} />
+                        <div className="editor-panel-header-toolbar-item" >
+                            <Menu context={'EditorPanel'} />
                         </div>
                     </div>
                 </div >

@@ -1,10 +1,10 @@
 import React from 'react'
 import './Toolbar.css'
-import ToolbarItem from './ToolbarItem/ToolbarItem'
-import { getToolbarConfig } from './ToolbarConfig/ToolbarIConfig'
+import ToolbarItems from '../ToolbarItems/ToolbarItems'
 
 const Toolbar = ({
     screenWidth,
+    showBigToolbar,
     editingStatus,
     handleNewmarkdownContent,
     handleAddmarkdownContentToHistory,
@@ -13,38 +13,30 @@ const Toolbar = ({
     handleInsertImage
 }) => {
 
-    const toolbarItems = getToolbarConfig({
-        editingStatus,
-        handleNewmarkdownContent,
-        handleAddmarkdownContentToHistory,
-        handleClearmarkdownContent,
-        handleTextFormatting,
-        handleInsertImage
-    });
 
-    const renderToolbarItems = toolbarItems.map((item, i) => {
-        let toolbarItem = null;
+    let showBigToolbarOption = showBigToolbar;
 
-        if (item.disabled === false) {
-            toolbarItem = <ToolbarItem
-                key={i}
-                screenWidth={screenWidth}
-                label={item.label}
-                icon={item.icon}
-                disabled={item.disabled}
-                eventHandler={item.eventHandler} />
-        }
-
-        return toolbarItem;
-    })
-
-    let toolbarPositionStyle = (screenWidth) < 1366 ? 'top' : 'bottom';
+    if (screenWidth < 1366) {
+        showBigToolbarOption = false;
+    }
 
     return (
-        <div className={`toolbarArea-${toolbarPositionStyle}`}>
-            <div id="toolbar">{renderToolbarItems}</div>
+        <div className={showBigToolbarOption ? "toolbarArea-bottom" : "toolbarArea-top"}>
+            <div id="toolbar">
+                <ToolbarItems
+                    editingStatus={editingStatus}
+                    showBigToolbarOption={showBigToolbarOption}
+                    handleNewmarkdownContent={handleNewmarkdownContent}
+                    handleAddmarkdownContentToHistory={handleAddmarkdownContentToHistory}
+                    handleClearmarkdownContent={handleClearmarkdownContent}
+                    handleTextFormatting={handleTextFormatting}
+                    handleInsertImage={handleInsertImage}
+                />
+            </div>
         </div >
     )
 }
 
 export default Toolbar;
+
+// `toolbarArea-${toolbarPositionStyle}`

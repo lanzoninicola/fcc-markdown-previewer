@@ -49,6 +49,8 @@ class App extends Component {
         endSelection: 0
       },
 
+      showBigToolbar: false,
+
       focusMode: false
     }
 
@@ -456,6 +458,7 @@ class App extends Component {
 
     const {
       screenWidth,
+      showBigToolbar,
       editingStatus,
       markdownText,
       markdownVersionsHistory,
@@ -506,10 +509,12 @@ class App extends Component {
         {showFormInsertImage ? formInsertImage : null}
         {showModalRollbackContent ? modalRollbackContent : null}
         {(!focusMode) ? <Header /> : null}
-        <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}>
+        {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
+        <div className="container">
           {(!focusMode) ? <Dashboard text={markdownText} /> : null}
           <Toolbar
             screenWidth={screenWidth}
+            showBigToolbar={showBigToolbar}
             editingStatus={editingStatus}
             handleNewmarkdownContent={this.handleNewmarkdownContent}
             handleAddmarkdownContentToHistory={this.handleAddmarkdownContentToHistory}
@@ -521,7 +526,7 @@ class App extends Component {
         <div className="container"
           style={{
             flexDirection: (screenWidth < 950) ? "column" : "row",
-            backgroundColor: (!focusMode) ? "none" : "rgb(0,0,0,0.8)"
+            background: (!focusMode) ? "none" : "linear-gradient(90deg, rgba(0,109,119,0.81) 10%, rgba(1,118,189,1) 50%, rgba(0,109,119,0.81) 90%)"
           }}>
           <EditorPanel
             editingStatus={editingStatus}
