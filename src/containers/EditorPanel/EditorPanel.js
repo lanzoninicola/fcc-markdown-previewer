@@ -9,6 +9,7 @@ class EditorPanel extends Component {
         const {
             editingStatus,
             markdownText,
+            focusMode,
             lastmarkdownVersion,
             versionSelectedFromHistory,
             markdownVersionsHistory,
@@ -17,7 +18,8 @@ class EditorPanel extends Component {
             handlemarkdownVersionChange,
             textAreaRef,
             handleFocusMode,
-            handleHideGridNumbers
+            handleUltraFocusMode,
+            // handleHideGridNumbers
         } = this.props;
 
         const mkVersionsOptions = markdownVersionsHistory.sort((a, b) => b - a).map((mkVersion, i) => {
@@ -29,7 +31,17 @@ class EditorPanel extends Component {
                 component: 'EditorPanel',
                 settingName: 'focusMode',
                 label: 'FOCUS MODE',
-                eventHandler: handleFocusMode
+                eventHandler: handleFocusMode,
+                disabled: false,
+                visible: true
+            },
+            {
+                component: 'EditorPanel',
+                settingName: 'ultraFocusMode',
+                label: 'ULTRA FOCUS MODE',
+                eventHandler: handleUltraFocusMode,
+                disabled: false,
+                visible: focusMode ? true : false
             }
             // ,
             // {

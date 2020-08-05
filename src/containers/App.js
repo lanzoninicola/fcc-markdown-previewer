@@ -15,7 +15,10 @@ import {
   setmarkdownVersionsHistory,
   resetmarkdownTextLogger,
   resetmarkdownVersionsHistory,
-  resetLocalStorageSession
+  resetLocalStorageSession,
+  openFullscreen,
+  closeFullscreen,
+  resetUltraFocusMode
 } from '../helper/helper'
 
 
@@ -51,7 +54,8 @@ class App extends Component {
 
       showBigToolbar: false,
 
-      focusMode: false
+      focusMode: false,
+      ultraFocusMode: false
     }
 
     this.textAreaRef = React.createRef();
@@ -450,15 +454,30 @@ class App extends Component {
     this.setState({ markdownImageURL: e.target.value })
   }
 
-  handleFocusMode = (status) => {
-    this.setState({ focusMode: status })
+  handleFocusMode = (enable) => {
+    this.setState({ focusMode: enable }, () => {
+      if (!enable) {
+        resetUltraFocusMode();
+        this.handleUltraFocusMode(false);
+      }
+    })
+
   }
 
-  handleHideGridNumbers = (foo) => {
-    console.log('handleHideGridNumbers', foo)
+  handleUltraFocusMode = (enable) => {
+    console.log('handleUltraFocusMode', enable)
+    this.setState({ ultraFocusMode: enable })
 
-    // this.setState({ focusMode: !this.state.focusMode })
+    if (enable) {
+      openFullscreen();
+    } else {
+      closeFullscreen()
+        .catch(() => { console.log('App - handleUltraFocusMode(): an error occured') })
+    }
+
   }
+
+
 
   render() {
 
@@ -538,6 +557,7 @@ class App extends Component {
           <EditorPanel
             editingStatus={editingStatus}
             markdownText={markdownText}
+            focusMode={focusMode}
             markdownVersionsHistory={markdownVersionsHistory}
             lastmarkdownVersion={lastmarkdownVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
@@ -546,6 +566,7 @@ class App extends Component {
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
             textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
+            handleUltraFocusMode={this.handleUltraFocusMode}
             handleHideGridNumbers={this.handleHideGridNumbers}
           />
           {(!focusMode) && <PreviewPanel rawText={markdownText} />}

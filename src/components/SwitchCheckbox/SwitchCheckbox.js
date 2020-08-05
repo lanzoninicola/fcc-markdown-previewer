@@ -7,35 +7,45 @@ class SwitchCheckbox extends React.Component {
         super(props)
 
         this.state = {
-            menuOptionEnable: false
+            settingIsEnable: false
         }
     }
 
     componentDidMount() {
-        let isOptionEnabled = localStorage.getItem(this.props.settingName);
-        this.setState({ menuOptionEnable: isOptionEnabled === "true" ? true : false });
+        const { settingName } = this.props;
+
+        let isSettingEnabled = localStorage.getItem(settingName);
+        if (isSettingEnabled) {
+            this.setState({ settingIsEnable: isSettingEnabled === "true" ? true : false });
+        }
     }
 
     onChangeEventHandler = () => {
-        this.setState({ menuOptionEnable: !this.state.menuOptionEnable }, this.dispatchEvent);
+        this.setState({ settingIsEnable: !this.state.settingIsEnable }, this.dispatchEvent);
     }
 
     dispatchEvent = () => {
-        const { menuOptionEnable } = this.state;
-        localStorage.setItem(this.props.settingName, menuOptionEnable);
-        this.props.eventHandler(menuOptionEnable);
+        const { settingIsEnable } = this.state;
+        const { settingName, eventHandler } = this.props;
+
+        localStorage.setItem(settingName, settingIsEnable);
+        eventHandler(settingIsEnable);
     }
 
     render() {
+
+        const { settingIsEnable } = this.state;
+        const { settingName, disabled } = this.props;
 
         return (
             <input
                 className="apple-switch"
                 type="checkbox"
-                name={this.props.settingName}
+                name={settingName}
                 // defaultChecked={false}
                 onChange={this.onChangeEventHandler}
-                checked={this.state.menuOptionEnable}
+                checked={settingIsEnable}
+                disabled={disabled}
             >
             </input>
         )
