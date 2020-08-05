@@ -15,10 +15,7 @@ const ContextMenu = ({ menuItems, handleCloseContextMenu }) => {
 
     return (
         <div id="context-menu">
-            <Fragment>
-                {optionsMenu}
-                <p id="context-menu-close" onClick={handleCloseContextMenu}>Close</p>
-            </Fragment>
+            {optionsMenu}
         </div>
 
     )
