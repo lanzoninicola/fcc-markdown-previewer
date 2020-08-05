@@ -4,6 +4,7 @@ import ToolbarItems from '../ToolbarItems/ToolbarItems'
 
 const Toolbar = ({
     screenWidth,
+    focusMode,
     showBigToolbar,
     editingStatus,
     handleNewmarkdownContent,
@@ -13,7 +14,6 @@ const Toolbar = ({
     handleInsertImage
 }) => {
 
-
     let showBigToolbarOption = showBigToolbar;
 
     if (screenWidth < 1366) {
@@ -21,8 +21,10 @@ const Toolbar = ({
     }
 
     return (
-        <div className={showBigToolbarOption ? "toolbarArea-bottom" : "toolbarArea-top"}>
-            <div id="toolbar">
+        <div id="toolbarArea" className={
+            `${focusMode ? "toolbarArea-focusMode" : ""} ${showBigToolbarOption ? "toolbarArea-bottom" : "toolbarArea-top"}`
+        }>
+            <div id="toolbar" className={`toolbar ${focusMode ? "toolbar-focusMode" : "toolbar-defaultMode"}`}>
                 <ToolbarItems
                     editingStatus={editingStatus}
                     showBigToolbarOption={showBigToolbarOption}
@@ -38,5 +40,3 @@ const Toolbar = ({
 }
 
 export default Toolbar;
-
-// `toolbarArea-${toolbarPositionStyle}`

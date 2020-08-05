@@ -45,6 +45,6 @@ class SwitchCheckbox extends React.Component {
 export default SwitchCheckbox;
 
 SwitchCheckbox.propTypes = {
-    name: PropTypes.string.isRequired,
+    settingName: PropTypes.string.isRequired,
     eventHandler: PropTypes.func.isRequired
 }

@@ -512,14 +512,15 @@ class App extends Component {
 
     return (
       <Fragment>
-        {showFormInsertImage ? formInsertImage : null}
-        {showModalRollbackContent ? modalRollbackContent : null}
-        {(!focusMode) ? <Header /> : null}
+        {showFormInsertImage && formInsertImage}
+        {showModalRollbackContent && modalRollbackContent}
+        {(!focusMode) && <Header />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
         <div className="container">
-          {(!focusMode) ? <Dashboard text={markdownText} /> : null}
+          {(!focusMode) && <Dashboard text={markdownText} />}
           <Toolbar
             screenWidth={screenWidth}
+            focusMode={focusMode}
             showBigToolbar={showBigToolbar}
             editingStatus={editingStatus}
             handleNewmarkdownContent={this.handleNewmarkdownContent}
@@ -547,7 +548,7 @@ class App extends Component {
             handleFocusMode={this.handleFocusMode}
             handleHideGridNumbers={this.handleHideGridNumbers}
           />
-          {(!focusMode) ? <PreviewPanel rawText={markdownText} /> : null}
+          {(!focusMode) && <PreviewPanel rawText={markdownText} />}
         </div>
       </Fragment >
     );
