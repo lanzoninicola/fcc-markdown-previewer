@@ -1,7 +1,37 @@
 import React from 'react'
 import './Header.css'
+import LocalStorageGraphWidget from '../LocalStorageGraphWidget/LocalStorageGraphWidget';
+import Menu from '../Menu/Menu'
+import SvgIcon from '../SvgIcon/SvgIcon'
 
 const Header = ({ storemarkdownVersionHistory }) => {
+
+    const menuItems = [
+        {
+            component: 'EditorPanel',
+            settingName: 'focusMode',
+            label: 'FOCUS MODE',
+            eventHandler: '',
+            disabled: false,
+            visible: true
+        },
+        {
+            component: 'EditorPanel',
+            settingName: 'ultraFocusMode',
+            label: 'ULTRA FOCUS MODE',
+            eventHandler: 'handleUltraFocusMode',
+            disabled: false,
+            visible: true
+        }
+        // ,
+        // {
+        //     component: 'EditorPanel',
+        //     name: 'hideNumbers',
+        //     label: 'HIDE NUMBERS',
+        //     eventHandler: handleHideGridNumbers
+        // },
+    ]
+
     return (
         <div className="header">
             <div className="header-title">
@@ -14,8 +44,26 @@ const Header = ({ storemarkdownVersionHistory }) => {
                 <h1 id="title">MARKDOWN EDITOR</h1>
             </div>
             <div className="header-toolbar">
-                <p>Download</p>
-                <p>Copy</p>
+                <div className="header-toolbar-items">
+                    <div className="header-toolbar-item">
+                        <LocalStorageGraphWidget />
+                    </div>
+                    <div className="header-toolbar-item">
+                        <SvgIcon
+                            name={'notification'}
+                            color={'#ffffff'}
+                            bigIcon={true}
+                        />
+                    </div>
+                    <div className="header-toolbar-item">
+                        <Menu
+                            menuItems={menuItems}
+                            iconColor={'#ffffff'}
+                            menuBgColor={'linear-gradient(90deg, rgb(1,118,189,0.7) 45%, rgba(0, 109, 119,0.7) 100%)'}
+                        />
+                    </div>
+                </div>
+
             </div>
         </div >
     )

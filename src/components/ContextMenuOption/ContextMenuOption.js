@@ -4,7 +4,14 @@ import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
 import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'
 
 
-const ContextMenuOption = ({ settingName, label, eventHandler, disabled, visible }) => {
+const ContextMenuOption = ({
+    menuContextBgColor,
+    settingName,
+    label,
+    eventHandler,
+    disabled,
+    visible
+}) => {
 
     return (
         visible &&
