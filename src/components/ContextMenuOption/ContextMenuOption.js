@@ -4,12 +4,12 @@ import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
 import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'
 
 
-const ContextMenuOption = ({ name, label, eventHandler }) => {
+const ContextMenuOption = ({ settingName, label, eventHandler }) => {
 
     return (
         <div className="contextMenuOption">
             <LabelMenuOption label={label} />
-            <SwitchCheckbox name={name} eventHandler={eventHandler} />
+            <SwitchCheckbox settingName={settingName} eventHandler={eventHandler} />
         </div>
     )
 }

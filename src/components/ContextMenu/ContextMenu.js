@@ -7,7 +7,7 @@ const ContextMenu = ({ menuItems, handleCloseContextMenu }) => {
     let optionsMenu = menuItems.map((menuItem, index) => {
         return <ContextMenuOption
             key={index}
-            name={menuItem.name}
+            settingName={menuItem.settingName}
             label={menuItem.label}
             eventHandler={menuItem.eventHandler}
         />

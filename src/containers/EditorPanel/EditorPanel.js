@@ -27,7 +27,7 @@ class EditorPanel extends Component {
         const menuItems = [
             {
                 component: 'EditorPanel',
-                name: 'focusMode',
+                settingName: 'focusMode',
                 label: 'FOCUS MODE',
                 eventHandler: handleFocusMode
             }

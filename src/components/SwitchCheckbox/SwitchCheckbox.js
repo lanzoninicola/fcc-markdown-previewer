@@ -12,7 +12,7 @@ class SwitchCheckbox extends React.Component {
     }
 
     componentDidMount() {
-        let isOptionEnabled = localStorage.getItem(this.props.name);
+        let isOptionEnabled = localStorage.getItem(this.props.settingName);
         this.setState({ menuOptionEnable: isOptionEnabled === "true" ? true : false });
     }
 
@@ -22,7 +22,7 @@ class SwitchCheckbox extends React.Component {
 
     dispatchEvent = () => {
         const { menuOptionEnable } = this.state;
-        localStorage.setItem(this.props.name, menuOptionEnable);
+        localStorage.setItem(this.props.settingName, menuOptionEnable);
         this.props.eventHandler(menuOptionEnable);
     }
 
@@ -32,7 +32,7 @@ class SwitchCheckbox extends React.Component {
             <input
                 className="apple-switch"
                 type="checkbox"
-                name={this.props.name}
+                name={this.props.settingName}
                 // defaultChecked={false}
                 onChange={this.onChangeEventHandler}
                 checked={this.state.menuOptionEnable}
