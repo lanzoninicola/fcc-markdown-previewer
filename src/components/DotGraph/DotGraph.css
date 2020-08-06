@@ -1,0 +1,54 @@
+.graph-dot-increment {
+    border-radius: 50%;
+    border: solid 2px;
+}
+
+.graph-dot-small {
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;  
+}
+
+.graph-dot-medium {
+    width: 30px;
+    height: 30px;
+    margin-left: 6px;  
+}
+
+.graph-dot-large {
+    width: 60px;
+    height: 60px;
+    margin-left: 12px;  
+}
+
+.intesity-undefined {
+    border-color: white;
+    
+}
+
+.intesity-very-low {
+    border-color: #47ebd3;
+    background-color: #47ebd3;
+}
+
+.intesity-low {
+    border-color: #22c1c3;
+    background-color: #22c1c3;
+}
+
+.intesity-medium {
+    border-color: #fcb045;
+    background-color: #fcb045;
+}
+
+.intesity-high {
+    border-color: #fd1d1d;
+    background-color: #fd1d1d;
+}
+
+.intesity-very-high {
+    border-color: #833ab4;
+    background-color: #833ab4;
+}
+
+

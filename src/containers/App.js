@@ -9,11 +9,11 @@ import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
 import Form from '../components/Form/Form'
 import {
-  getmarkdownTextLogger,
+  getmarkdownTextLog,
   getmarkdownVersionsHistory,
-  setmarkdownTextLogger,
+  setmarkdownTextLog,
   setmarkdownVersionsHistory,
-  resetmarkdownTextLogger,
+  resetmarkdownTextLog,
   resetmarkdownVersionsHistory,
   resetLocalStorageSession,
   openFullscreen,
@@ -55,7 +55,9 @@ class App extends Component {
       showBigToolbar: false,
 
       focusMode: false,
-      ultraFocusMode: false
+      ultraFocusMode: false,
+
+      localStorageSpaceInUse: 0
     }
 
     this.textAreaRef = React.createRef();
@@ -72,6 +74,11 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
+    console.log(this.state.markdownText.length)
+  }
+
   componentWillUnmount() {
     document.removeEventListener("resize", this.setWindowDimensions())
   }
@@ -81,14 +88,14 @@ class App extends Component {
   }
 
   isThereDataInLocalStorageSession = () => {
-    const markdownTextLogger = getmarkdownTextLogger();
+    const markdownTextLog = getmarkdownTextLog();
     const markdownVersionsHistory = getmarkdownVersionsHistory();
 
-    return ((markdownTextLogger && markdownTextLogger.length > 0) || (markdownVersionsHistory));
+    return ((markdownTextLog && markdownTextLog.length > 0) || (markdownVersionsHistory));
   }
 
   rollbackData = () => {
-    const markdownTextLoggerData = getmarkdownTextLogger();
+    const markdownTextLogData = getmarkdownTextLog();
     const markdownVersionsHistoryData = getmarkdownVersionsHistory();
 
     let lastmarkdownSavedVersion = 0;
@@ -99,7 +106,7 @@ class App extends Component {
     }
 
     this.setState({
-      markdownText: markdownTextLoggerData,
+      markdownText: markdownTextLogData,
       lastmarkdownVersion: lastmarkdownSavedVersion,
       markdownVersionsHistory: markdownVersionsHistory,
       editingStatus: 'InProgress',
@@ -116,7 +123,7 @@ class App extends Component {
   }
 
   handleEditorChange = (e) => {
-    setmarkdownTextLogger(e.target.value);
+    setmarkdownTextLog(e.target.value);
     this.setState({
       editingStatus: 'InProgress',
       markdownText: e.target.value
@@ -125,7 +132,7 @@ class App extends Component {
 
   handleNewmarkdownContent = () => {
     this.clearmarkdownContent();
-    resetmarkdownTextLogger();
+    resetmarkdownTextLog();
     resetmarkdownVersionsHistory();
     this.resetmarkdownVersion();
 
@@ -155,6 +162,8 @@ class App extends Component {
     }
 
     setmarkdownVersionsHistory(newmarkdownVersion);
+
+
   }
 
   clearmarkdownContent = () => {
@@ -175,7 +184,7 @@ class App extends Component {
       return [true, markdownVersionsHistory]
     }
 
-    return [false, { markdownTextLoggers: {}, versions: [] }]
+    return [false, { markdownTextLogs: {}, versions: [] }]
   }
 
   createNewmarkdownVersionHistory = () => {
@@ -320,7 +329,7 @@ class App extends Component {
         break;
     }
 
-    setmarkdownTextLogger(markdownTextPostFormatting);
+    setmarkdownTextLog(markdownTextPostFormatting);
 
     this.setState(
       { markdownText: markdownTextPostFormatting }
@@ -426,7 +435,7 @@ class App extends Component {
     textToFormat.splice(startSelection, 0, imagemarkdownText);
     markdownTextPostFormatting = textToFormat.join("");
 
-    setmarkdownTextLogger(markdownTextPostFormatting);
+    setmarkdownTextLog(markdownTextPostFormatting);
 
     this.setState(
       {

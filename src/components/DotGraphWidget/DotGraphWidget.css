@@ -1,4 +1,4 @@
-#localStorageGraph {
+#DotGraph {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +6,7 @@
     
 }
 
-#localStorageGraph-title {
+#DotGraph-title {
     margin-top: -4px;
     margin-bottom: -2px;
     margin-right: 0px;
@@ -16,46 +16,12 @@
     color: white;
 }
 
-#localStorageBar {
+#GraphBar {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-#lsg_20_40 {
-    border: solid 2px white;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-}
-
-
-#lsg_40_60 {
-    border: solid 2px white;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    margin-left: 3px;
-    
-}
-
-#lsg_60_80 {
-    border: solid 2px white;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    margin-left: 3px;
-
-}
-
-#lsg_80_100 {
-    border: solid 2px white;
-    border-radius: 50%;
-    width: 15px;
-    height: 15px;
-    margin-left: 3px;
-    
-}
 
 
 /* #lsg_20_40 {

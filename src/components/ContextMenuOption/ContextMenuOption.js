@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import './ContextMenuOption.css'
 import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
 import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'

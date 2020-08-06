@@ -1,12 +1,12 @@
 const MARKDOWNVERSIONSHISTORY = 'markdownVersionsHistory';
-const MARKDOWNTEXTLOGGER = 'markdownTextLogger';
+const markdownTextLog = 'markdownTextLog';
 const FOCUSMODE = 'focusMode';
 const ULTRAFOCUSMODE = 'ultraFocusMode';
 
 
-export const getmarkdownTextLogger = () => {
-    const markdownTextLogger = localStorage.getItem(MARKDOWNTEXTLOGGER);
-    return markdownTextLogger;
+export const getmarkdownTextLog = () => {
+    const markdownTextLog = localStorage.getItem(markdownTextLog);
+    return markdownTextLog;
 }
 
 export const getmarkdownVersionsHistory = () => {
@@ -15,16 +15,16 @@ export const getmarkdownVersionsHistory = () => {
     return markdownVersionsHistoryParsed;
 }
 
-export const setmarkdownTextLogger = (data) => {
-    localStorage.setItem(MARKDOWNTEXTLOGGER, data);
+export const setmarkdownTextLog = (data) => {
+    localStorage.setItem(markdownTextLog, data);
 }
 
 export const setmarkdownVersionsHistory = (data) => {
     localStorage.setItem(MARKDOWNVERSIONSHISTORY, JSON.stringify(data));
 }
 
-export const resetmarkdownTextLogger = () => {
-    localStorage.removeItem(MARKDOWNTEXTLOGGER);
+export const resetmarkdownTextLog = () => {
+    localStorage.removeItem(markdownTextLog);
 }
 
 export const resetmarkdownVersionsHistory = () => {
@@ -40,7 +40,7 @@ export const resetUltraFocusMode = () => {
 }
 
 export const resetLocalStorageSession = () => {
-    resetmarkdownTextLogger();
+    resetmarkdownTextLog();
     resetmarkdownVersionsHistory();
     resetFocusMode();
     resetUltraFocusMode();
