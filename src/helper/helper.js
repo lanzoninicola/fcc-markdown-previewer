@@ -1,11 +1,11 @@
 const MARKDOWNVERSIONSHISTORY = 'markdownVersionsHistory';
-const markdownTextLog = 'markdownTextLog';
+const MARKDOWNTEXTLOG = 'markdownTextLog';
 const FOCUSMODE = 'focusMode';
 const ULTRAFOCUSMODE = 'ultraFocusMode';
 
 
 export const getmarkdownTextLog = () => {
-    const markdownTextLog = localStorage.getItem(markdownTextLog);
+    const markdownTextLog = localStorage.getItem(MARKDOWNTEXTLOG);
     return markdownTextLog;
 }
 
@@ -16,7 +16,7 @@ export const getmarkdownVersionsHistory = () => {
 }
 
 export const setmarkdownTextLog = (data) => {
-    localStorage.setItem(markdownTextLog, data);
+    localStorage.setItem(MARKDOWNTEXTLOG, data);
 }
 
 export const setmarkdownVersionsHistory = (data) => {
@@ -24,7 +24,7 @@ export const setmarkdownVersionsHistory = (data) => {
 }
 
 export const resetmarkdownTextLog = () => {
-    localStorage.removeItem(markdownTextLog);
+    localStorage.removeItem(MARKDOWNTEXTLOG);
 }
 
 export const resetmarkdownVersionsHistory = () => {
@@ -77,7 +77,7 @@ export const closeFullscreen = () => {
 }
 
 
-export const getLocalStorageUsedSpace = () => {
+export const getLocalStorageUsedSpaceInByte = () => {
     let localStorageTotalByte = 0,
         xLen, x;
 
@@ -90,4 +90,22 @@ export const getLocalStorageUsedSpace = () => {
     };
     // (localStorageTotalByte / 1024).toFixed(2)
     return localStorageTotalByte;
+}
+
+export const getLocalStorageFreeSpaceInByte = () => {
+    const LOCAL_STORAGE_SIZE = '5000000';
+    const localStorageSpaceUsedInByte = getLocalStorageUsedSpaceInByte()
+
+    return LOCAL_STORAGE_SIZE - localStorageSpaceUsedInByte;
+}
+
+export const getLocalStorageFreeSpaceInPercentage = () => {
+    const LOCAL_STORAGE_SIZE = '5000000';
+    const spaceUsedInByte = getLocalStorageUsedSpaceInByte()
+
+    let spaceUsedInPercentage = (spaceUsedInByte / LOCAL_STORAGE_SIZE) * 100;
+
+    let spaceFreeInPercentage = 100 - spaceUsedInPercentage
+
+    return spaceFreeInPercentage.toFixed(3);
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import './ContextMenuOption.css'
+import './Setting.css'
 import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
 import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'
 
 
-const ContextMenuOption = ({
+const Setting = ({
     menuContextBgColor,
     settingName,
     label,
@@ -15,7 +15,7 @@ const ContextMenuOption = ({
 
     return (
         visible &&
-        <div className="contextMenuOption">
+        <div className="setting">
             <LabelMenuOption
                 label={label}
                 disabled={disabled}
@@ -30,4 +30,4 @@ const ContextMenuOption = ({
     )
 }
 
-export default ContextMenuOption;
+export default Setting;

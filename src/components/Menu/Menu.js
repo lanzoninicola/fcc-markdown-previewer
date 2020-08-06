@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './Menu.css'
 import SvgIcon from '../SvgIcon/SvgIcon'
-import ContextMenuOption from '../ContextMenuOption/ContextMenuOption'
+import ContextMenu from '../ContextMenu/ContextMenu'
+import SettingsList from '../SettingsList/SettingsList';
 
 class Menu extends Component {
     constructor(props) {
@@ -23,20 +24,7 @@ class Menu extends Component {
         const { showMenuContext } = this.state;
         const { menuItems, iconColor, menuBgColor } = this.props
 
-        let optionsMenu = null;
 
-        if (menuItems && menuItems.length > 0) {
-            optionsMenu = menuItems.map((menuItem, index) => {
-                return <ContextMenuOption
-                    key={index}
-                    settingName={menuItem.settingName}
-                    label={menuItem.label}
-                    eventHandler={menuItem.eventHandler}
-                    disabled={menuItem.disabled}
-                    visible={menuItem.visible}
-                />
-            })
-        }
 
         return (
             <div id="menu">
@@ -48,9 +36,14 @@ class Menu extends Component {
                     />
                 </div>
                 {showMenuContext &&
-                    <div id="context-menu" style={{ background: menuBgColor }}>
-                        {optionsMenu}
-                    </div>
+                    // <ContextMenu
+                    //     menuItems={menuItems}
+                    //     menuBgColor={menuBgColor}
+                    // />
+                    // <SettingsListWithContextMenu menuItems={menuItems}  />
+                    <ContextMenu menuBgColor={menuBgColor}>
+                        <SettingsList menuItems={menuItems} />
+                    </ContextMenu>
                 }
             </div>
         )
