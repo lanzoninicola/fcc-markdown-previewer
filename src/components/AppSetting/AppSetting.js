@@ -1,11 +1,10 @@
 import React from 'react'
-import './Setting.css'
+import './AppSetting.css'
 import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
 import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'
 
 
-const Setting = ({
-    menuContextBgColor,
+const AppSetting = ({
     settingName,
     label,
     eventHandler,
@@ -15,7 +14,7 @@ const Setting = ({
 
     return (
         visible &&
-        <div className="setting">
+        <div className="appSetting">
             <LabelMenuOption
                 label={label}
                 disabled={disabled}
@@ -30,4 +29,4 @@ const Setting = ({
     )
 }
 
-export default Setting;
+export default AppSetting;

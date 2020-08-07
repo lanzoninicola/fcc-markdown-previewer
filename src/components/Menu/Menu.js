@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Menu.css'
 import SvgIcon from '../SvgIcon/SvgIcon'
 import ContextMenu from '../ContextMenu/ContextMenu'
-import SettingsList from '../SettingsList/SettingsList';
+import AppSettingsList from '../AppSettingsList/AppSettingsList';
 
 class Menu extends Component {
     constructor(props) {
@@ -22,27 +22,20 @@ class Menu extends Component {
     render() {
 
         const { showMenuContext } = this.state;
-        const { menuItems, iconColor, menuBgColor } = this.props
-
-
+        const { menuIconColor, contextMenuBgColor, contextMenuSpaceBetween, menuItems } = this.props
 
         return (
             <div id="menu">
                 <div id="menu-icon" onClick={this.handleOpenContextMenu}>
                     <SvgIcon
                         name={(!showMenuContext) ? 'menuopen' : 'menuclose'}
-                        color={iconColor}
+                        iconColor={menuIconColor}
                         bigIcon={true}
                     />
                 </div>
                 {showMenuContext &&
-                    // <ContextMenu
-                    //     menuItems={menuItems}
-                    //     menuBgColor={menuBgColor}
-                    // />
-                    // <SettingsListWithContextMenu menuItems={menuItems}  />
-                    <ContextMenu menuBgColor={menuBgColor}>
-                        <SettingsList menuItems={menuItems} />
+                    <ContextMenu spaceBetween={contextMenuSpaceBetween}>
+                        <AppSettingsList menuItems={menuItems} />
                     </ContextMenu>
                 }
             </div>
@@ -53,6 +46,8 @@ class Menu extends Component {
 export default Menu;
 
 Menu.propTypes = {
-    menuItems: PropTypes.array.isRequired
-
+    menuItems: PropTypes.array,
+    menuIconColor: PropTypes.string,
+    contextMenuBgColor: PropTypes.string,
+    contextMenuSpaceBetween: PropTypes.string
 }

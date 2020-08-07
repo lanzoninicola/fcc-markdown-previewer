@@ -1,4 +1,4 @@
-.setting {
+.appSetting {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -6,7 +6,7 @@
     padding: 5px;
 }
 
-.setting:hover {
+.appSetting:hover {
     border-radius: 10px;
     transition: all 0.3s ease-out;
 }

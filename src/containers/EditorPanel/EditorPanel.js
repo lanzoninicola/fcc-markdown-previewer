@@ -69,8 +69,6 @@ class EditorPanel extends Component {
                         <div className="editor-panel-header-toolbar-item" >
                             <Menu
                                 menuItems={menuItems}
-                                iconColor={'#006d77'}
-                                menuBgColor={'linear-gradient(90deg, rgb(0, 109, 119,0.6) 45%, rgba(1,118,189,0.6) 100%)'}
                             />
                         </div>
                     </div>

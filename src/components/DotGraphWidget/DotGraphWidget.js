@@ -14,18 +14,15 @@ class DotGraphWidget extends Component {
         }
     }
 
-    // value = 0;
     handleContextMenuAppearance = () => {
         console.log('handlefunction fired')
-        this.setState({ showContextMnu: !this.state.showContextMenu })
+        this.setState({ showContextMenu: !this.state.showContextMenu })
     }
 
     render() {
 
         const { showContextMenu } = this.state;
         const { title, value } = this.props;
-
-        console.log(showContextMenu)
 
         let graphTitle = (title) ? title.toUpperCase() : DotGraphWidget.defaultProps.title;
 
@@ -58,7 +55,8 @@ class DotGraphWidget extends Component {
                         intensity={(value > 4800000) ? "very-high" : DotGraph.defaultProps.intensity}
                     />
                 </div>
-                {true && <ContextMenu />}
+                {showContextMenu &&
+                    <ContextMenu spaceBetween={'large'} />}
             </div >
 
 

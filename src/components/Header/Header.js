@@ -53,15 +53,16 @@ const Header = ({ storemarkdownVersionHistory }) => {
                     <div className="header-toolbar-item">
                         <SvgIcon
                             name={'notification'}
-                            color={'#ffffff'}
+                            iconColor={'#ffffff'}
                             bigIcon={true}
                         />
                     </div>
                     <div className="header-toolbar-item">
                         <Menu
+                            menuIconColor={'#ffffff'}
+                            contextMenuSpaceBetween={'large'}
+                            contextMenuBgColor={'linear-gradient(90deg, rgb(30, 43, 92,0.7) 60%, rgba(51,112,150,0.7) 100%)'}
                             menuItems={menuItems}
-                            iconColor={'#ffffff'}
-                            menuBgColor={'linear-gradient(90deg, rgb(1,118,189,0.7) 45%, rgba(0, 109, 119,0.7) 100%)'}
                         />
                     </div>
                 </div>

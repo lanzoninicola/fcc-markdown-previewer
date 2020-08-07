@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Setting from '../Setting/Setting'
+import AppSetting from '../AppSetting/AppSetting'
 
-const SettingsList = ({ menuItems }) => {
+const AppSettingsList = ({ menuItems }) => {
 
     // let optionsMenu = null;
 
     // if (menuItems && menuItems.length > 0) {
     let optionsMenu = menuItems.map((menuItem, index) => {
-        return <Setting
+        return <AppSetting
             key={index}
             settingName={menuItem.settingName}
             label={menuItem.label}
@@ -20,15 +20,15 @@ const SettingsList = ({ menuItems }) => {
     // }
 
     return (
-        <div id="context-menu-options">
+        <div id="app-settings-list">
             {optionsMenu}
         </div >
     )
 }
 
-export default SettingsList;
+export default AppSettingsList;
 
-SettingsList.propTypes = {
+AppSettingsList.propTypes = {
     menuItems: PropTypes.arrayOf(
         PropTypes.shape({
             settingName: PropTypes.string,
@@ -40,6 +40,6 @@ SettingsList.propTypes = {
     )
 }
 
-SettingsList.defaultProps = {
+AppSettingsList.defaultProps = {
     menuItems: [],
 }
