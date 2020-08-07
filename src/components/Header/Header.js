@@ -1,6 +1,7 @@
 import React from 'react'
 import './Header.css'
 import DotGraphWidget from '../DotGraphWidget/DotGraphWidget';
+import DotGraphWidgetWithData from '../DotGraphWidget/DotGraphWidgetWithData';
 import Menu from '../Menu/Menu'
 import SvgIcon from '../SvgIcon/SvgIcon'
 
@@ -46,7 +47,7 @@ const Header = ({ storemarkdownVersionHistory }) => {
             <div className="header-toolbar">
                 <div className="header-toolbar-items">
                     <div className="header-toolbar-item">
-                        <DotGraphWidget
+                        <DotGraphWidgetWithData
                             title="local storage space used"
                             value={0} />
                     </div>

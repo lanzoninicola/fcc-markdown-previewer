@@ -4,26 +4,32 @@ import './DotGraphWidget.css'
 import DotGraph from '../DotGraph/DotGraph'
 import ContextMenu from '../ContextMenu/ContextMenu'
 
-
 class DotGraphWidget extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            showContextMenu: false
+            showContextMenu: false,
+
+
+            localStorageSpaceUsedInByte: 0
         }
     }
 
     handleContextMenuAppearance = () => {
-        console.log('handlefunction fired')
         this.setState({ showContextMenu: !this.state.showContextMenu })
+
+        this.props.handleData();
     }
 
     render() {
 
         const { showContextMenu } = this.state;
-        const { title, value } = this.props;
+        const { title, data } = this.props;
 
+        console.log(this.props)
+
+        let value = data.localStorageSpaceUsedInByte;
         let graphTitle = (title) ? title.toUpperCase() : DotGraphWidget.defaultProps.title;
 
         return (
@@ -56,7 +62,13 @@ class DotGraphWidget extends Component {
                     />
                 </div>
                 {showContextMenu &&
-                    <ContextMenu spaceBetween={'large'} />}
+                    <ContextMenu spaceBetween={'large'} >
+
+                        <p>{`Space Used ${data.localStorageSpaceUsedInByte}`}</p>
+                        <p>{`Free Space In Byte ${data.localStorageFreeSpaceInByte}`}</p>
+                        <p>{`Free Space In Percentage ${data.localStorageFreeSpaceInPercentage}`}</p>
+
+                    </ContextMenu>}
             </div >
 
 

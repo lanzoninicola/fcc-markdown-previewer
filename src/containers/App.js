@@ -7,7 +7,8 @@ import Dashboard from '../components/Dashboard/Dashboard';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
-import Form from '../components/Form/Form'
+import Form from '../components/Form/Form';
+import { LocalStorageItem } from '../helper/LocalStorage'
 import {
   getmarkdownTextLog,
   getmarkdownVersionsHistory,
@@ -40,6 +41,8 @@ class App extends Component {
       markdownImageDescription: '',
       markdownImageURL: '',
       lastmarkdownVersion: 0,
+
+      markdownFoo: new LocalStorageItem('markdownFoo'),
       markdownVersionsHistory: [],
       versionSelectedFromHistory: 0,
 
@@ -72,11 +75,6 @@ class App extends Component {
     } else {
       this.initSession()
     }
-  }
-
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
-    console.log(this.state.markdownText.length)
   }
 
   componentWillUnmount() {
@@ -124,6 +122,9 @@ class App extends Component {
 
   handleEditorChange = (e) => {
     setmarkdownTextLog(e.target.value);
+
+    this.state.markdownFoo.setValue(e.target.value);
+
     this.setState({
       editingStatus: 'InProgress',
       markdownText: e.target.value
