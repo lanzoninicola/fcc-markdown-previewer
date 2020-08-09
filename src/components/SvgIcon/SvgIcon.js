@@ -30,7 +30,7 @@ const SvgIcon = ({ bigIcon, name, iconColor }) => {
     ))
 }
 
-export default SvgIcon;
+export default React.memo(SvgIcon);
 
 SvgIcon.propTypes = {
     bigIcon: PropTypes.bool,

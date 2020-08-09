@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './ContextMenu.css'
 
-const ContextMenu = ({ menuBgColor, spaceBetween, ...props }) => {
+const ContextMenu = ({ config, ...props }) => {
+
+    let spaceBetween = (config.spaceBetween) ? config.spaceBetween : ContextMenu.defaultProps.config.spaceBetween;
+    let menuBgColor = (config.menuBgColor) ? config.menuBgColor : ContextMenu.defaultProps.config.menuBgColor;
 
     let topStyle;
 
@@ -35,11 +38,16 @@ const ContextMenu = ({ menuBgColor, spaceBetween, ...props }) => {
 export default ContextMenu;
 
 ContextMenu.propTypes = {
-    menuBgColor: PropTypes.string,
-    spaceBetween: PropTypes.oneOf(['small', 'medium', 'large'])
+    config: PropTypes.shape({
+        spaceBetween: PropTypes.string,
+        menuBgColor: PropTypes.string,
+    })
+
 }
 
 ContextMenu.defaultProps = {
-    menuBgColor: "linear-gradient(90deg, rgb(0, 109, 119,0.6) 45%, rgba(1,118,189,0.6) 100%)",
-    spaceBetween: 'medium'
+    config: {
+        menuBgColor: "linear-gradient(90deg, rgb(0, 109, 119,0.6) 45%, rgba(1,118,189,0.6) 100%)",
+        spaceBetween: 'medium'
+    }
 }

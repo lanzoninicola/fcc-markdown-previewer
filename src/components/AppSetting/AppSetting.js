@@ -1,7 +1,8 @@
-import React from 'react'
-import './AppSetting.css'
-import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox'
-import LabelMenuOption from '../LabelMenuOption/LabelMenuOption'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './AppSetting.css';
+import SwitchCheckbox from '../SwitchCheckbox/SwitchCheckbox';
+import LabelMenuOption from '../LabelMenuOption/LabelMenuOption';
 
 
 const AppSetting = ({
@@ -30,3 +31,16 @@ const AppSetting = ({
 }
 
 export default AppSetting;
+
+AppSetting.propTypes = {
+    settingName: PropTypes.string,
+    label: PropTypes.string,
+    eventHandler: PropTypes.func,
+    disabled: PropTypes.bool,
+    visible: PropTypes.bool
+}
+
+AppSetting.defaultProps = {
+    disabled: false,
+    visible: true
+}

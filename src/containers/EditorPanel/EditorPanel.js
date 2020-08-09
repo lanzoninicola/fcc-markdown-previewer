@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './EditorPanel.css'
 import EditorArea from './EditorArea/EditorArea'
-import Menu from '../../components/Menu/Menu'
+import EditorPanelSettings from '../../components/EditorPanelSettings/EditorPanelSettings'
 
 
 class EditorPanel extends Component {
@@ -67,9 +67,8 @@ class EditorPanel extends Component {
                             : null}
 
                         <div className="editor-panel-header-toolbar-item" >
-                            <Menu
-                                menuItems={menuItems}
-                            />
+                            <EditorPanelSettings
+                                menuItems={menuItems} />
                         </div>
                     </div>
                 </div >

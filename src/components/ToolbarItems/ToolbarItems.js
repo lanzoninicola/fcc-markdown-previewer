@@ -159,5 +159,5 @@ const ToolbarItems = ({
 }
 
 
-export default ToolbarItems;
+export default React.memo(ToolbarItems);
 

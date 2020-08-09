@@ -1,8 +1,7 @@
 import React from 'react'
 import './Header.css'
-import DotGraphWidget from '../DotGraphWidget/DotGraphWidget';
 import DotGraphWidgetWithData from '../DotGraphWidget/DotGraphWidgetWithData';
-import Menu from '../Menu/Menu'
+import AppGlobalSettings from '../AppGlobalSettings/AppGlobalSettings';
 import SvgIcon from '../SvgIcon/SvgIcon'
 
 const Header = ({ storemarkdownVersionHistory }) => {
@@ -59,10 +58,8 @@ const Header = ({ storemarkdownVersionHistory }) => {
                         />
                     </div>
                     <div className="header-toolbar-item">
-                        <Menu
-                            menuIconColor={'#ffffff'}
+                        <AppGlobalSettings
                             contextMenuSpaceBetween={'large'}
-                            contextMenuBgColor={'linear-gradient(90deg, rgb(30, 43, 92,0.7) 60%, rgba(51,112,150,0.7) 100%)'}
                             menuItems={menuItems}
                         />
                     </div>
@@ -75,4 +72,4 @@ const Header = ({ storemarkdownVersionHistory }) => {
 
 
 
-export default Header;
+export default React.memo(Header);

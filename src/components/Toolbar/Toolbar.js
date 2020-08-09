@@ -39,4 +39,4 @@ const Toolbar = ({
     )
 }
 
-export default Toolbar;
+export default React.memo(Toolbar);

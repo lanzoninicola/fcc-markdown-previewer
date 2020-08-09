@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import './DotGraph.css';
 
 
-const DotGraph = ({ dotSize, intensity }) => {
+const DotGraph = ({ dotSize, increment }) => {
 
     return (
         <div
-            className={`graph-dot-increment graph-dot-${dotSize} intesity-${intensity}`}>
+            className={`graph-dot-increment graph-dot-${dotSize} increment-${increment}`}>
         </div>
     )
 
@@ -19,12 +19,12 @@ DotGraph.propTypes = {
     dotSize: PropTypes.oneOf([
         'small', 'medium', 'large'
     ]),
-    intensity: PropTypes.oneOf(
+    increment: PropTypes.oneOf(
         ['undefined', 'very-low', 'low', 'medium', 'high', 'very-high']
     )
 }
 
 DotGraph.defaultProps = {
     dotSize: "small",
-    intensity: "undefined"
+    increment: "undefined"
 }

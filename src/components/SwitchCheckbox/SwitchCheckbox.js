@@ -58,3 +58,7 @@ SwitchCheckbox.propTypes = {
     settingName: PropTypes.string.isRequired,
     eventHandler: PropTypes.func.isRequired
 }
+
+SwitchCheckbox.defaultProps = {
+    disabled: false
+}

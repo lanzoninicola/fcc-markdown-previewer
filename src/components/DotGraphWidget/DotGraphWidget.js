@@ -1,92 +1,60 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import './DotGraphWidget.css'
 import DotGraph from '../DotGraph/DotGraph'
-import ContextMenu from '../ContextMenu/ContextMenu'
 
-class DotGraphWidget extends Component {
-    constructor(props) {
-        super(props)
+const DotGraphWidget = ({ title, children, data, handleClickEventHandler }) => {
 
-        this.state = {
-            showContextMenu: false,
+    let value = data;
+    let graphTitle = (title) ? title.toUpperCase() : DotGraphWidget.defaultProps.title;
 
-
-            localStorageSpaceUsedInByte: 0
-        }
-    }
-
-    handleContextMenuAppearance = () => {
-        this.setState({ showContextMenu: !this.state.showContextMenu })
-
-        this.props.handleData();
-    }
-
-    render() {
-
-        const { showContextMenu } = this.state;
-        const { title, data } = this.props;
-
-        console.log(this.props)
-
-        let value = data.localStorageSpaceUsedInByte;
-        let graphTitle = (title) ? title.toUpperCase() : DotGraphWidget.defaultProps.title;
-
-        return (
-            <div id="DotGraph" onClick={this.handleContextMenuAppearance}>
-                <p id="DotGraph-title">{graphTitle}</p>
-                <div id="GraphBar">
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 0) ? "very-low" : DotGraph.defaultProps.intensity}
-                    />
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 1000000) ? "low" : DotGraph.defaultProps.intensity}
-                    />
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 3000000) ? "low" : DotGraph.defaultProps.intensity}
-                    />
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 4000000) ? "medium" : DotGraph.defaultProps.intensity}
-                    />
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 4500000) ? "high" : DotGraph.defaultProps.intensity}
-                    />
-                    <DotGraph
-                        dotSize={"small"}
-                        intensity={(value > 4800000) ? "very-high" : DotGraph.defaultProps.intensity}
-                    />
-                </div>
-                {showContextMenu &&
-                    <ContextMenu spaceBetween={'large'} >
-
-                        <p>{`Space Used ${data.localStorageSpaceUsedInByte}`}</p>
-                        <p>{`Free Space In Byte ${data.localStorageFreeSpaceInByte}`}</p>
-                        <p>{`Free Space In Percentage ${data.localStorageFreeSpaceInPercentage}`}</p>
-
-                    </ContextMenu>}
-            </div >
-
-
-        )
-    }
-
+    return (
+        <div id="DotGraph" onClick={(handleClickEventHandler) ? handleClickEventHandler : null}>
+            <p id="DotGraph-title">{graphTitle}</p>
+            <div id="GraphBar">
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 0) ? "very-low" : DotGraph.defaultProps.increment}
+                />
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 1000000) ? "low" : DotGraph.defaultProps.increment}
+                />
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 3000000) ? "low" : DotGraph.defaultProps.increment}
+                />
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 4000000) ? "medium" : DotGraph.defaultProps.increment}
+                />
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 4500000) ? "high" : DotGraph.defaultProps.increment}
+                />
+                <DotGraph
+                    dotSize={"small"}
+                    increment={(value > 4800000) ? "very-high" : DotGraph.defaultProps.increment}
+                />
+            </div>
+            {children}
+        </div >
+    )
 }
+
+
 
 export default DotGraphWidget;
 
 DotGraphWidget.propTypes = {
     title: PropTypes.string,
-    value: PropTypes.number,
+    data: PropTypes.number,
+    handleClickEventHandler: PropTypes.func
 }
 
 DotGraphWidget.defaultProps = {
     title: 'DOT GRAPH',
-    value: 0
+    data: 0
 }
 
 

@@ -15,4 +15,4 @@ const ToolbarItem = ({ label, icon, eventHandler, showBigToolbarOption }) => {
     )
 }
 
-export default ToolbarItem;
+export default React.memo(ToolbarItem);

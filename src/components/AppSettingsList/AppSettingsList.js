@@ -4,9 +4,6 @@ import AppSetting from '../AppSetting/AppSetting'
 
 const AppSettingsList = ({ menuItems }) => {
 
-    // let optionsMenu = null;
-
-    // if (menuItems && menuItems.length > 0) {
     let optionsMenu = menuItems.map((menuItem, index) => {
         return <AppSetting
             key={index}
@@ -17,7 +14,6 @@ const AppSettingsList = ({ menuItems }) => {
             visible={menuItem.visible}
         />
     })
-    // }
 
     return (
         <div id="app-settings-list">
