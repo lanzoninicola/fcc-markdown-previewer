@@ -47,6 +47,27 @@ const Header = ({ storemarkdownVersionHistory, screenWidth }) => {
             <div className="header-toolbar">
                 <div className="header-toolbar-items">
                     <div className="header-toolbar-item">
+                        <SvgIcon
+                            name={'new'}
+                            iconColor={'#ffffff'}
+                            bigIcon={true}
+                        />
+                    </div>
+                    <div className="header-toolbar-item">
+                        <SvgIcon
+                            name={'save'}
+                            iconColor={'#ffffff'}
+                            bigIcon={true}
+                        />
+                    </div>
+                    <div className="header-toolbar-item">
+                        <SvgIcon
+                            name={'timemachine'}
+                            iconColor={'#ffffff'}
+                            bigIcon={true}
+                        />
+                    </div>
+                    <div className="header-toolbar-item">
                         {screenWidth >= 768 && <LocalStorageStatsWidget
                             title="local storage space used"
                         />}
