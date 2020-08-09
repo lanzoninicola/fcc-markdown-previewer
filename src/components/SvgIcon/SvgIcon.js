@@ -35,7 +35,7 @@ export default React.memo(SvgIcon);
 SvgIcon.propTypes = {
     bigIcon: PropTypes.bool,
     name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
+    iconColor: PropTypes.string.isRequired,
 }
 
 SvgIcon.defaultProps = {

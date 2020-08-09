@@ -1,10 +1,11 @@
 import React from 'react'
 import './Header.css'
-import DotGraphWidgetWithData from '../DotGraphWidget/DotGraphWidgetWithData';
 import AppGlobalSettings from '../AppGlobalSettings/AppGlobalSettings';
-import SvgIcon from '../SvgIcon/SvgIcon'
+import SvgIcon from '../SvgIcon/SvgIcon';
+import LocalStorageStatsMenu from '../LocalStorageStats/LocalStorageStatsMenu/LocalStorageStatsMenu';
+import LocalStorageStatsWidget from '../LocalStorageStats/LocalStorageStatsWidget/LocalStorageStatsWidget';
 
-const Header = ({ storemarkdownVersionHistory }) => {
+const Header = ({ storemarkdownVersionHistory, screenWidth }) => {
 
     const menuItems = [
         {
@@ -46,9 +47,10 @@ const Header = ({ storemarkdownVersionHistory }) => {
             <div className="header-toolbar">
                 <div className="header-toolbar-items">
                     <div className="header-toolbar-item">
-                        <DotGraphWidgetWithData
+                        {screenWidth >= 768 && <LocalStorageStatsWidget
                             title="local storage space used"
-                            value={0} />
+                        />}
+                        {screenWidth < 768 && <LocalStorageStatsMenu />}
                     </div>
                     <div className="header-toolbar-item">
                         <SvgIcon

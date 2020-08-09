@@ -33,7 +33,7 @@
     }
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     .toolbar-item {
       padding: 4px;
       /* padding-left: 5px;

@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import './DotGraphWidget.css'
 import DotGraph from '../DotGraph/DotGraph'
 
-const DotGraphWidget = ({ title, children, data, handleClickEventHandler }) => {
+const DotGraphWidget = ({ title, ...props }) => {
 
-    let value = data;
+    const { data, handleOnClickEvent } = props;
+
+    let value = data.localStorageSpaceUsedInByte;
     let graphTitle = (title) ? title.toUpperCase() : DotGraphWidget.defaultProps.title;
 
     return (
-        <div id="DotGraph" onClick={(handleClickEventHandler) ? handleClickEventHandler : null}>
+        <div id="DotGraph" onClick={handleOnClickEvent}>
             <p id="DotGraph-title">{graphTitle}</p>
             <div id="GraphBar">
                 <DotGraph
@@ -37,12 +39,9 @@ const DotGraphWidget = ({ title, children, data, handleClickEventHandler }) => {
                     increment={(value > 4800000) ? "very-high" : DotGraph.defaultProps.increment}
                 />
             </div>
-            {children}
         </div >
     )
 }
-
-
 
 export default DotGraphWidget;
 

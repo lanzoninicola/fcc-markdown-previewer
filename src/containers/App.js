@@ -543,7 +543,7 @@ class App extends Component {
       <Fragment>
         {showFormInsertImage && formInsertImage}
         {showModalRollbackContent && modalRollbackContent}
-        {(!focusMode) && <Header />}
+        {(!focusMode) && <Header screenWidth={screenWidth} />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
         <div className="container">
           {(!focusMode) && <Dashboard text={markdownText} />}

@@ -10,7 +10,7 @@ const withContextMenu = (
 ) => {
 
         return (
-            class Menu extends React.PureComponent {
+            class withContextMenu extends React.PureComponent {
                 constructor(props) {
                     super(props)
 
@@ -54,7 +54,7 @@ const withContextMenu = (
                                     {...this.props}
                                 >
                                     {(ContextMenuContent) &&
-                                        <ContextMenuContent menuItems={this.props.menuItems} />}
+                                        <ContextMenuContent {...this.props} />}
                                 </ContextMenu>}
                         </div>
                     )

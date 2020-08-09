@@ -1,0 +1,31 @@
+.localStorageStatsView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    
+}
+
+.localStorageStats-section-view {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.localStorageStats-section-title {
+    margin: -5px;
+    text-align: center;
+    color: #EDF6F9;
+    font-family: 'Hind', Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+.localStorageStats-section-value {
+    margin: -5px;
+    text-align: center;
+    font-family: 'Hind', Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    color: #ffffff;
+}
