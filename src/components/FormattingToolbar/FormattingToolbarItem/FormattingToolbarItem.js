@@ -1,8 +1,8 @@
 import React from 'react'
-import './ToolbarItem.css'
+import './FormattingToolbarItem.css'
 
 
-const ToolbarItem = ({ label, icon, eventHandler, showBigToolbarOption }) => {
+const FormattingToolbarItem = ({ label, icon, eventHandler, showBigToolbarOption }) => {
 
     let showLabel = false;
     showBigToolbarOption ? showLabel = true : showLabel = false;
@@ -15,4 +15,4 @@ const ToolbarItem = ({ label, icon, eventHandler, showBigToolbarOption }) => {
     )
 }
 
-export default React.memo(ToolbarItem);
+export default React.memo(FormattingToolbarItem);

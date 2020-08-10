@@ -4,7 +4,7 @@ import PreviewPanel from './PreviewPanel/PreviewPanel';
 import EditorPanel from './EditorPanel/EditorPanel';
 import Header from '../components/Header/Header';
 import Dashboard from '../components/Dashboard/Dashboard';
-import Toolbar from '../components/Toolbar/Toolbar';
+import FormattingToolbar from '../components/FormattingToolbar/FormattingToolbar';
 import Modal from '../components/Modal/Modal';
 import Button from '../components/Button/Button';
 import Form from '../components/Form/Form';
@@ -547,7 +547,7 @@ class App extends Component {
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
         <div className="container">
           {(!focusMode) && <Dashboard text={markdownText} />}
-          <Toolbar
+          <FormattingToolbar
             screenWidth={screenWidth}
             focusMode={focusMode}
             showBigToolbar={showBigToolbar}

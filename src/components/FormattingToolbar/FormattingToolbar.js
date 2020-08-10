@@ -1,8 +1,8 @@
 import React from 'react'
-import './Toolbar.css'
-import ToolbarItems from '../ToolbarItems/ToolbarItems'
+import './FormattingToolbar.css'
+import FormattingToolbarItems from './FormattingToolbarItems/FormattingToolbarItems'
 
-const Toolbar = ({
+const FormattingToolbar = ({
     screenWidth,
     focusMode,
     showBigToolbar,
@@ -26,7 +26,7 @@ const Toolbar = ({
                 `toolbarArea toolbarArea-anchor-top ${focusMode && "toolbarArea-focusMode"} ${showBigToolbarOption && "toolbarArea-anchor-bottom"}`
             }>
             <div id="toolbar" className="toolbar">
-                <ToolbarItems
+                <FormattingToolbarItems
                     editingStatus={editingStatus}
                     focusMode={focusMode}
                     showBigToolbarOption={showBigToolbarOption}
@@ -41,4 +41,4 @@ const Toolbar = ({
     )
 }
 
-export default React.memo(Toolbar);
+export default React.memo(FormattingToolbar);

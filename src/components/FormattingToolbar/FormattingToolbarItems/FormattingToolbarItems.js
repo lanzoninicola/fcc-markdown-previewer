@@ -1,8 +1,8 @@
 import React from 'react'
-import SvgIcon from '../SvgIcon/SvgIcon'
-import ToolbarItem from '../ToolbarItem/ToolbarItem'
+import SvgIcon from '../../SvgIcon/SvgIcon'
+import FormattingToolbarItem from '../FormattingToolbarItem/FormattingToolbarItem'
 
-const ToolbarItems = ({
+const FormattingToolbarItems = ({
     editingStatus,
     focusMode,
     showBigToolbarOption,
@@ -150,7 +150,7 @@ const ToolbarItems = ({
         let toolbarItem = null;
 
         if (item.disabled === false) {
-            toolbarItem = <ToolbarItem
+            toolbarItem = <FormattingToolbarItem
                 key={i}
                 bigIcon={bigIcon}
                 label={item.label}
@@ -167,5 +167,5 @@ const ToolbarItems = ({
 }
 
 
-export default React.memo(ToolbarItems);
+export default React.memo(FormattingToolbarItems);
 
