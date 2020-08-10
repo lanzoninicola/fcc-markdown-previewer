@@ -72,12 +72,13 @@ const HeaderToolbar = ({ screenWidth }) => {
                         bigIcon={true}
                     />
                 </div>
-                {/* <div className="header-toolbar-item">
-                    {screenWidth >= 768 && <LocalStorageStatsWidget
+                <div className="header-toolbar-item">
+                    {/* {screenWidth >= 768 && <LocalStorageStatsWidget
                         title="local storage space used"
                     />}
-                    {screenWidth < 768 && <LocalStorageStatsMenu />}
-                </div> */}
+                    {screenWidth < 768 && <LocalStorageStatsMenu />} */}
+                    <LocalStorageStatsWidget />
+                </div>
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'notification'}

@@ -15,3 +15,17 @@
     height: 60px;
     margin-left: 12px;  
 }
+
+.widget {
+    /* border: solid 2px white;
+    border-radius: 50px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box; */
+    
+}
+
+#freespace-value {
+    margin: 0px;
+    text-align: center;
+}

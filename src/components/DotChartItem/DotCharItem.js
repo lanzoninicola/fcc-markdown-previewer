@@ -20,7 +20,7 @@ DotChartItem.propTypes = {
         'small', 'medium', 'large'
     ]),
     increment: PropTypes.oneOf(
-        ['undefined', 'very-low', 'low', 'medium', 'high', 'very-high']
+        ['undefined', 'lower', 'low', 'medium', 'high', 'higher']
     )
 }
 

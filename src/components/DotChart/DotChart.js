@@ -3,40 +3,37 @@ import PropTypes from 'prop-types'
 import './DotChart.css'
 import DotChartItem from '../DotChartItem/DotCharItem'
 
-const DotChart = ({ title, ...props }) => {
+const DotChart = ({ title, data, ...props }) => {
 
-    const { data, handleOnClickEvent } = props;
-
-    let value = data.localStorageSpaceUsedInByte;
     let graphTitle = (title) ? title.toUpperCase() : DotChart.defaultProps.title;
 
     return (
-        <div id="dotchart" onClick={handleOnClickEvent}>
+        <div id="dotchart">
             <p id="dotchart-title">{graphTitle}</p>
             <div id="dotchart-bar">
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 0) ? "lower" : DotChart.defaultProps.increment}
+                    increment={(data > 0) ? "lower" : DotChart.defaultProps.increment}
                 />
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 1000000) ? "low" : DotChart.defaultProps.increment}
+                    increment={(data > 1000000) ? "low" : DotChart.defaultProps.increment}
                 />
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 3000000) ? "low" : DotChart.defaultProps.increment}
+                    increment={(data > 3000000) ? "low" : DotChart.defaultProps.increment}
                 />
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 4000000) ? "medium" : DotChart.defaultProps.increment}
+                    increment={(data > 4000000) ? "medium" : DotChart.defaultProps.increment}
                 />
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 4500000) ? "high" : DotChart.defaultProps.increment}
+                    increment={(data > 4500000) ? "high" : DotChart.defaultProps.increment}
                 />
                 <DotChartItem
                     dotSize={"small"}
-                    increment={(value > 4800000) ? "higher" : DotChart.defaultProps.increment}
+                    increment={(data > 4800000) ? "higher" : DotChart.defaultProps.increment}
                 />
             </div>
         </div >
@@ -58,4 +55,4 @@ DotChart.defaultProps = {
 
 
 
-// }= ({ title, value }) => {
+// }= ({ title, data }) => {

@@ -47,7 +47,7 @@ ContextMenu.propTypes = {
 
 ContextMenu.defaultProps = {
     config: {
-        menuBgColor: "linear-gradient(90deg, rgb(0, 109, 119,0.6) 45%, rgba(1,118,189,0.6) 100%)",
+        menuBgColor: "linear-gradient(90deg,  rgb(0,0,0, 0.5) 2%, rgba(0,0,0,0.7) 98%)",
         spaceBetween: 'medium'
     }
 }

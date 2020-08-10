@@ -14,7 +14,8 @@ const withLocalStorageData = (WrappedComponent) => {
                         localStorageSpaceUsedInByte: 0,
                         localStorageFreeSpaceInByte: 0,
                         localStorageFreeSpaceInPercentage: ''
-                    }
+                    },
+                    lastRefreshedDate: null
                 }
             }
 
@@ -54,20 +55,28 @@ const withLocalStorageData = (WrappedComponent) => {
                             localStorageFreeSpaceInByte: globalLocalStorage.getFreeSpaceInByte(),
                             localStorageFreeSpaceInPercentage: globalLocalStorage.getFreeSpaceInPercentage()
                         },
-
+                        lastRefreshedDate: new Date()
                     }
                 )
             }
 
             render() {
                 const {
-                    localStorageData
+                    localStorageData,
+                    lastRefreshedDate
                 } = this.state;
+
+                let dateOfLastRefresh = null;
+
+                if (lastRefreshedDate) {
+                    dateOfLastRefresh = `${lastRefreshedDate.toLocaleDateString()} ${lastRefreshedDate.toLocaleTimeString()}`;
+                }
 
                 return (
                     <WrappedComponent
                         handleStorageData={this.handleStorageData}
                         data={localStorageData}
+                        lastRefreshedDate={dateOfLastRefresh}
                         {...this.props}
                     />
                 )
