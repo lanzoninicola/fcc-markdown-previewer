@@ -1,4 +1,4 @@
-#DotGraph {
+#dotchart {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     
 }
 
-#DotGraph-title {
+#dotchart-title {
     margin-top: -4px;
     margin-bottom: -2px;
     margin-right: 0px;
@@ -17,7 +17,7 @@
     color: white;
 }
 
-#GraphBar {
+#dotchart-bar {
     display: flex;
     flex-direction: row;
     align-items: center;

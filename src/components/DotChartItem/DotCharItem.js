@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './DotGraph.css';
+import './DotChartItem.css';
 
 
-const DotGraph = ({ dotSize, increment }) => {
+const DotChartItem = ({ dotSize, increment }) => {
 
     return (
         <div
-            className={`graph-dot-increment graph-dot-${dotSize} increment-${increment}`}>
+            className={`dotchart-increment dotchart-item-${dotSize} increment-${increment}`}>
         </div>
     )
 
 }
 
-export default DotGraph;
+export default DotChartItem;
 
-DotGraph.propTypes = {
+DotChartItem.propTypes = {
     dotSize: PropTypes.oneOf([
         'small', 'medium', 'large'
     ]),
@@ -24,7 +24,7 @@ DotGraph.propTypes = {
     )
 }
 
-DotGraph.defaultProps = {
+DotChartItem.defaultProps = {
     dotSize: "small",
     increment: "undefined"
 }
