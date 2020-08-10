@@ -1,8 +1,15 @@
-#dashboard {
+.dashboard {
     display: flex;
     justify-content: center;
     /* background-color: rgb(136, 82, 127, 0.8); */
     width: 100%;
+    height: 30px;
+}
+
+.dashboar-anchor {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
 }
 
 .dashboard-text {

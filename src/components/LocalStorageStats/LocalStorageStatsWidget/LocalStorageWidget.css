@@ -1,0 +1,17 @@
+.widget-small {
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;  
+}
+
+.widget-medium {
+    width: 30px;
+    height: 30px;
+    margin-left: 6px;  
+}
+
+.widget-large {
+    width: 60px;
+    height: 60px;
+    margin-left: 12px;  
+}

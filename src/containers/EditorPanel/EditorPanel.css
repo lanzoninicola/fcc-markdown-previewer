@@ -2,12 +2,9 @@
     width: 50%;
     height: auto;
     margin: 10px;
-    /* border: solid 5px #6E7E85; */
     border-radius: 0.7%;
     padding: 10px;
     background-color: #fbfbfb;
-    /* background-color: rgb(159, 135, 175); */
-    /* box-shadow: 0 20px 25px -5px rgba(240, 233, 230, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
     box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5);
   }
     
@@ -25,9 +22,9 @@
 .editor-panel-header-toolbar-item {
   display: flex;
   align-items: center;
-  /* justify-content: flex-end; */
   padding-right: 5px;
   padding-left: 5px;
+  max-width: 30px;
   cursor: pointer;
 }
 
@@ -56,5 +53,13 @@
 @media screen and (max-width: 992px) {
   #editor-panel {
     width: auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .editor-panel-header-toolbar-item {
+      padding-right: 6px;
+      padding-left: 6px;
+      max-width: 20px;
   }
 }

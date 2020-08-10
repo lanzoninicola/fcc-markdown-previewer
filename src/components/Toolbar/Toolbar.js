@@ -21,12 +21,14 @@ const Toolbar = ({
     }
 
     return (
-        <div id="toolbarArea" className={
-            `${focusMode ? "toolbarArea-focusMode" : ""} ${showBigToolbarOption ? "toolbarArea-bottom" : "toolbarArea-top"}`
-        }>
-            <div id="toolbar" className={`toolbar ${focusMode ? "toolbar-focusMode" : "toolbar-defaultMode"}`}>
+        <div id="toolbar"
+            className={
+                `toolbarArea toolbarArea-anchor-top ${focusMode && "toolbarArea-focusMode"} ${showBigToolbarOption && "toolbarArea-anchor-bottom"}`
+            }>
+            <div id="toolbar" className="toolbar">
                 <ToolbarItems
                     editingStatus={editingStatus}
+                    focusMode={focusMode}
                     showBigToolbarOption={showBigToolbarOption}
                     handleNewmarkdownContent={handleNewmarkdownContent}
                     handleAddmarkdownContentToHistory={handleAddmarkdownContentToHistory}

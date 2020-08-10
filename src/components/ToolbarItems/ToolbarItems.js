@@ -4,6 +4,7 @@ import ToolbarItem from '../ToolbarItem/ToolbarItem'
 
 const ToolbarItems = ({
     editingStatus,
+    focusMode,
     showBigToolbarOption,
     handleNewmarkdownContent,
     handleAddmarkdownContentToHistory,
@@ -22,28 +23,35 @@ const ToolbarItems = ({
             label: 'NEW',
             icon: <SvgIcon name={'NEW'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
             alt: 'New markdown content',
-            disabled: false,
+            disabled: (focusMode === false ? true : false) || false,
             eventHandler: handleNewmarkdownContent
         },
         {
-            label: 'SNAPSHOT',
-            icon: <SvgIcon name={'SNAPSHOT'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Take a snapshot of markdown text',
-            disabled: editingStatus === 'idle' ? true : false,
+            label: 'SAVE',
+            icon: <SvgIcon name={'SAVE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
+            alt: 'Save a version of markdown text',
+            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
+            eventHandler: handleAddmarkdownContentToHistory
+        },
+        {
+            label: 'TIME MACHINE',
+            icon: <SvgIcon name={'TIMEMACHINE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
+            alt: 'Get a version of markdown text',
+            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
             eventHandler: handleAddmarkdownContentToHistory
         },
         {
             label: 'CLEAR',
             icon: <SvgIcon name={'CLEAR'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
             alt: 'Remove markdown Content',
-            disabled: editingStatus === 'idle' ? true : false,
+            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
             eventHandler: handleClearmarkdownContent
         },
         {
             label: '',
             icon: <SvgIcon name={'SEPARATOR'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
             alt: 'separator',
-            disabled: editingStatus === 'idle' ? true : false
+            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
         },
         {
             label: 'H1',

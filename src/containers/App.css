@@ -47,6 +47,20 @@
   flex-direction: column;
 }
 
+.container-editor-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 100px;
+  background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%);
+}
+
+.container-editor-area-focusMode {
+  /* background: linear-gradient(90deg, rgba(0,109,119,0.6) 10%, rgba(1,118,189,0.7) 50%, rgba(0,109,119,0.6) 90%); */
+  background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%);
+}
+
+
 h3 {
   margin: 10px;
   font-family: 'Alegreya Sans';

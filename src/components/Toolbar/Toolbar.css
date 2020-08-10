@@ -1,36 +1,34 @@
-.toolbarArea-bottom {
-  position: fixed;
-  bottom: 20px;
-}
-
-.toolbarArea-top {
+.toolbarArea {
   display: flex;
   justify-content: center;
   padding-top: 5px;
   padding-bottom: 5px;
+  position: fixed;
+}
+
+.toolbarArea-anchor-top {
+  top: 50px;
+  z-index: 1;
+}
+
+.toolbarArea-anchor-bottom {
+  bottom: 20px;
 }
 
 .toolbarArea-focusMode {
-  background: linear-gradient(90deg, rgba(0,109,119,0.81) 10%, rgba(1,118,189,1) 50%, rgba(0,109,119,0.81) 90%);
+  top: 20px;
 }
 
 .toolbar {
   display: flex;
   flex-direction: row;
   text-align: center;
-}
-
-.toolbar-defaultMode {
-  background: rgb(0,109,119);
-  background: linear-gradient(90deg, rgba(0, 109, 119,0.8) 45%, rgba(1,118,189,0.8) 100%);
-  border-radius: 50px;
-  padding-left: 20px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding-left: 10px;
   padding-right: 20px;
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5);
-}
-
-.toolbar-focusMode {
-  background: none; 
+  background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%);
 }
 
 ::-webkit-scrollbar {

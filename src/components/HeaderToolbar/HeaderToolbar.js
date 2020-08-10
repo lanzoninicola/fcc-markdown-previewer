@@ -21,7 +21,7 @@ const HeaderToolbar = ({ screenWidth }) => {
             component: 'EditorPanel',
             settingName: 'ultraFocusMode',
             label: 'ULTRA FOCUS MODE',
-            eventHandler: 'handleUltraFocusMode',
+            eventHandler: 'handleImmersiveWriting',
             disabled: false,
             visible: true
         }
@@ -66,11 +66,18 @@ const HeaderToolbar = ({ screenWidth }) => {
                     />
                 </div>
                 <div className="header-toolbar-item">
+                    <SvgIcon
+                        name={'clear'}
+                        iconColor={'#ffffff'}
+                        bigIcon={true}
+                    />
+                </div>
+                {/* <div className="header-toolbar-item">
                     {screenWidth >= 768 && <LocalStorageStatsWidget
                         title="local storage space used"
                     />}
                     {screenWidth < 768 && <LocalStorageStatsMenu />}
-                </div>
+                </div> */}
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'notification'}

@@ -468,21 +468,21 @@ class App extends Component {
     this.setState({ focusMode: enable }, () => {
       if (!enable) {
         resetUltraFocusMode();
-        this.handleUltraFocusMode(false);
+        this.handleImmersiveWriting(false);
       }
     })
 
   }
 
-  handleUltraFocusMode = (enable) => {
-    console.log('handleUltraFocusMode', enable)
+  handleImmersiveWriting = (enable) => {
+    console.log('handleImmersiveWriting', enable)
     this.setState({ ultraFocusMode: enable })
 
     if (enable) {
       openFullscreen();
     } else {
       closeFullscreen()
-        .catch(() => { console.log('App - handleUltraFocusMode(): an error occured') })
+        .catch(() => { console.log('App - handleImmersiveWriting(): an error occured') })
     }
 
   }
@@ -559,10 +559,9 @@ class App extends Component {
             handleInsertImage={this.handleInsertImage}
           />
         </div>
-        <div className="container"
+        <div className={`container-editor-area ${focusMode && "container-editor-area-focusMode"}`}
           style={{
             flexDirection: (screenWidth < 950) ? "column" : "row",
-            background: (!focusMode) ? "none" : "linear-gradient(90deg, rgba(0,109,119,0.81) 10%, rgba(1,118,189,1) 50%, rgba(0,109,119,0.81) 90%)"
           }}>
           <EditorPanel
             editingStatus={editingStatus}
@@ -576,7 +575,7 @@ class App extends Component {
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
             textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
-            handleUltraFocusMode={this.handleUltraFocusMode}
+            handleImmersiveWriting={this.handleImmersiveWriting}
             handleHideGridNumbers={this.handleHideGridNumbers}
           />
           {(!focusMode) && <PreviewPanel rawText={markdownText} />}
