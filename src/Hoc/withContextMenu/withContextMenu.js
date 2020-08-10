@@ -49,6 +49,7 @@ const withContextMenu = (
                                 config={wrappedComponentConfig}
                                 {...this.props} />
                             {showContextMenu &&
+
                                 <ContextMenu
                                     config={contextMenuConfig}
                                     {...this.props}

@@ -9,6 +9,7 @@
     padding: 10px 20px 10px 20px;
     transition: width 2s;
     cursor: initial;
+    z-index: 1;
 }
 
 #context-menu::after{
@@ -24,3 +25,21 @@
     color: white;
     letter-spacing: 0.1rem;
 }
+
+.fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 0.45s;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }

@@ -53,7 +53,7 @@ class EditorPanel extends Component {
         ]
 
         return (
-            <div id="editor-panel">
+            <div id="editor-panel" className="fadeInLeft">
                 <div id="editor-panel-header">
                     <h3 id="editor-panel-header-title">EDITOR</h3>
                     <div className="editor-panel-header-toolbar">

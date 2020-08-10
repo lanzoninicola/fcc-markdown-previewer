@@ -61,3 +61,45 @@ h3 {
     justify-content: center;
   }
 }
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 0.85s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #preview-panel {
+    width: auto;
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+  animation-duration: 0.85s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

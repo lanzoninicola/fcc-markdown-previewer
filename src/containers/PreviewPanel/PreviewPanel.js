@@ -68,7 +68,7 @@ class PreviewPanel extends Component {
         })
 
         return (
-            <div id="preview-panel">
+            <div id="preview-panel" className="fadeInRight">
                 <div id="preview-panel-header">
                     <h3>PREVIEW</h3>
                     <div id="preview-panel-header-select">

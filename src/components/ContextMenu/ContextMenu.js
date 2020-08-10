@@ -1,6 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import './ContextMenu.css'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './ContextMenu.css';
 
 const ContextMenu = ({ config, ...props }) => {
 
@@ -25,7 +25,7 @@ const ContextMenu = ({ config, ...props }) => {
     }
 
     return (
-        <div id="context-menu"
+        <div id="context-menu" className={'fadeInDown'}
             style={{
                 background: menuBgColor,
                 top: topStyle

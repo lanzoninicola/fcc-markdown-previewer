@@ -23,25 +23,6 @@
 }
 
 
-.header-toolbar{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;    
-}
-
-.header-toolbar-items {
-    display: flex;
-    align-items: center;
-    padding-right: 5px;
-    padding-left: 5px;
-    cursor: pointer;
-}
-
-.header-toolbar-item {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
 @media screen and (max-width: 450px) {
     #title {
         padding-top: 12px;
@@ -50,10 +31,6 @@
         line-height: 1rem;
     }
 
-    .header-toolbar-item {
-        padding-right: 6px;
-        padding-left: 6px;
-    }
   }
 
   
