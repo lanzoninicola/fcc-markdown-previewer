@@ -20,7 +20,10 @@ import {
   openFullscreen,
   closeFullscreen,
   resetUltraFocusMode
-} from '../helper/helper'
+} from '../helper/helper';
+
+import { connect } from 'react-redux';
+import { initApplicationInstance } from '../redux/actionsCreators/initApplication';
 
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
@@ -63,7 +66,7 @@ class App extends Component {
       localStorageSpaceInUse: 0
     }
 
-    this.textAreaRef = React.createRef();
+    // this.textAreaRef = React.createRef();
 
   }
 
@@ -120,16 +123,16 @@ class App extends Component {
     });
   }
 
-  handleEditorChange = (e) => {
-    setmarkdownTextLog(e.target.value);
+  // handleEditorChange = (e) => {
+  //   setmarkdownTextLog(e.target.value);
 
-    this.state.markdownFoo.setValue(e.target.value);
+  //   this.state.markdownFoo.setValue(e.target.value);
 
-    this.setState({
-      editingStatus: 'InProgress',
-      markdownText: e.target.value
-    });
-  }
+  //   this.setState({
+  //     editingStatus: 'InProgress',
+  //     markdownText: e.target.value
+  //   });
+  // }
 
   handleNewmarkdownContent = () => {
     this.clearmarkdownContent();
@@ -255,24 +258,24 @@ class App extends Component {
     this.setState({ markdownText: markdownTextFromHistory })
   }
 
-  handleTextSelection = () => {
-    const { textSelection, markdownText } = this.state;
+  // handleTextSelection = () => {
+  //   const { textSelection, markdownText } = this.state;
 
-    let newTextSelection = { ...textSelection };
+  //   let newTextSelection = { ...textSelection };
 
-    let startSelection = this.textAreaRef.current.selectionStart;
-    let endSelection = this.textAreaRef.current.selectionEnd;
+  //   let startSelection = this.textAreaRef.current.selectionStart;
+  //   let endSelection = this.textAreaRef.current.selectionEnd;
 
-    if (markdownText[startSelection] === " ") { startSelection = startSelection + 1 }
-    if (markdownText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
+  //   if (markdownText[startSelection] === " ") { startSelection = startSelection + 1 }
+  //   if (markdownText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
 
-    newTextSelection.startSelection = startSelection;
-    newTextSelection.endSelection = endSelection;
+  //   newTextSelection.startSelection = startSelection;
+  //   newTextSelection.endSelection = endSelection;
 
-    this.setState(
-      { textSelection: newTextSelection }
-    )
-  }
+  //   this.setState(
+  //     { textSelection: newTextSelection }
+  //   )
+  // }
 
   handleTextFormatting = (formattingType) => {
     const { textSelection, markdownText } = this.state;
@@ -573,7 +576,7 @@ class App extends Component {
             handleEditorChange={this.handleEditorChange}
             handleTextSelection={this.handleTextSelection}
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
-            textAreaRef={this.textAreaRef}
+            // textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
             handleImmersiveWriting={this.handleImmersiveWriting}
             handleHideGridNumbers={this.handleHideGridNumbers}
@@ -635,6 +638,21 @@ And here. | Okay. | I think we get it.
 ![React Logo w/ Text](https://goo.gl/Umyytc)
 `
 
-export default App;
+const mapState = state => {
+  const { textAreaRef2 } = state;
+
+  return {
+    textAreaRef2
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    initApp: () => dispatch(initApplicationInstance())
+  }
+}
+
+
+export default connect(mapState, mapDispatch)(App);
 
 

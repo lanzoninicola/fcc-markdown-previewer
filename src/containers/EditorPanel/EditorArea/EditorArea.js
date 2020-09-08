@@ -1,9 +1,28 @@
-import React, { Fragment } from 'react'
-import './EditorArea.css'
+import React, { Fragment } from 'react';
+import './EditorArea.css';
 
-const EditorArea = ({ editingStatus, rawText, handleEditorChange, handleTextSelection, textAreaRef }) => {
+import { connect } from 'react-redux';
+import { handleEditorChange, handleTextSelection } from '../../../redux/actionsCreators/globalActions';
 
-    const readonly = (editingStatus === 'idle') ? true : false
+const EditorArea = ({
+    //editingStatus,
+    //rawText,
+    //handleEditorChange,
+    //handleTextSelection,
+    // textAreaRef,
+    ...props }) => {
+
+    const {
+        handleEditorChange,
+        handleTextSelection,
+        editingStatus,
+        markdownText,
+        textAreaRef2
+    } = props;
+
+    //  const readonly = (editingStatus === 'idle') ? true : false // da riabilitare
+
+    console.log(editingStatus)
 
     return (
         <Fragment>
@@ -16,12 +35,12 @@ const EditorArea = ({ editingStatus, rawText, handleEditorChange, handleTextSele
                 <div id="text-area">
                     <textarea
                         id="editor"
-                        ref={textAreaRef}
+                        ref={textAreaRef2}
                         onChange={handleEditorChange}
                         onClick={handleTextSelection}
                         onSelect={handleTextSelection}
-                        value={rawText}
-                        readOnly={readonly}
+                        value={markdownText}
+                        // readOnly={readonly} // da riabilitare
                         placeholder="Start here...">
                     </textarea>
                 </div>
@@ -30,6 +49,28 @@ const EditorArea = ({ editingStatus, rawText, handleEditorChange, handleTextSele
     )
 }
 
+const madDispatch = dispatch => {
+    return {
+        handleEditorChange: (e) => dispatch(handleEditorChange(e)),
+        // handleTextSelection: (textAreaRef) => dispatch(handleTextSelection(textAreaRef))
+    }
+
+}
+
+const mapState = state => {
+    const { editingStatus, markdownText } = state.changeMarkdownText;
+    const { textAreaRef2 } = state.initTextAreaRef;
+    // const { } = state.init
+
+    console.log('editorArea', 'mapState', state)
+
+    return {
+        editingStatus,
+        markdownText,
+        textAreaRef2
+    }
+}
 
 
-export default EditorArea;
+
+export default connect(mapState, madDispatch)(EditorArea);

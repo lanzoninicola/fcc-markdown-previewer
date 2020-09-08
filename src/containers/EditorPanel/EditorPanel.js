@@ -73,11 +73,11 @@ class EditorPanel extends Component {
                     </div>
                 </div >
                 <EditorArea
-                    editingStatus={editingStatus}
-                    rawText={markdownText}
-                    handleEditorChange={handleEditorChange}
+                    // editingStatus={editingStatus}
+                    // rawText={markdownText}
+                    // handleEditorChange={handleEditorChange}
                     handleTextSelection={handleTextSelection}
-                    textAreaRef={textAreaRef}
+                // textAreaRef={textAreaRef}
                 />
 
             </div >
