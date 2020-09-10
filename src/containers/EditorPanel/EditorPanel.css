@@ -5,7 +5,8 @@
     border-radius: 0.7%;
     padding: 10px;
     background-color: #fbfbfb;
-    box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5);
+    box-shadow: 20px -17px 57px -42px rgba(0,0,0,0.3);
+    /* box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5); */
   }
     
 #editor-panel-header {

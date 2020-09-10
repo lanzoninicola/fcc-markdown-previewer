@@ -1,9 +1,18 @@
 .toolbarArea {
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
   position: fixed;
+}
+
+.toolbarArea-anchor-top {
   top: 50px;
-  width: 100%;
   z-index: 1;
+}
+
+.toolbarArea-anchor-bottom {
+  bottom: 20px;
 }
 
 .toolbarArea-focusMode {
@@ -12,15 +21,14 @@
 
 .toolbar {
   display: flex;
-  justify-content: center;
   flex-direction: row;
   text-align: center;
-  border-radius: 50px;
-  padding-left: 20px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding-left: 10px;
   padding-right: 20px;
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5);
-  background-color: rgb(251,251,251, 0.5) ;
-  /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
+  background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%);
 }
 
 ::-webkit-scrollbar {

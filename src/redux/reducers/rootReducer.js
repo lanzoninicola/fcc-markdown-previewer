@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import {
     textSelection,
-    changeMarkdownText
+    markdownFile
 } from './reducers';
 
 export const rootReducer = combineReducers({
-    changeMarkdownText,
+    markdownFile,
     textSelection
 });

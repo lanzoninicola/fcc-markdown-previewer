@@ -3,6 +3,6 @@ import AppSettingsList from '../AppSettingsList/AppSettingsList';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 
 
-const AppGlobalSettings = withContextMenu(AppSettingsList, { spaceBetween: 'large' })(HamburgerMenu, { iconColor: '#ffffff' });
+const AppGlobalSettings = withContextMenu(AppSettingsList, { spaceBetween: 'large' })(HamburgerMenu, { iconColor: '#006d77' });
 
 export default AppGlobalSettings;

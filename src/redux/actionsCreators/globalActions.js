@@ -1,7 +1,18 @@
 import { setmarkdownTextLog } from '../../helper/helper';
 import {
-    MARKDOWN_TEXT_EDITOR_CHANGE,
-    MARKDOWN_TEXT_SELECTION
+    MARKDOWN_TEXT_CONTENT_CHANGE,
+    MARKDOWN_TEXT_SELECTION,
+    TEXT_FORMATTING_APPLIED_H1,
+    TEXT_FORMATTING_APPLIED_H2,
+    TEXT_FORMATTING_APPLIED_H3,
+    TEXT_FORMATTING_APPLIED_BOLD,
+    TEXT_FORMATTING_APPLIED_ITALIC,
+    TEXT_FORMATTING_APPLIED_STRIKETROUGH,
+    TEXT_FORMATTING_APPLIED_CODE,
+    TEXT_FORMATTING_APPLIED_BLOCKCODE,
+    TEXT_FORMATTING_APPLIED_LINK,
+    TEXT_FORMATTING_APPLIED_LIST,
+    TEXT_FORMATTING_APPLIED_NUMBERS
 } from '../actions/actions';
 
 
@@ -12,7 +23,7 @@ export const handleEditorChange = (e) => {
     setmarkdownTextLog(e.target.value);
 
     return {
-        type: MARKDOWN_TEXT_EDITOR_CHANGE,
+        type: MARKDOWN_TEXT_CONTENT_CHANGE,
         payload: e.target.value
     }
 }
@@ -39,5 +50,30 @@ export const handleTextSelection = (text) => {
         payload: { ...textSelection, ...nextSelectionRange }
     };
 };
+
+
+export const setH1 = (toFormat = { markdownText: '', textSelection: { startSelection: 0, endSelection: 0 } }) => {
+
+    const { markdownText, textSelection } = toFormat;
+
+    let textToFormat = [];
+    let newMarkdownText = markdownText;
+
+    if (markdownText && textSelection) {
+
+        const { startSelection } = textSelection;
+
+        textToFormat.push(...markdownText.split(""))
+        textToFormat.splice(startSelection, 0, "# ");
+        newMarkdownText = textToFormat.join("");
+
+        setmarkdownTextLog(textToFormat);
+    }
+
+    return {
+        type: TEXT_FORMATTING_APPLIED_H1,
+        payload: newMarkdownText
+    };
+}
 
 

@@ -4,6 +4,8 @@ import './PreviewPanel.css'
 // import './PreviewRenderGithub.css'
 import marked from 'marked'
 
+import { connect } from 'react-redux';
+
 const DEFAULT = 'Default';
 const GITHUB = 'Github Style'
 
@@ -36,6 +38,9 @@ class PreviewPanel extends Component {
 
 
         const markdown = marked(text);
+
+        console.log('PreviewPanel - createMarkdown - markdown', markdown)
+
         return { __html: markdown };
     }
 
@@ -60,7 +65,7 @@ class PreviewPanel extends Component {
 
     render() {
 
-        const { rawText } = this.props;
+        const { markdownText } = this.props;
         const { previewRenderStyles, previewRenderClassName } = this.state;
 
         const stylesOptions = previewRenderStyles.map((previewRenderStyle, i) => {
@@ -78,11 +83,19 @@ class PreviewPanel extends Component {
                         </select>
                     </div>
                 </div>
-                <div dangerouslySetInnerHTML={this.createmarkdown(rawText)} id="preview-render" className={previewRenderClassName} >
+                <div dangerouslySetInnerHTML={this.createmarkdown(markdownText)} id="preview-render" className={previewRenderClassName} >
                 </div>
             </div>
         )
     }
 }
 
-export default PreviewPanel;
+const mapState = state => {
+    const { markdownText } = state.markdownFile
+
+    return {
+        markdownText
+    }
+}
+
+export default connect(mapState, null)(PreviewPanel);

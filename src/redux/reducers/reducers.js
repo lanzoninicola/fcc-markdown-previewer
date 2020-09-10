@@ -1,29 +1,31 @@
 import {
-    MARKDOWN_TEXT_EDITOR_CHANGE,
+    MARKDOWN_TEXT_CONTENT_CHANGE,
     MARKDOWN_TEXT_SELECTION,
+    TEXT_FORMATTING_APPLIED_H1,
 } from '../actions/actions';
 
 
-let initStateOnMarkdownEditorChange = {
+let initStateOfMarkdownFile = {
     editingStatus: 'idle', //'InProgress',
     markdownText: ''
 };
 
-export const changeMarkdownText = (state = initStateOnMarkdownEditorChange, action) => {
-
-    console.log(action.type)
-
+export const markdownFile = (state = initStateOfMarkdownFile, action) => {
     switch (action.type) {
-        case MARKDOWN_TEXT_EDITOR_CHANGE:
+        case MARKDOWN_TEXT_CONTENT_CHANGE:
             return {
                 ...state,
                 editingStatus: 'InProgress',
                 markdownText: action.payload
             }
+        case TEXT_FORMATTING_APPLIED_H1:
+            return {
+                ...state,
+                markdownText: action.payload
+            };
         default:
             return state;
     }
-
 };
 
 let initStateOnTextSelection = {
@@ -34,11 +36,6 @@ let initStateOnTextSelection = {
 };
 
 export const textSelection = (state = initStateOnTextSelection, action) => {
-    console.log(state, {
-        ...state,
-        textSelection: action.payload
-    });
-
     switch (action.type) {
         case MARKDOWN_TEXT_SELECTION:
             return {

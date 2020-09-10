@@ -2,10 +2,9 @@ import React from 'react'
 import './FormattingToolbarItem.css'
 
 
-const FormattingToolbarItem = ({ label, icon, eventHandler, showBigToolbarOption }) => {
+const FormattingToolbarItem = ({ label, icon, eventHandler }) => {
 
     let showLabel = false;
-    showBigToolbarOption ? showLabel = true : showLabel = false;
 
     return (
         <div className="toolbar-item" onClick={eventHandler}>

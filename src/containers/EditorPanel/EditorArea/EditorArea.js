@@ -54,7 +54,7 @@ const madDispatch = dispatch => {
 }
 
 const mapState = state => {
-    const { editingStatus, markdownText } = state.changeMarkdownText;
+    const { editingStatus, markdownText } = state.markdownFile;
     const { textSelection } = state.textSelection;
 
     console.log(markdownText, editingStatus)

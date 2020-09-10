@@ -40,10 +40,14 @@ class App extends Component {
 
     this.state = {
       screenWidth: 0,
+
+
       editingStatus: 'idle',
+
       markdownText: placeholder,
       markdownImageDescription: '',
       markdownImageURL: '',
+
       lastmarkdownVersion: 0,
 
       markdownFoo: new LocalStorageItem('markdownFoo'),
@@ -58,8 +62,6 @@ class App extends Component {
         startSelection: 0,
         endSelection: 0
       },
-
-      showBigToolbar: false,
 
       focusMode: false,
       ultraFocusMode: false,
@@ -499,7 +501,6 @@ class App extends Component {
 
     const {
       screenWidth,
-      showBigToolbar,
       editingStatus,
       markdownText,
       markdownVersionsHistory,
@@ -551,40 +552,41 @@ class App extends Component {
         {/* {showModalRollbackContent && modalRollbackContent} !!!!!! DA RIPRISTINARE*/}
         {(!focusMode) && <Header screenWidth={screenWidth} />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
+        <FormattingToolbar
+          screenWidth={screenWidth}
+          focusMode={focusMode}
+          editingStatus={editingStatus}
+          handleNewmarkdownContent={this.handleNewmarkdownContent}
+          handleAddmarkdownContentToHistory={this.handleAddmarkdownContentToHistory}
+          handleClearmarkdownContent={this.handleClearmarkdownContent}
+          handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
+          handleInsertImage={this.handleInsertImage}
+        />
         <div className="container">
           {(!focusMode) && <Dashboard text={markdownText} />}
-          <FormattingToolbar
-            screenWidth={screenWidth}
-            focusMode={focusMode}
-            showBigToolbar={showBigToolbar}
-            editingStatus={editingStatus}
-            handleNewmarkdownContent={this.handleNewmarkdownContent}
-            handleAddmarkdownContentToHistory={this.handleAddmarkdownContentToHistory}
-            handleClearmarkdownContent={this.handleClearmarkdownContent}
-            handleTextFormatting={(formattingType) => this.handleTextFormatting(formattingType)}
-            handleInsertImage={this.handleInsertImage}
-          />
         </div>
         <div className={`container-editor-area ${focusMode && "container-editor-area-focusMode"}`}
           style={{
             flexDirection: (screenWidth < 950) ? "column" : "row",
           }}>
+
           <EditorPanel
-            editingStatus={editingStatus}
-            markdownText={markdownText}
+            //editingStatus={editingStatus}
+            //markdownText={markdownText}
+            screenWidth={screenWidth}
             focusMode={focusMode}
             markdownVersionsHistory={markdownVersionsHistory}
             lastmarkdownVersion={lastmarkdownVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
-            handleEditorChange={this.handleEditorChange}
-            handleTextSelection={this.handleTextSelection}
+            //handleEditorChange={this.handleEditorChange}
+            //handleTextSelection={this.handleTextSelection}
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
-            textAreaRef={this.textAreaRef}
+            //textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
             handleImmersiveWriting={this.handleImmersiveWriting}
             handleHideGridNumbers={this.handleHideGridNumbers}
           />
-          {(!focusMode) && <PreviewPanel rawText={markdownText} />}
+          {(!focusMode) && <PreviewPanel />}
         </div>
       </Fragment >
     );
@@ -593,18 +595,7 @@ class App extends Component {
 
 }
 
-// FINTANTO CHE NON HO INTEGRATO REDUX NELLA TOOLBAR DOVRò MANTENERE
-// QUI QUESTO MAPSTATE PER ESSERE UTILIZZATO DALLE FUNZIONI DEI PULSANTI DELLA TOOLBAR
-const mapState = state => {
-  const { textSelection } = state;
-
-  return {
-    textSelection
-  }
-
-}
-
-export default connect(mapState, null, null, { forwardRef: true })(App);
+export default App;
 
 
 
