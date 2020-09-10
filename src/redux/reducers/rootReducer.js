@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import {
-    initTextAreaRef,
+    textSelection,
     changeMarkdownText
 } from './reducers';
 
-
 export const rootReducer = combineReducers({
-    initTextAreaRef,
-    changeMarkdownText
+    changeMarkdownText,
+    textSelection
 });

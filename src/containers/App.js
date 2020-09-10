@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
+import placeholder from '../helper/placeholder';
 import PreviewPanel from './PreviewPanel/PreviewPanel';
 import EditorPanel from './EditorPanel/EditorPanel';
 import Header from '../components/Header/Header';
@@ -23,7 +24,6 @@ import {
 } from '../helper/helper';
 
 import { connect } from 'react-redux';
-import { initApplicationInstance } from '../redux/actionsCreators/initApplication';
 
 
 // manage with a modal rollbackData after closed or crashed see: this.rollbackData
@@ -32,6 +32,7 @@ import { initApplicationInstance } from '../redux/actionsCreators/initApplicatio
 // NOTIFICATION BACKGROUND
 // background: rgb(255,255,255);
 // background: linear-gradient(45deg, rgba(255,255,255,0) 44%, rgba(10,131,136,1) 76%);
+
 
 class App extends Component {
   constructor(props) {
@@ -66,11 +67,11 @@ class App extends Component {
       localStorageSpaceInUse: 0
     }
 
-    // this.textAreaRef = React.createRef();
 
   }
 
   componentDidMount() {
+
     document.addEventListener("resize", this.setWindowDimensions());
 
     if (this.isThereDataInLocalStorageSession()) {
@@ -494,6 +495,8 @@ class App extends Component {
 
   render() {
 
+
+
     const {
       screenWidth,
       showBigToolbar,
@@ -545,7 +548,7 @@ class App extends Component {
     return (
       <Fragment>
         {showFormInsertImage && formInsertImage}
-        {showModalRollbackContent && modalRollbackContent}
+        {/* {showModalRollbackContent && modalRollbackContent} !!!!!! DA RIPRISTINARE*/}
         {(!focusMode) && <Header screenWidth={screenWidth} />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
         <div className="container">
@@ -576,7 +579,7 @@ class App extends Component {
             handleEditorChange={this.handleEditorChange}
             handleTextSelection={this.handleTextSelection}
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
-            // textAreaRef={this.textAreaRef}
+            textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
             handleImmersiveWriting={this.handleImmersiveWriting}
             handleHideGridNumbers={this.handleHideGridNumbers}
@@ -590,69 +593,18 @@ class App extends Component {
 
 }
 
-const placeholder =
-  `# Welcome to my React markdown Previewer!
-
-## This is a sub-heading...
-### And here's some other cool stuff:
-  
-Heres some code, \`<div></div>\`, between 2 backticks.
-
-\`\`\`
-// this is multi-line code:
-
-function anotherExample(firstLine, lastLine) {
-  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
-    return multiLineCode;
-  }
-}
-\`\`\`
-  
-You can also make text **bold**... whoa!
-Or _italic_.
-Or... wait for it... **_both!_**
-And feel free to go crazy ~~crossing stuff out~~.
-
-There's also [links](https://www.freecodecamp.com), and
-> Block Quotes!
-
-And if you want to get really crazy, even tables:
-
-Wild Header | Crazy Header | Another Header?
------------- | ------------- | ------------- 
-Your content can | be here, and it | can be here....
-And here. | Okay. | I think we get it.
-
-- And of course there are lists.
-  - Some are bulleted.
-     - With different indentation levels.
-        - That look like this.
-
-
-1. And there are numbererd lists too.
-1. Use just 1s if you want! 
-1. But the list goes on...
-- Even if you use dashes or asterisks.
-* And last but not least, let's not forget embedded images:
-
-![React Logo w/ Text](https://goo.gl/Umyytc)
-`
-
+// FINTANTO CHE NON HO INTEGRATO REDUX NELLA TOOLBAR DOVRò MANTENERE
+// QUI QUESTO MAPSTATE PER ESSERE UTILIZZATO DALLE FUNZIONI DEI PULSANTI DELLA TOOLBAR
 const mapState = state => {
-  const { textAreaRef2 } = state;
+  const { textSelection } = state;
 
   return {
-    textAreaRef2
+    textSelection
   }
+
 }
 
-const mapDispatch = dispatch => {
-  return {
-    initApp: () => dispatch(initApplicationInstance())
-  }
-}
+export default connect(mapState, null, null, { forwardRef: true })(App);
 
-
-export default connect(mapState, mapDispatch)(App);
 
 

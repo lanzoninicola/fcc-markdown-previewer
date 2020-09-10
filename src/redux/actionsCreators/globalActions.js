@@ -5,13 +5,9 @@ import {
 } from '../actions/actions';
 
 
-// Application Init
-// 
-//export const initEditor = () => {
-
-// }
-
 export const handleEditorChange = (e) => {
+
+    console.log('globalAction - handleEditorChange - e', e.target.value)
 
     setmarkdownTextLog(e.target.value);
 
@@ -21,44 +17,27 @@ export const handleEditorChange = (e) => {
     }
 }
 
-export const handleTextSelection = (textAreaRef) => {
+export const handleTextSelection = (text) => {
+    let textSelection = {};
+    let nextSelectionRange = {
+        startSelection: 0,
+        endSelection: 0
+    };
 
-    console.log(textAreaRef)
+    let nextStartSelection = text.current.selectionStart
+        ? text.current.selectionStart
+        : nextSelectionRange.startSelection;
+    let nextEndSelection = text.current.selectionEnd
+        ? text.current.selectionEnd
+        : nextSelectionRange.endSelection;
 
-    // let newTextSelection = {};
+    nextSelectionRange.startSelection = nextStartSelection;
+    nextSelectionRange.endSelection = nextEndSelection;
 
-    // let startSelection = textAreaRef.current.selectionStart;
-    // let endSelection = textAreaRef.current.selectionEnd;
-
-
-    // newTextSelection.startSelection = startSelection;
-    // newTextSelection.endSelection = endSelection;
-
-    // return {
-    //     type: MARKDOWN_TEXT_SELECTION,
-    //     payload: newTextSelection
-    // }
-}
-
-
-// handleTextSelection = () => {
-//     const { textSelection, markdownText } = this.state;
-
-//     let newTextSelection = { ...textSelection };
-
-//     let startSelection = this.textAreaRef.current.selectionStart;
-//     let endSelection = this.textAreaRef.current.selectionEnd;
-
-//     if (markdownText[startSelection] === " ") { startSelection = startSelection + 1 }
-//     if (markdownText[endSelection - 1] === " ") { endSelection = endSelection - 1 }
-
-//     newTextSelection.startSelection = startSelection;
-//     newTextSelection.endSelection = endSelection;
-
-//     this.setState(
-//         { textSelection: newTextSelection }
-//     )
-// }
-
+    return {
+        type: MARKDOWN_TEXT_SELECTION,
+        payload: { ...textSelection, ...nextSelectionRange }
+    };
+};
 
 

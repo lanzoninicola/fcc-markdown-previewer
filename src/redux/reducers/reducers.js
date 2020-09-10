@@ -1,27 +1,7 @@
 import {
-    INIT_TEXTAREA_REF,
     MARKDOWN_TEXT_EDITOR_CHANGE,
     MARKDOWN_TEXT_SELECTION,
 } from '../actions/actions';
-
-
-let initStateOnInitApplication = {
-    textAreaRef2: null
-};
-
-export const initTextAreaRef = (state = initStateOnInitApplication, action) => {
-
-    switch (action.type) {
-        case INIT_TEXTAREA_REF:
-            return {
-                ...state,
-                textAreaRef2: action.payload
-            }
-        default:
-            return state;
-    }
-
-};
 
 
 let initStateOnMarkdownEditorChange = {
@@ -30,6 +10,8 @@ let initStateOnMarkdownEditorChange = {
 };
 
 export const changeMarkdownText = (state = initStateOnMarkdownEditorChange, action) => {
+
+    console.log(action.type)
 
     switch (action.type) {
         case MARKDOWN_TEXT_EDITOR_CHANGE:
@@ -45,19 +27,25 @@ export const changeMarkdownText = (state = initStateOnMarkdownEditorChange, acti
 };
 
 let initStateOnTextSelection = {
-    textSelection: null
+    textSelection: {
+        startSelection: 0,
+        endSelection: 0
+    }
 };
 
 export const textSelection = (state = initStateOnTextSelection, action) => {
+    console.log(state, {
+        ...state,
+        textSelection: action.payload
+    });
 
     switch (action.type) {
-        case MARKDOWN_TEXT_EDITOR_CHANGE:
+        case MARKDOWN_TEXT_SELECTION:
             return {
                 ...state,
                 textSelection: action.payload
-            }
+            };
         default:
             return state;
     }
-
 };

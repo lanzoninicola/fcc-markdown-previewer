@@ -16,7 +16,7 @@ class EditorPanel extends Component {
             handleEditorChange,
             handleTextSelection,
             handlemarkdownVersionChange,
-            textAreaRef,
+            // textAreaRef,
             handleFocusMode,
             handleImmersiveWriting,
             // handleHideGridNumbers
@@ -73,10 +73,10 @@ class EditorPanel extends Component {
                     </div>
                 </div >
                 <EditorArea
-                    // editingStatus={editingStatus}
-                    // rawText={markdownText}
-                    // handleEditorChange={handleEditorChange}
-                    handleTextSelection={handleTextSelection}
+                // editingStatus={editingStatus}
+                // rawText={markdownText}
+                // handleEditorChange={handleEditorChange}
+                //handleTextSelection={handleTextSelection}
                 // textAreaRef={textAreaRef}
                 />
 
