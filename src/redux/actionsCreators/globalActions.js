@@ -13,6 +13,7 @@ import {
   TEXT_FORMATTING_APPLIED_LINK,
   TEXT_FORMATTING_APPLIED_LIST,
   TEXT_FORMATTING_APPLIED_NUMBERS,
+  TEXT_FORMATTING_APPLIED_TABLE,
   ADDING_IMAGE_SHOW_FORM,
   ADDING_IMAGE_SET_DESCRIPTION,
   ADDING_IMAGE_SET_IMAGEURL,
@@ -440,4 +441,34 @@ export const addingImage = (toFormat, imageData) => (dispatch) => {
     dispatch(closeFormToInsertImage()),
     dispatch(setImage(toFormat, imageData)),
   ];
+};
+
+export const setTable = (
+  toFormat = {
+    markdownText: "",
+    textSelection: { startSelection: 0, endSelection: 0 },
+  }
+) => {
+  const { markdownText, textSelection } = toFormat;
+
+  const tablemarkdownText =
+    "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r";
+
+  let textToFormat = [];
+  let newMarkdownText = markdownText;
+
+  if (textSelection) {
+    const { startSelection, endSelection } = textSelection;
+    textToFormat.push(...markdownText.split(""));
+    textToFormat.splice(endSelection, 0, "");
+    textToFormat.splice(startSelection, 0, tablemarkdownText);
+    newMarkdownText = textToFormat.join("");
+
+    setmarkdownTextLog(textToFormat);
+  }
+
+  return {
+    type: TEXT_FORMATTING_APPLIED_TABLE,
+    payload: newMarkdownText,
+  };
 };

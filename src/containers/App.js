@@ -251,16 +251,16 @@ class App extends Component {
     this.setState({ markdownText: markdownTextFromHistory });
   };
 
-  setTable = (text) => {
-    const { startSelection, endSelection } = this.state.textSelection;
+  // setTable = (text) => {
+  //   const { startSelection, endSelection } = this.state.textSelection;
 
-    const tablemarkdownText =
-      "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r";
+  //   const tablemarkdownText =
+  //     "Header1 | Header2 | Header3 \r ------------ | ------------- | ------------- \r Cell(1:1) | Cell(1:2) | Cell(1:3) \r Cell(2:1) | Cell(2:2) | Cell(2:3) \r";
 
-    text.splice(endSelection, 0, "");
-    text.splice(startSelection, 0, tablemarkdownText);
-    return text.join("");
-  };
+  //   text.splice(endSelection, 0, "");
+  //   text.splice(startSelection, 0, tablemarkdownText);
+  //   return text.join("");
+  // };
 
   handleFocusMode = (enable) => {
     this.setState({ focusMode: enable }, () => {
@@ -330,10 +330,6 @@ class App extends Component {
             this.handleAddmarkdownContentToHistory
           }
           handleClearmarkdownContent={this.handleClearmarkdownContent}
-          handleTextFormatting={(formattingType) =>
-            this.handleTextFormatting(formattingType)
-          }
-          handleInsertImage={this.handleInsertImage}
         />
         <div className="container">
           {!focusMode && <Dashboard text={markdownText} />}

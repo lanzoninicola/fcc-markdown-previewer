@@ -13,6 +13,7 @@ import {
   TEXT_FORMATTING_APPLIED_LIST,
   TEXT_FORMATTING_APPLIED_NUMBERS,
   TEXT_FORMATTING_APPLIED_IMAGE,
+  TEXT_FORMATTING_APPLIED_TABLE,
   ADDING_IMAGE_SHOW_FORM,
   ADDING_IMAGE_SET_DESCRIPTION,
   ADDING_IMAGE_SET_IMAGEURL,
@@ -88,6 +89,11 @@ export const markdownFile = (state = initStateOfMarkdownFile, action) => {
         markdownText: action.payload,
       };
     case TEXT_FORMATTING_APPLIED_IMAGE:
+      return {
+        ...state,
+        markdownText: action.payload,
+      };
+    case TEXT_FORMATTING_APPLIED_TABLE:
       return {
         ...state,
         markdownText: action.payload,
