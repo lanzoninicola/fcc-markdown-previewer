@@ -1,10 +1,8 @@
-import { combineReducers } from 'redux';
-import {
-    textSelection,
-    markdownFile
-} from './reducers';
+import { combineReducers } from "redux";
+import { textSelection, markdownFile, markdownImage } from "./reducers";
 
 export const rootReducer = combineReducers({
-    markdownFile,
-    textSelection
+  markdownFile,
+  textSelection,
+  markdownImage,
 });

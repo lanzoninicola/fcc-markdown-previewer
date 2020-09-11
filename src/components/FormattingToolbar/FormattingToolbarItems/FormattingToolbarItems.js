@@ -2,9 +2,22 @@ import React from 'react'
 import SvgIcon from '../../SvgIcon/SvgIcon'
 import FormattingToolbarItem from '../FormattingToolbarItem/FormattingToolbarItem'
 
-import { setH1 } from '../../../redux/actionsCreators/globalActions';
+import {
+    setH1,
+    setH2,
+    setH3,
+    setBold,
+    setItalic,
+    setStrikeThrough,
+    setCode,
+    setBlockCode,
+    setLink,
+    setList,
+    setNumbers,
+    showFormToInsertImage
+} from '../../../redux/actionsCreators/globalActions';
 import { connect } from 'react-redux';
-import { markdownFile } from '../../../redux/reducers/reducers';
+
 
 const FormattingToolbarItems = ({
     editingStatus,
@@ -17,7 +30,6 @@ const FormattingToolbarItems = ({
     ...props
 }) => {
 
-    console.log('FormattingToolbarItems - props', props)
 
     const toolbarItems = [
         {
@@ -61,7 +73,7 @@ const FormattingToolbarItems = ({
             disabled: editingStatus === 'idle' ? true : false,
             eventHandler: () => props.setH1({
                 markdownText: props.markdownText,
-                textSelection: props.textSelection
+                ...props.textSelection
             })
         },
         {
@@ -69,77 +81,107 @@ const FormattingToolbarItems = ({
             icon: <SvgIcon name={'H2'} iconColor={'#006d77'} />,
             alt: 'H2',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('H2')
+            eventHandler: () => props.setH2({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'H3',
             icon: <SvgIcon name={'H3'} iconColor={'#006d77'} />,
             alt: 'H3',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('H3')
+            eventHandler: () => props.setH3({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'BOLD',
             icon: <SvgIcon name={'BOLD'} iconColor={'#006d77'} />,
             alt: 'Bold',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('BOLD')
+            eventHandler: () => props.setBold({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'ITALIC',
             icon: <SvgIcon name={'ITALIC'} iconColor={'#006d77'} />,
             alt: 'Italic',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('ITALIC')
+            eventHandler: () => props.setItalic({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'STRIKETROUGH',
             icon: <SvgIcon name={'STRIKETROUGH'} iconColor={'#006d77'} />,
             alt: 'Striketrough',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('STRIKETROUGH')
+            eventHandler: () => props.setStrikeThrough({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'CODE',
             icon: <SvgIcon name={'CODE'} iconColor={'#006d77'} />,
             alt: 'Code',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('CODE')
+            eventHandler: () => props.setCode({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'BLOCKCODE',
             icon: <SvgIcon name={'CODE'} iconColor={'#006d77'} />,
             alt: 'Block Code',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('BLOCKCODE')
+            eventHandler: () => props.setBlockCode({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'LINK',
             icon: <SvgIcon name={'LINK'} iconColor={'#006d77'} />,
             alt: 'Block Code',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('LINK')
+            eventHandler: () => props.setLink({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'LIST',
             icon: <SvgIcon name={'LIST'} iconColor={'#006d77'} />,
             alt: 'List',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('LIST')
+            eventHandler: () => props.setList({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'NUMBERS',
             icon: <SvgIcon name={'NUMBERS'} iconColor={'#006d77'} />,
             alt: 'Numbers',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('NUMBERS')
+            eventHandler: () => props.setNumbers({
+                markdownText: props.markdownText,
+                ...props.textSelection
+            })
         },
         {
             label: 'IMAGE',
             icon: <SvgIcon name={'IMAGE'} iconColor={'#006d77'} />,
             alt: 'Image',
             disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleInsertImage
+            eventHandler: () => props.showFormToInsertImage()
         },
         {
             label: 'TABLE',
@@ -166,26 +208,33 @@ const FormattingToolbarItems = ({
         return toolbarItem;
     })
 
-    console.log('FormattingToolbarItems - renderToolbarItems', renderToolbarItems)
-
     return renderToolbarItems
 }
 
 
 const mapDispatch = dispatch => {
     return {
-        setH1: (data) => dispatch(setH1(data))
+        setH1: (data) => dispatch(setH1(data)),
+        setH2: (data) => dispatch(setH2(data)),
+        setH3: (data) => dispatch(setH3(data)),
+        setBold: (data) => dispatch(setBold(data)),
+        setItalic: (data) => dispatch(setItalic(data)),
+        setStrikeThrough: (data) => dispatch(setStrikeThrough(data)),
+        setCode: (data) => dispatch(setCode(data)),
+        setBlockCode: (data) => dispatch(setBlockCode(data)),
+        setLink: (data) => dispatch(setLink(data)),
+        setList: (data) => dispatch(setList(data)),
+        setNumbers: (data) => dispatch(setNumbers(data)),
+        showFormToInsertImage: () => dispatch(showFormToInsertImage())
     }
 
 }
 
 const mapState = state => {
-
-
     const { textSelection, markdownFile } = state;
     const { markdownText } = markdownFile;
 
-    console.log('formattinToolbarItems - mapState - state', textSelection, markdownText)
+    //console.log('formattinToolbarItems - mapState - state', textSelection, markdownText)
 
     return {
         markdownText,

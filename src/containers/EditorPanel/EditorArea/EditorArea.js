@@ -57,8 +57,6 @@ const mapState = state => {
     const { editingStatus, markdownText } = state.markdownFile;
     const { textSelection } = state.textSelection;
 
-    console.log(markdownText, editingStatus)
-
     return {
         editingStatus,
         markdownText,

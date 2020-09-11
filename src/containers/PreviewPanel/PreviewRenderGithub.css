@@ -1,27 +1,28 @@
 .preview-render-github {
   padding-left: 15px;
-    /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji; */
-    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+  /* font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji; */
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
 }
 
-.preview-render-github h1, .preview-render-github h2 {
-  padding-bottom: .3em;
+.preview-render-github h1,
+.preview-render-github h2 {
+  padding-bottom: 0.3em;
   border-bottom: 1px solid #eaecef;
 }
 
 .preview-render-github h1 {
   font-size: 2em;
   margin-bottom: 16px;
-    font-weight: 600;
-    line-height: 1.25;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .preview-render-github h2 {
   margin-top: 24px;
-    margin-bottom: 16px;
-    font-weight: 600;
-    line-height: 1.25;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .preview-render-github h3 {
@@ -34,15 +35,19 @@
   line-height: 1.25;
 }
 
+.preview-render-github img {
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
 .preview-render-github p {
   margin-top: 0;
   margin-bottom: 16px;
 }
 
 .preview-render-github code {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
-
 
 .preview-render-github pre {
   padding: 16px;
@@ -63,7 +68,7 @@
 .preview-render-github blockquote {
   padding: 0 1em;
   color: #6a737d;
-  border-left: .25em solid #dfe2e5;
+  border-left: 0.25em solid #dfe2e5;
   margin: 0px;
 }
 
@@ -86,7 +91,9 @@
   border: 1px solid #dfe2e5;
 }
 
-.preview-render-github tr:nth-child(even){background-color: rgb(246,248,250)}
+.preview-render-github tr:nth-child(even) {
+  background-color: rgb(246, 248, 250);
+}
 
 .preview-render-github ul {
   padding-left: 2em;
@@ -100,19 +107,18 @@
   margin-bottom: 16px;
 }
 
-.preview-render-github li+li {
-  margin-top: .25em;
+.preview-render-github li + li {
+  margin-top: 0.25em;
 }
-
 
 @media screen and (max-width: 992px) {
   #preview-render code {
-  font-size: 0.6rem;
- }
+    font-size: 0.6rem;
+  }
 
- #preview-render img {
-  max-width: 100%;
-  height: auto;
-  width: auto;
- }
+  #preview-render img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
 }

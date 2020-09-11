@@ -39,8 +39,6 @@ class PreviewPanel extends Component {
 
         const markdown = marked(text);
 
-        console.log('PreviewPanel - createMarkdown - markdown', markdown)
-
         return { __html: markdown };
     }
 
