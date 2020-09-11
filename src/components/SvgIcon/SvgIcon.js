@@ -2,17 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getIcon } from './IconCatalog/IconCatalog';
 
-const SvgIcon = ({ bigIcon, name, iconColor }) => {
+const SvgIcon = ({ name, iconColor }) => {
 
     let iconFromCatalog = getIcon(name);
 
     let svgWidth = "15";
     let svgHeight = "15";
-
-    if (bigIcon) {
-        svgWidth = "30";
-        svgHeight = "30";
-    }
 
     return ((
         <svg
@@ -34,7 +29,6 @@ const SvgIcon = ({ bigIcon, name, iconColor }) => {
 export default React.memo(SvgIcon);
 
 SvgIcon.propTypes = {
-    bigIcon: PropTypes.bool,
     name: PropTypes.string.isRequired,
     iconColor: PropTypes.string.isRequired,
 }

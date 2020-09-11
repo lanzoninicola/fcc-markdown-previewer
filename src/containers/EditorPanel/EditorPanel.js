@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import './EditorPanel.css'
-import EditorArea from './EditorArea/EditorArea'
 import EditorPanelSettings from '../../components/EditorPanelSettings/EditorPanelSettings'
+import EditorArea from './EditorArea/EditorArea'
+
 
 
 class EditorPanel extends Component {
     render() {
         const {
             editingStatus,
-            markdownText,
+            //markdownText,
+            screenWidth,
             focusMode,
             lastmarkdownVersion,
             versionSelectedFromHistory,
             markdownVersionsHistory,
-            handleEditorChange,
-            handleTextSelection,
+            //handleEditorChange,
+            //handleTextSelection,
             handlemarkdownVersionChange,
-            textAreaRef,
+            // textAreaRef,
             handleFocusMode,
             handleImmersiveWriting,
             // handleHideGridNumbers
@@ -72,12 +74,13 @@ class EditorPanel extends Component {
                         </div>
                     </div>
                 </div >
+
                 <EditorArea
-                    editingStatus={editingStatus}
-                    rawText={markdownText}
-                    handleEditorChange={handleEditorChange}
-                    handleTextSelection={handleTextSelection}
-                    textAreaRef={textAreaRef}
+                // editingStatus={editingStatus}
+                // rawText={markdownText}
+                // handleEditorChange={handleEditorChange}
+                //handleTextSelection={handleTextSelection}
+                // textAreaRef={textAreaRef}
                 />
 
             </div >

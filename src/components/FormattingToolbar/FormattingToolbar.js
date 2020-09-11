@@ -5,7 +5,7 @@ import FormattingToolbarItems from './FormattingToolbarItems/FormattingToolbarIt
 const FormattingToolbar = ({
     screenWidth,
     focusMode,
-    showBigToolbar,
+
     editingStatus,
     handleNewmarkdownContent,
     handleAddmarkdownContentToHistory,
@@ -14,22 +14,15 @@ const FormattingToolbar = ({
     handleInsertImage
 }) => {
 
-    let showBigToolbarOption = showBigToolbar;
-
-    if (screenWidth < 1366) {
-        showBigToolbarOption = false;
-    }
-
     return (
-        <div id="toolbar"
+        <div id="toolbarArea"
             className={
-                `toolbarArea toolbarArea-anchor-top ${focusMode && "toolbarArea-focusMode"} ${showBigToolbarOption && "toolbarArea-anchor-bottom"}`
+                `toolbarArea ${focusMode && "toolbarArea-focusMode"}`
             }>
             <div id="toolbar" className="toolbar">
                 <FormattingToolbarItems
                     editingStatus={editingStatus}
                     focusMode={focusMode}
-                    showBigToolbarOption={showBigToolbarOption}
                     handleNewmarkdownContent={handleNewmarkdownContent}
                     handleAddmarkdownContentToHistory={handleAddmarkdownContentToHistory}
                     handleClearmarkdownContent={handleClearmarkdownContent}

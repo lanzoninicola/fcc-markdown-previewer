@@ -10,7 +10,7 @@ const Header = ({ screenWidth }) => {
                 <div className="header-branding-item" style={{ maxWidth: '30px' }}>
                     <SvgIcon
                         name={'applogo'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>

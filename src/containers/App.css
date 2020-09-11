@@ -52,7 +52,7 @@
   justify-content: center;
   flex-direction: column;
   padding-top: 100px;
-  background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%);
+  /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
 }
 
 .container-editor-area-focusMode {

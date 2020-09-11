@@ -1,171 +1,268 @@
-import React from 'react'
-import SvgIcon from '../../SvgIcon/SvgIcon'
-import FormattingToolbarItem from '../FormattingToolbarItem/FormattingToolbarItem'
+import React from "react";
+import SvgIcon from "../../SvgIcon/SvgIcon";
+import FormattingToolbarItem from "../FormattingToolbarItem/FormattingToolbarItem";
+
+import {
+  setH1,
+  setH2,
+  setH3,
+  setBold,
+  setItalic,
+  setStrikeThrough,
+  setCode,
+  setBlockCode,
+  showFormToInsertLink,
+  setList,
+  setNumbers,
+  showFormToInsertImage,
+  setTable,
+} from "../../../redux/actionsCreators/globalActions";
+import { connect } from "react-redux";
 
 const FormattingToolbarItems = ({
-    editingStatus,
-    focusMode,
-    showBigToolbarOption,
-    handleNewmarkdownContent,
-    handleAddmarkdownContentToHistory,
-    handleClearmarkdownContent,
-    handleTextFormatting,
-    handleInsertImage
+  editingStatus,
+  focusMode,
+  handleNewmarkdownContent,
+  handleAddmarkdownContentToHistory,
+  handleClearmarkdownContent,
+  handleTextFormatting,
+  ...props
 }) => {
+  const toolbarItems = [
+    {
+      label: "NEW",
+      icon: <SvgIcon name={"NEW"} iconColor={"#006d77"} />,
+      alt: "New markdown content",
+      disabled: (focusMode === false ? false : true) || false,
+      eventHandler: handleNewmarkdownContent,
+    },
+    {
+      label: "SAVE",
+      icon: <SvgIcon name={"SAVE"} iconColor={"#006d77"} />,
+      alt: "Save a version of markdown text",
+      disabled:
+        (focusMode === false ? true : false) ||
+        (editingStatus === "idle" ? true : false),
+      eventHandler: handleAddmarkdownContentToHistory,
+    },
+    {
+      label: "TIME MACHINE",
+      icon: <SvgIcon name={"TIMEMACHINE"} iconColor={"#006d77"} />,
+      alt: "Get a version of markdown text",
+      disabled:
+        (focusMode === false ? true : false) ||
+        (editingStatus === "idle" ? true : false),
+      eventHandler: handleAddmarkdownContentToHistory,
+    },
+    {
+      label: "CLEAR",
+      icon: <SvgIcon name={"CLEAR"} iconColor={"#006d77"} />,
+      alt: "Remove markdown Content",
+      disabled:
+        (focusMode === false ? true : false) ||
+        (editingStatus === "idle" ? true : false),
+      eventHandler: handleClearmarkdownContent,
+    },
+    {
+      label: "",
+      icon: <SvgIcon name={"SEPARATOR"} iconColor={"#006d77"} />,
+      alt: "separator",
+      disabled:
+        (focusMode === false ? true : false) ||
+        (editingStatus === "idle" ? true : false),
+    },
+    {
+      label: "H1",
+      icon: <SvgIcon name={"H1"} iconColor={"#006d77"} />,
+      alt: "H1",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setH1({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "H2",
+      icon: <SvgIcon name={"H2"} iconColor={"#006d77"} />,
+      alt: "H2",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setH2({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "H3",
+      icon: <SvgIcon name={"H3"} iconColor={"#006d77"} />,
+      alt: "H3",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setH3({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "BOLD",
+      icon: <SvgIcon name={"BOLD"} iconColor={"#006d77"} />,
+      alt: "Bold",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setBold({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "ITALIC",
+      icon: <SvgIcon name={"ITALIC"} iconColor={"#006d77"} />,
+      alt: "Italic",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setItalic({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "STRIKETROUGH",
+      icon: <SvgIcon name={"STRIKETROUGH"} iconColor={"#006d77"} />,
+      alt: "Striketrough",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setStrikeThrough({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "CODE",
+      icon: <SvgIcon name={"CODE"} iconColor={"#006d77"} />,
+      alt: "Code",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setCode({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "BLOCKCODE",
+      icon: <SvgIcon name={"CODE"} iconColor={"#006d77"} />,
+      alt: "Block Code",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setBlockCode({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "LINK",
+      icon: <SvgIcon name={"LINK"} iconColor={"#006d77"} />,
+      alt: "Block Code",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setLink({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "LIST",
+      icon: <SvgIcon name={"LIST"} iconColor={"#006d77"} />,
+      alt: "List",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setList({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "NUMBERS",
+      icon: <SvgIcon name={"NUMBERS"} iconColor={"#006d77"} />,
+      alt: "Numbers",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setNumbers({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+    {
+      label: "IMAGE",
+      icon: <SvgIcon name={"IMAGE"} iconColor={"#006d77"} />,
+      alt: "Image",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () => props.showFormToInsertImage(),
+    },
+    {
+      label: "TABLE",
+      icon: <SvgIcon name={"TABLE"} iconColor={"#006d77"} />,
+      alt: "Table",
+      disabled: editingStatus === "idle" ? true : false,
+      eventHandler: () =>
+        props.setTable({
+          markdownText: props.markdownText,
+          ...props.textSelection,
+        }),
+    },
+  ];
 
-    let bigIcon = false;
-    if (showBigToolbarOption) {
-        bigIcon = true;
+  const renderToolbarItems = toolbarItems.map((item, i) => {
+    let toolbarItem = null;
+
+    if (item.disabled === false) {
+      toolbarItem = (
+        <FormattingToolbarItem
+          key={i}
+          label={item.label}
+          icon={item.icon}
+          disabled={item.disabled}
+          eventHandler={item.eventHandler}
+        />
+      );
     }
 
-    const toolbarItems = [
-        {
-            label: 'NEW',
-            icon: <SvgIcon name={'NEW'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'New markdown content',
-            disabled: (focusMode === false ? true : false) || false,
-            eventHandler: handleNewmarkdownContent
-        },
-        {
-            label: 'SAVE',
-            icon: <SvgIcon name={'SAVE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Save a version of markdown text',
-            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
-            eventHandler: handleAddmarkdownContentToHistory
-        },
-        {
-            label: 'TIME MACHINE',
-            icon: <SvgIcon name={'TIMEMACHINE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Get a version of markdown text',
-            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
-            eventHandler: handleAddmarkdownContentToHistory
-        },
-        {
-            label: 'CLEAR',
-            icon: <SvgIcon name={'CLEAR'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Remove markdown Content',
-            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
-            eventHandler: handleClearmarkdownContent
-        },
-        {
-            label: '',
-            icon: <SvgIcon name={'SEPARATOR'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'separator',
-            disabled: (focusMode === false ? true : false) || (editingStatus === 'idle' ? true : false),
-        },
-        {
-            label: 'H1',
-            icon: <SvgIcon name={'H1'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'H1',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('H1')
-        },
-        {
-            label: 'H2',
-            icon: <SvgIcon name={'H2'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'H2',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('H2')
-        },
-        {
-            label: 'H3',
-            icon: <SvgIcon name={'H3'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'H3',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('H3')
-        },
-        {
-            label: 'BOLD',
-            icon: <SvgIcon name={'BOLD'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Bold',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('BOLD')
-        },
-        {
-            label: 'ITALIC',
-            icon: <SvgIcon name={'ITALIC'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Italic',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('ITALIC')
-        },
-        {
-            label: 'STRIKETROUGH',
-            icon: <SvgIcon name={'STRIKETROUGH'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Striketrough',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('STRIKETROUGH')
-        },
-        {
-            label: 'CODE',
-            icon: <SvgIcon name={'CODE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Code',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('CODE')
-        },
-        {
-            label: 'BLOCKCODE',
-            icon: <SvgIcon name={'CODE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Block Code',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('BLOCKCODE')
-        },
-        {
-            label: 'LINK',
-            icon: <SvgIcon name={'LINK'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Block Code',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('LINK')
-        },
-        {
-            label: 'LIST',
-            icon: <SvgIcon name={'LIST'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'List',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('LIST')
-        },
-        {
-            label: 'NUMBERS',
-            icon: <SvgIcon name={'NUMBERS'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Numbers',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('NUMBERS')
-        },
-        {
-            label: 'IMAGE',
-            icon: <SvgIcon name={'IMAGE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Image',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: handleInsertImage
-        },
-        {
-            label: 'TABLE',
-            icon: <SvgIcon name={'TABLE'} iconColor={'#ffffff'} bigIcon={bigIcon} />,
-            alt: 'Table',
-            disabled: editingStatus === 'idle' ? true : false,
-            eventHandler: () => handleTextFormatting('TABLE')
-        }
-    ]
+    return toolbarItem;
+  });
 
-    const renderToolbarItems = toolbarItems.map((item, i) => {
-        let toolbarItem = null;
+  return renderToolbarItems;
+};
 
-        if (item.disabled === false) {
-            toolbarItem = <FormattingToolbarItem
-                key={i}
-                bigIcon={bigIcon}
-                label={item.label}
-                icon={item.icon}
-                disabled={item.disabled}
-                eventHandler={item.eventHandler} />
-        }
+const mapDispatch = (dispatch) => {
+  return {
+    setH1: (data) => dispatch(setH1(data)),
+    setH2: (data) => dispatch(setH2(data)),
+    setH3: (data) => dispatch(setH3(data)),
+    setBold: (data) => dispatch(setBold(data)),
+    setItalic: (data) => dispatch(setItalic(data)),
+    setStrikeThrough: (data) => dispatch(setStrikeThrough(data)),
+    setCode: (data) => dispatch(setCode(data)),
+    setBlockCode: (data) => dispatch(setBlockCode(data)),
+    setLink: () => dispatch(showFormToInsertLink()),
+    setList: (data) => dispatch(setList(data)),
+    setNumbers: (data) => dispatch(setNumbers(data)),
+    showFormToInsertImage: () => dispatch(showFormToInsertImage()),
+    setTable: (data) => dispatch(setTable(data)),
+  };
+};
 
-        return toolbarItem;
-    })
+const mapState = (state) => {
+  const { textSelection, markdownFile } = state;
+  const { markdownText } = markdownFile;
 
-    return renderToolbarItems
+  //console.log('formattinToolbarItems - mapState - state', textSelection, markdownText)
 
-}
+  return {
+    markdownText,
+    textSelection,
+  };
+};
 
+//export default React.memo(FormattingToolbarItems);
 
-export default React.memo(FormattingToolbarItems);
-
+export default connect(mapState, mapDispatch)(FormattingToolbarItems);

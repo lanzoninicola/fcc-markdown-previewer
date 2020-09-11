@@ -40,35 +40,35 @@ const HeaderToolbar = ({ screenWidth }) => {
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'new'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'save'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'timemachine'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'copy'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'clear'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
@@ -82,7 +82,7 @@ const HeaderToolbar = ({ screenWidth }) => {
                 <div className="header-toolbar-item">
                     <SvgIcon
                         name={'notification'}
-                        iconColor={'#ffffff'}
+                        iconColor={'#006d77'}
                         bigIcon={true}
                     />
                 </div>
