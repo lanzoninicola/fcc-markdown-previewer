@@ -9,6 +9,7 @@ import {
   setImageDescription,
   setImageURL,
   addingImage,
+  closeFormToInsertImage,
 } from "../../redux/actionsCreators/globalActions";
 
 const FormInsertImage = ({ ...props }) => {
@@ -18,6 +19,7 @@ const FormInsertImage = ({ ...props }) => {
     setImageDescription,
     setImageURL,
     addingImage,
+    closeFormToInsertImage,
   } = props;
 
   return (
@@ -59,6 +61,9 @@ const FormInsertImage = ({ ...props }) => {
         >
           OK
         </Button>
+        <Button type="secondary" eventHandler={() => closeFormToInsertImage()}>
+          CLOSE
+        </Button>
       </Form>
     </Fragment>
   );
@@ -85,6 +90,7 @@ const mapDispatch = (dispatch) => {
     setImageURL: (e) => dispatch(setImageURL(e)),
     addingImage: (markdownData, imageData) =>
       dispatch(addingImage(markdownData, imageData)),
+    closeFormToInsertImage: () => dispatch(closeFormToInsertImage()),
   };
 };
 

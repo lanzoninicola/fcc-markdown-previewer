@@ -8,6 +8,7 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import FormattingToolbar from "../components/FormattingToolbar/FormattingToolbar";
 import Modal from "../components/Modal/Modal";
 import FormInsertImage from "../components/FormInsertImage/FormInsertImage";
+import FormInsertLink from "../components/FormInsertLink/FormInsertLink";
 import Button from "../components/Button/Button";
 import { LocalStorageItem } from "../helper/LocalStorage";
 import {
@@ -318,6 +319,7 @@ class App extends Component {
     return (
       <Fragment>
         {this.props.showFormInsertImage && <FormInsertImage />}
+        {this.props.showFormInsertLink && <FormInsertLink />}
         {/* {showModalRollbackContent && modalRollbackContent} !!!!!! DA RIPRISTINARE*/}
         {!focusMode && <Header screenWidth={screenWidth} />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
@@ -366,13 +368,15 @@ class App extends Component {
 }
 
 const mapState = (state) => {
-  const { markdownImage } = state;
+  const { markdownImage, markdownLink } = state;
   const { showFormInsertImage } = markdownImage;
+  const { showFormInsertLink } = markdownLink;
 
   //  console.log("app - mapState - state", markdownImage);
 
   return {
     showFormInsertImage,
+    showFormInsertLink,
   };
 };
 

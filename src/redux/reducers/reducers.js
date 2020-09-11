@@ -18,6 +18,9 @@ import {
   ADDING_IMAGE_SET_DESCRIPTION,
   ADDING_IMAGE_SET_IMAGEURL,
   ADDING_IMAGE_CLOSE_FORM,
+  ADDING_LINK_SHOW_FORM,
+  ADDING_LINK_CLOSE_FORM,
+  ADDING_LINK_SET_URL,
 } from "../actions/actions";
 
 let initStateOfMarkdownFile = {
@@ -149,6 +152,34 @@ export const markdownImage = (state = initStateForAddingImage, action) => {
       return {
         ...state,
         showFormInsertImage: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+let initStateForAddingLink = {
+  showFormInsertLink: false,
+  url: "",
+};
+
+export const markdownLink = (state = initStateForAddingLink, action) => {
+  switch (action.type) {
+    case ADDING_LINK_SHOW_FORM:
+      return {
+        ...state,
+        showFormInsertLink: action.payload,
+      };
+
+    case ADDING_LINK_SET_URL:
+      return {
+        ...state,
+        url: action.payload,
+      };
+    case ADDING_LINK_CLOSE_FORM:
+      return {
+        ...state,
+        showFormInsertLink: action.payload,
       };
     default:
       return state;

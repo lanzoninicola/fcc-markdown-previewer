@@ -19,6 +19,9 @@ import {
   ADDING_IMAGE_SET_IMAGEURL,
   TEXT_FORMATTING_APPLIED_IMAGE,
   ADDING_IMAGE_CLOSE_FORM,
+  ADDING_LINK_SHOW_FORM,
+  ADDING_LINK_CLOSE_FORM,
+  ADDING_LINK_SET_URL,
 } from "../actions/actions";
 
 export const handleEditorChange = (e) => {
@@ -273,33 +276,6 @@ export const setBlockCode = (
   };
 };
 
-export const setLink = (
-  toFormat = {
-    markdownText: "",
-    textSelection: { startSelection: 0, endSelection: 0 },
-  }
-) => {
-  const { markdownText, textSelection } = toFormat;
-
-  let textToFormat = [];
-  let newMarkdownText = markdownText;
-
-  if (markdownText && textSelection) {
-    const { startSelection, endSelection } = textSelection;
-    textToFormat.push(...markdownText.split(""));
-    textToFormat.splice(endSelection, 0, ")");
-    textToFormat.splice(startSelection, 0, "[links](");
-    newMarkdownText = textToFormat.join("");
-
-    setmarkdownTextLog(textToFormat);
-  }
-
-  return {
-    type: TEXT_FORMATTING_APPLIED_LINK,
-    payload: newMarkdownText,
-  };
-};
-
 export const setList = (
   toFormat = {
     markdownText: "",
@@ -362,8 +338,6 @@ export const showFormToInsertImage = () => {
 };
 
 export const closeFormToInsertImage = () => {
-  console.log("globalActions - closeFormToInsertImage - function fired");
-
   return {
     type: ADDING_IMAGE_CLOSE_FORM,
     payload: false,
@@ -471,4 +445,99 @@ export const setTable = (
     type: TEXT_FORMATTING_APPLIED_TABLE,
     payload: newMarkdownText,
   };
+};
+
+export const showFormToInsertLink = () => {
+  return {
+    type: ADDING_LINK_SHOW_FORM,
+    payload: true,
+  };
+};
+
+export const closeFormToInsertLink = () => {
+  return {
+    type: ADDING_LINK_CLOSE_FORM,
+    payload: false,
+  };
+};
+
+export const setURL = (e) => {
+  return {
+    type: ADDING_LINK_SET_URL,
+    payload: e.target.value,
+  };
+};
+
+export const setLink = (
+  toFormat = {
+    markdownText: "",
+    textSelection: { startSelection: 0, endSelection: 0 },
+  },
+  linkData = {
+    URL: "",
+  }
+) => {
+  console.log("globalActions - setLink - function fired", toFormat, linkData);
+
+  const { markdownText, textSelection } = toFormat;
+  const { url } = linkData;
+
+  let textToFormat = [];
+  let newMarkdownText = markdownText;
+
+  console.log(
+    "globalActions - setLink - (markdownText && textSelection)",
+    markdownText && textSelection,
+    markdownText,
+    textSelection
+  );
+
+  if (textSelection) {
+    const { startSelection, endSelection } = textSelection;
+    let linkMarkdownText = `[${markdownText.substring(
+      startSelection,
+      endSelection
+    )}](${url})`;
+
+    let noOfHighlightedChar = endSelection - startSelection;
+
+    console.log(noOfHighlightedChar);
+
+    textToFormat.push(...markdownText.split(""));
+    textToFormat.splice(endSelection, 0, "");
+    console.log(
+      "globalActions - setLink - textToFormat - splice endSelection",
+      textToFormat
+    );
+
+    textToFormat.splice(startSelection, noOfHighlightedChar, linkMarkdownText);
+
+    console.log(
+      "globalActions - setLink - textToFormat - splice startSelection",
+      textToFormat
+    );
+    newMarkdownText = textToFormat.join("");
+
+    setmarkdownTextLog(textToFormat);
+  }
+
+  console.log("globalActions - setLink - newMarkdownText", newMarkdownText);
+
+  return {
+    type: TEXT_FORMATTING_APPLIED_LINK,
+    payload: newMarkdownText,
+  };
+};
+
+export const addingLink = (toFormat, linkData) => (dispatch) => {
+  console.log(
+    "globalActions - addingLink - function fired",
+    toFormat,
+    linkData
+  );
+
+  return [
+    dispatch(closeFormToInsertLink()),
+    dispatch(setLink(toFormat, linkData)),
+  ];
 };

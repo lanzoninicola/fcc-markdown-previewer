@@ -2,14 +2,13 @@ import React, { Fragment } from "react";
 import "./Form.css";
 
 const Form = ({ title, message, inputs, children }) => {
-  console.log("Form", inputs);
-
   let inputForm;
 
   if (inputs) {
     inputForm = inputs.map((input, index) => {
       return (
         <Fragment key={`input_${index}`}>
+          <label htmlFor={index}>{input.label}</label>
           <input
             id={index}
             type="text"
@@ -18,7 +17,6 @@ const Form = ({ title, message, inputs, children }) => {
             onChange={input.onChangeEventHandler}
             required={input.required}
           />
-          <label htmlFor={index}>{input.label}</label>
         </Fragment>
       );
     });
