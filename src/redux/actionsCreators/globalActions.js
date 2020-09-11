@@ -501,9 +501,8 @@ export const setLink = (
 
     let noOfHighlightedChar = endSelection - startSelection;
 
-    console.log(noOfHighlightedChar);
-
     textToFormat.push(...markdownText.split(""));
+    //textToFormat.filter((char) => char !== " ");
     textToFormat.splice(endSelection, 0, "");
     console.log(
       "globalActions - setLink - textToFormat - splice endSelection",
