@@ -1,6 +1,13 @@
-import { setmarkdownTextLog } from "../../helper/helper";
 import {
-  MARKDOWN_TEXT_CONTENT_CHANGE,
+  setmarkdownTextLog,
+  resetmarkdownTextLog,
+  resetmarkdownVersionsHistory,
+  resetmarkdownVersion,
+} from "../../helper/helper";
+import {
+  MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_TEXT_CONTENT_EDIT,
+  MARKDOWN_TEXT_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
   TEXT_FORMATTING_APPLIED_H1,
   TEXT_FORMATTING_APPLIED_H2,
@@ -24,12 +31,39 @@ import {
   ADDING_LINK_SET_URL,
 } from "../actions/actions";
 
-export const handleEditorChange = (e) => {
+export const createNewMarkdowFile = () => (dispatch) => {
+  console.log("createNewMarkdowFile fired");
+  return [dispatch(newMarkdownContent()), dispatch(clearMarkdownContent())];
+};
+
+export const newMarkdownContent = () => {
+  resetmarkdownTextLog();
+  resetmarkdownVersionsHistory();
+
+  // resetmarkdownVersion(); it uses state **********************
+
+  return {
+    type: MARKDOWN_TEXT_CONTENT_NEW,
+    payload: "new",
+  };
+};
+
+export const editMarkdownContent = (e) => {
   setmarkdownTextLog(e.target.value);
 
   return {
-    type: MARKDOWN_TEXT_CONTENT_CHANGE,
-    payload: e.target.value,
+    type: MARKDOWN_TEXT_CONTENT_EDIT,
+    payload: {
+      editingStatus: "in progress",
+      text: e.target.value,
+    },
+  };
+};
+
+export const clearMarkdownContent = () => {
+  return {
+    type: MARKDOWN_TEXT_CONTENT_CLEAR,
+    payload: "",
   };
 };
 

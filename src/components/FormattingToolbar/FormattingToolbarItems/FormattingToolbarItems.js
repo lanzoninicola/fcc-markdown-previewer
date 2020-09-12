@@ -3,6 +3,8 @@ import SvgIcon from "../../SvgIcon/SvgIcon";
 import FormattingToolbarItem from "../FormattingToolbarItem/FormattingToolbarItem";
 
 import {
+  createNewMarkdowFile,
+  clearMarkdownContent,
   setH1,
   setH2,
   setH3,
@@ -20,12 +22,31 @@ import {
 import { connect } from "react-redux";
 
 const FormattingToolbarItems = ({
-  editingStatus,
   focusMode,
   handleNewmarkdownContent,
   handleAddmarkdownContentToHistory,
   handleClearmarkdownContent,
   handleTextFormatting,
+
+  // from REDUX
+  editingStatus,
+  markdownText,
+  textSelection,
+  createNewMarkdowFile,
+  clearMarkdownContent,
+  setH1,
+  setH2,
+  setH3,
+  setBold,
+  setItalic,
+  setStrikeThrough,
+  setCode,
+  setBlockCode,
+  setLink,
+  setList,
+  setNumbers,
+  showFormToInsertImage,
+  setTable,
   ...props
 }) => {
   const toolbarItems = [
@@ -34,7 +55,7 @@ const FormattingToolbarItems = ({
       icon: <SvgIcon name={"NEW"} iconColor={"#006d77"} />,
       alt: "New markdown content",
       disabled: (focusMode === false ? false : true) || false,
-      eventHandler: handleNewmarkdownContent,
+      eventHandler: createNewMarkdowFile,
     },
     {
       label: "SAVE",
@@ -61,7 +82,7 @@ const FormattingToolbarItems = ({
       disabled:
         (focusMode === false ? true : false) ||
         (editingStatus === "idle" ? true : false),
-      eventHandler: handleClearmarkdownContent,
+      eventHandler: clearMarkdownContent,
     },
     {
       label: "",
@@ -77,9 +98,9 @@ const FormattingToolbarItems = ({
       alt: "H1",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setH1({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setH1({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -88,9 +109,9 @@ const FormattingToolbarItems = ({
       alt: "H2",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setH2({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setH2({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -99,9 +120,9 @@ const FormattingToolbarItems = ({
       alt: "H3",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setH3({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setH3({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -110,9 +131,9 @@ const FormattingToolbarItems = ({
       alt: "Bold",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setBold({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setBold({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -121,9 +142,9 @@ const FormattingToolbarItems = ({
       alt: "Italic",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setItalic({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setItalic({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -132,9 +153,9 @@ const FormattingToolbarItems = ({
       alt: "Striketrough",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setStrikeThrough({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setStrikeThrough({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -143,9 +164,9 @@ const FormattingToolbarItems = ({
       alt: "Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setCode({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setCode({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -154,9 +175,9 @@ const FormattingToolbarItems = ({
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setBlockCode({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setBlockCode({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -165,9 +186,9 @@ const FormattingToolbarItems = ({
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setLink({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setLink({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -176,9 +197,9 @@ const FormattingToolbarItems = ({
       alt: "List",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setList({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setList({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -187,9 +208,9 @@ const FormattingToolbarItems = ({
       alt: "Numbers",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setNumbers({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setNumbers({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
     {
@@ -197,7 +218,7 @@ const FormattingToolbarItems = ({
       icon: <SvgIcon name={"IMAGE"} iconColor={"#006d77"} />,
       alt: "Image",
       disabled: editingStatus === "idle" ? true : false,
-      eventHandler: () => props.showFormToInsertImage(),
+      eventHandler: () => showFormToInsertImage(),
     },
     {
       label: "TABLE",
@@ -205,9 +226,9 @@ const FormattingToolbarItems = ({
       alt: "Table",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        props.setTable({
-          markdownText: props.markdownText,
-          ...props.textSelection,
+        setTable({
+          markdownText: markdownText,
+          ...textSelection,
         }),
     },
   ];
@@ -235,6 +256,8 @@ const FormattingToolbarItems = ({
 
 const mapDispatch = (dispatch) => {
   return {
+    createNewMarkdowFile: () => dispatch(createNewMarkdowFile()),
+    clearMarkdownContent: () => dispatch(clearMarkdownContent()),
     setH1: (data) => dispatch(setH1(data)),
     setH2: (data) => dispatch(setH2(data)),
     setH3: (data) => dispatch(setH3(data)),
@@ -253,16 +276,15 @@ const mapDispatch = (dispatch) => {
 
 const mapState = (state) => {
   const { textSelection, markdownFile } = state;
-  const { markdownText } = markdownFile;
+  const { markdownText, editingStatus } = markdownFile;
 
   //console.log('formattinToolbarItems - mapState - state', textSelection, markdownText)
 
   return {
     markdownText,
     textSelection,
+    editingStatus,
   };
 };
-
-//export default React.memo(FormattingToolbarItems);
 
 export default connect(mapState, mapDispatch)(FormattingToolbarItems);

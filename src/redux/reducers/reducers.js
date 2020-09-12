@@ -1,5 +1,7 @@
 import {
-  MARKDOWN_TEXT_CONTENT_CHANGE,
+  MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_TEXT_CONTENT_EDIT,
+  MARKDOWN_TEXT_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
   TEXT_FORMATTING_APPLIED_H1,
   TEXT_FORMATTING_APPLIED_H2,
@@ -30,10 +32,20 @@ let initStateOfMarkdownFile = {
 
 export const markdownFile = (state = initStateOfMarkdownFile, action) => {
   switch (action.type) {
-    case MARKDOWN_TEXT_CONTENT_CHANGE:
+    case MARKDOWN_TEXT_CONTENT_NEW:
       return {
         ...state,
-        editingStatus: "InProgress",
+        editingStatus: action.payload,
+      };
+    case MARKDOWN_TEXT_CONTENT_EDIT:
+      return {
+        ...state,
+        editingStatus: action.payload.editingStatus,
+        markdownText: action.payload.text,
+      };
+    case MARKDOWN_TEXT_CONTENT_CLEAR:
+      return {
+        ...state,
         markdownText: action.payload,
       };
     case TEXT_FORMATTING_APPLIED_H1:
