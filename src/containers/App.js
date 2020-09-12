@@ -40,8 +40,6 @@ class App extends Component {
     this.state = {
       screenWidth: 0,
 
-      editingStatus: "idle",
-
       markdownText: placeholder,
       markdownImageDescription: "",
       markdownImageURL: "",
@@ -288,15 +286,11 @@ class App extends Component {
   render() {
     const {
       screenWidth,
-      editingStatus,
       markdownText,
       markdownVersionsHistory,
       lastmarkdownVersion,
       versionSelectedFromHistory,
       showModalRollbackContent,
-      //showFormInsertImage,
-      //markdownImageDescription,
-      //markdownImageURL,
       focusMode,
     } = this.state;
 
@@ -326,7 +320,6 @@ class App extends Component {
         <FormattingToolbar
           screenWidth={screenWidth}
           focusMode={focusMode}
-          editingStatus={editingStatus}
           handleNewmarkdownContent={this.handleNewmarkdownContent}
           handleAddmarkdownContentToHistory={
             this.handleAddmarkdownContentToHistory
@@ -345,17 +338,12 @@ class App extends Component {
           }}
         >
           <EditorPanel
-            //editingStatus={editingStatus}
-            //markdownText={markdownText}
             screenWidth={screenWidth}
             focusMode={focusMode}
             markdownVersionsHistory={markdownVersionsHistory}
             lastmarkdownVersion={lastmarkdownVersion}
             versionSelectedFromHistory={versionSelectedFromHistory}
-            //handleEditorChange={this.handleEditorChange}
-            //handleTextSelection={this.handleTextSelection}
             handlemarkdownVersionChange={this.handlemarkdownVersionChange}
-            //textAreaRef={this.textAreaRef}
             handleFocusMode={this.handleFocusMode}
             handleImmersiveWriting={this.handleImmersiveWriting}
             handleHideGridNumbers={this.handleHideGridNumbers}
