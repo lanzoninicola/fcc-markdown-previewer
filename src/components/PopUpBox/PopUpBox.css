@@ -1,0 +1,63 @@
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  width: 100vh; /* Full width (cover the whole page) */
+  height: 100vh; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  cursor: pointer;
+}
+
+#popup-box {
+  position: absolute;
+  /* top: 35px; */
+  right: 0;
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.3);
+  padding: 10px 20px 10px 20px;
+  transition: width 2s;
+  cursor: initial;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgb(0, 0, 0, 0.9) 2%,
+    rgba(0, 0, 0, 0.9) 98%
+  );
+}
+
+#popup-box::after {
+  transition: all 0.3s ease-out;
+}
+
+#popup-box-close {
+  font-family: "Hind", Helvetica, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: white;
+  letter-spacing: 0.1rem;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+  animation-duration: 0.45s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

@@ -4,6 +4,7 @@ import {
   markdownFile,
   markdownImage,
   markdownLink,
+  focusWriting,
 } from "./reducers";
 
 export const rootReducer = combineReducers({
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   textSelection,
   markdownImage,
   markdownLink,
+  focusWriting,
 });

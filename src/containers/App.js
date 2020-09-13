@@ -356,15 +356,18 @@ class App extends Component {
 }
 
 const mapState = (state) => {
-  const { markdownImage, markdownLink } = state;
+  const { markdownImage, markdownLink, focusWriting } = state;
   const { showFormInsertImage } = markdownImage;
   const { showFormInsertLink } = markdownLink;
+  const { focusMode, immersiveWriting } = focusWriting;
 
   //  console.log("app - mapState - state", markdownImage);
 
   return {
     showFormInsertImage,
     showFormInsertLink,
+    focusMode,
+    immersiveWriting,
   };
 };
 

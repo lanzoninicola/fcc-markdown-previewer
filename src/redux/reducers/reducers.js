@@ -23,6 +23,14 @@ import {
   ADDING_LINK_SHOW_FORM,
   ADDING_LINK_CLOSE_FORM,
   ADDING_LINK_SET_URL,
+  FOCUS_MODE_ENABLE,
+  FOCUS_MODE_DISABLE,
+  IMMERSIVE_WRITING_ENABLE,
+  IMMERSIVE_WRITING_DISABLE,
+  SHOW_APP_SETTINGS_EDITOR,
+  HIDE_APP_SETTINGS_EDITOR,
+  SHOW_APP_SETTINGS_GLOBAL,
+  HIDE_APP_SETTINGS_GLOBAL,
 } from "../actions/actions";
 
 let initStateOfMarkdownFile = {
@@ -192,6 +200,38 @@ export const markdownLink = (state = initStateForAddingLink, action) => {
       return {
         ...state,
         showFormInsertLink: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+let initStateForFocusMode = {
+  focusMode: false,
+  immersiveWriting: false,
+};
+
+export const focusWriting = (state = initStateForFocusMode, action) => {
+  switch (action.type) {
+    case FOCUS_MODE_ENABLE:
+      return {
+        ...state,
+        focusMode: action.payload,
+      };
+    case FOCUS_MODE_DISABLE:
+      return {
+        ...state,
+        focusMode: action.payload,
+      };
+    case IMMERSIVE_WRITING_ENABLE:
+      return {
+        ...state,
+        immersiveWriting: action.payload,
+      };
+    case IMMERSIVE_WRITING_DISABLE:
+      return {
+        ...state,
+        immersiveWriting: action.payload,
       };
     default:
       return state;

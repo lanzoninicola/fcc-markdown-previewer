@@ -70,7 +70,7 @@ const HeaderToolbar = ({ screenWidth, ...props }) => {
         </div>
         <div className="header-toolbar-item">
           <AppGlobalSettings
-            contextMenuSpaceBetween={"large"}
+            PopUpBoxSpaceBetween={"large"}
             menuItems={menuItems}
           />
         </div>
