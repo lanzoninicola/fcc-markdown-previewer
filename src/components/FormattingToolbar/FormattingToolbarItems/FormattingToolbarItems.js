@@ -52,49 +52,56 @@ const FormattingToolbarItems = ({
   const toolbarItems = [
     {
       label: "NEW",
-      icon: <SvgIcon name={"NEW"} iconColor={"#006d77"} />,
+      icon: { name: "new" },
       alt: "New markdown content",
       disabled: (focusMode === false ? false : true) || false,
       eventHandler: createNewMarkdowFile,
     },
     {
       label: "SAVE",
-      icon: <SvgIcon name={"SAVE"} iconColor={"#006d77"} />,
+      icon: { name: "save" },
       alt: "Save a version of markdown text",
       disabled:
-        (focusMode === false ? true : false) ||
+        (focusMode === false ? true : false) &&
         (editingStatus === "idle" ? true : false),
       eventHandler: handleAddmarkdownContentToHistory,
     },
     {
+      label: "COPY",
+      icon: { name: "copy" },
+      alt: "New markdown content",
+      disabled:
+        (focusMode === false ? true : false) &&
+        (editingStatus === "idle" ? true : false),
+      eventHandler: createNewMarkdowFile,
+    },
+    {
       label: "TIME MACHINE",
-      icon: <SvgIcon name={"TIMEMACHINE"} iconColor={"#006d77"} />,
+      icon: { name: "timemachine" },
       alt: "Get a version of markdown text",
       disabled:
-        (focusMode === false ? true : false) ||
+        (focusMode === false ? true : false) &&
         (editingStatus === "idle" ? true : false),
       eventHandler: handleAddmarkdownContentToHistory,
     },
     {
       label: "CLEAR",
-      icon: <SvgIcon name={"CLEAR"} iconColor={"#006d77"} />,
+      icon: { name: "clear" },
       alt: "Remove markdown Content",
       disabled:
-        (focusMode === false ? true : false) ||
+        (focusMode === false ? true : false) &&
         (editingStatus === "idle" ? true : false),
       eventHandler: clearMarkdownContent,
     },
     {
       label: "",
-      icon: <SvgIcon name={"SEPARATOR"} iconColor={"#006d77"} />,
+      icon: { name: "separator" },
       alt: "separator",
-      disabled:
-        (focusMode === false ? true : false) ||
-        (editingStatus === "idle" ? true : false),
+      disabled: true,
     },
     {
       label: "H1",
-      icon: <SvgIcon name={"H1"} iconColor={"#006d77"} />,
+      icon: { name: "h1" },
       alt: "H1",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -105,7 +112,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "H2",
-      icon: <SvgIcon name={"H2"} iconColor={"#006d77"} />,
+      icon: { name: "h2" },
       alt: "H2",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -116,7 +123,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "H3",
-      icon: <SvgIcon name={"H3"} iconColor={"#006d77"} />,
+      icon: { name: "h3" },
       alt: "H3",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -127,7 +134,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "BOLD",
-      icon: <SvgIcon name={"BOLD"} iconColor={"#006d77"} />,
+      icon: { name: "bold" },
       alt: "Bold",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -138,7 +145,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "ITALIC",
-      icon: <SvgIcon name={"ITALIC"} iconColor={"#006d77"} />,
+      icon: { name: "italic" },
       alt: "Italic",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -149,7 +156,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "STRIKETROUGH",
-      icon: <SvgIcon name={"STRIKETROUGH"} iconColor={"#006d77"} />,
+      icon: { name: "striketrough" },
       alt: "Striketrough",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -160,7 +167,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "CODE",
-      icon: <SvgIcon name={"CODE"} iconColor={"#006d77"} />,
+      icon: { name: "code" },
       alt: "Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -171,7 +178,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "BLOCKCODE",
-      icon: <SvgIcon name={"CODE"} iconColor={"#006d77"} />,
+      icon: { name: "code" },
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -182,7 +189,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "LINK",
-      icon: <SvgIcon name={"LINK"} iconColor={"#006d77"} />,
+      icon: { name: "link" },
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -193,7 +200,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "LIST",
-      icon: <SvgIcon name={"LIST"} iconColor={"#006d77"} />,
+      icon: { name: "list" },
       alt: "List",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -204,7 +211,7 @@ const FormattingToolbarItems = ({
     },
     {
       label: "NUMBERS",
-      icon: <SvgIcon name={"NUMBERS"} iconColor={"#006d77"} />,
+      icon: { name: "numbers" },
       alt: "Numbers",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -215,14 +222,14 @@ const FormattingToolbarItems = ({
     },
     {
       label: "IMAGE",
-      icon: <SvgIcon name={"IMAGE"} iconColor={"#006d77"} />,
+      icon: { name: "image" },
       alt: "Image",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () => showFormToInsertImage(),
     },
     {
       label: "TABLE",
-      icon: <SvgIcon name={"TABLE"} iconColor={"#006d77"} />,
+      icon: { name: "table" },
       alt: "Table",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
@@ -236,17 +243,16 @@ const FormattingToolbarItems = ({
   const renderToolbarItems = toolbarItems.map((item, i) => {
     let toolbarItem = null;
 
-    if (item.disabled === false) {
-      toolbarItem = (
-        <FormattingToolbarItem
-          key={i}
-          label={item.label}
-          icon={item.icon}
-          disabled={item.disabled}
-          eventHandler={item.eventHandler}
-        />
-      );
-    }
+    toolbarItem = (
+      <FormattingToolbarItem
+        key={i}
+        label={item.label}
+        icon={item.icon}
+        disabled={item.disabled}
+        eventHandler={item.eventHandler}
+      />
+    );
+    // }
 
     return toolbarItem;
   });

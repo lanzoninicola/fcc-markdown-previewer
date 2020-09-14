@@ -43,21 +43,6 @@ const HeaderToolbar = ({ screenWidth, ...props }) => {
   return (
     <div className="header-toolbar">
       <div className="header-toolbar-items">
-        <div className="header-toolbar-item" onClick={createNewMarkdowFile}>
-          <SvgIcon name={"new"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"save"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"timemachine"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"copy"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item" onClick={clearMarkdownContent}>
-          <SvgIcon name={"clear"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
         <div className="header-toolbar-item">
           {/* {screenWidth >= 768 && <LocalStorageStatsWidget
                         title="local storage space used"

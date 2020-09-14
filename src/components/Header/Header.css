@@ -1,47 +1,45 @@
-.header{
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(251,251,251, 0.5) ;
-    /* background-color: #006D77; */
-    /* background: rgb(0,109,119); */
-    /* background: linear-gradient(90deg, rgba(0, 109, 119,1) 45%, rgba(1,118,189,1) 100%); */
-    /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
-    height: 55px;
-  
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255, 1);
+  /* background-color: #006D77; */
+  /* background: rgb(0,109,119); */
+  /* background: linear-gradient(90deg, rgba(0, 109, 119,1) 45%, rgba(1,118,189,1) 100%); */
+  /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
+  height: 55px;
 }
 
-.header-anchor{
-    position: fixed;
-    width: 100%;
-    z-index: 1;
+.header-anchor {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
-.header-branding{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 15px;
+.header-branding {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
 }
 
+.header-branding-logo {
+  max-width: 29px;
+}
 
 #appname {
-    margin: 0px;
-    padding: 5px;
-    color: #006d77;
-    font-family: 'Hind', Helvetica, sans-serif;
-    font-weight: 600;
-    font-size: 1.5rem;
+  margin: 0px;
+  padding: 5px;
+  color: #006d77;
+  font-family: "Hind", Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
-
 @media screen and (max-width: 600px) {
-    #appname {
-        font-size: 0.8rem;
-        width: 50px;
-        line-height: 1rem;
-    }
-
+  #appname {
+    font-size: 0.8rem;
+    width: 50px;
+    line-height: 1rem;
   }
-
-  
+}
