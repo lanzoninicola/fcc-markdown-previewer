@@ -1,6 +1,16 @@
 import {
+  MARKDOWN_STORE_NEW,
+  NEW_FILE_SHOW_FORM,
+  NEW_FILE_CLOSE_FORM,
+  MARKDOWN_STORE_FILE_NEWID,
+  MARKDOWN_STORE_FILE_NEWNAME,
+  MARKDOWN_STORE_FILE_CONTENT,
+  MARKDOWN_STORE_FILE_TO_HISTORY,
+  EDITOR_STATUS_INIT,
   MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_TEXT_CONTENT_SAVE,
   MARKDOWN_TEXT_CONTENT_EDIT,
+  MARKDOWN_TEXT_CONTENT_COPY,
   MARKDOWN_TEXT_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
   TEXT_FORMATTING_APPLIED_H1,
@@ -25,6 +35,43 @@ import {
   ADDING_LINK_SET_URL,
 } from "../actions/actions";
 
+let initStateOfMarkdownStore = {
+  showFormInsertFile: false,
+  fileId: null,
+  fileName: "",
+};
+
+export const markdownStore = (state = initStateOfMarkdownStore, action) => {
+  switch (action.type) {
+    case NEW_FILE_SHOW_FORM:
+      return {
+        ...state,
+        showFormInsertFile: true,
+      };
+    case NEW_FILE_CLOSE_FORM:
+      return {
+        ...state,
+        showFormInsertFile: false,
+      };
+    case MARKDOWN_STORE_NEW:
+      return {
+        ...state,
+      };
+    case MARKDOWN_STORE_FILE_NEWID:
+      return {
+        ...state,
+        fileId: action.payload,
+      };
+    case MARKDOWN_STORE_FILE_NEWNAME:
+      return {
+        ...state,
+        fileName: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 let initStateOfMarkdownFile = {
   editingStatus: "idle", //'InProgress',
   markdownText: "",
@@ -32,6 +79,11 @@ let initStateOfMarkdownFile = {
 
 export const markdownFile = (state = initStateOfMarkdownFile, action) => {
   switch (action.type) {
+    case EDITOR_STATUS_INIT:
+      return {
+        ...state,
+        editingStatus: action.payload,
+      };
     case MARKDOWN_TEXT_CONTENT_NEW:
       return {
         ...state,

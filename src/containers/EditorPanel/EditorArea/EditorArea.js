@@ -3,7 +3,7 @@ import "./EditorArea.css";
 
 import { connect } from "react-redux";
 import {
-  editMarkdownContent,
+  saveMarkdownInstantContent,
   handleTextSelection,
 } from "../../../redux/actionsCreators/globalActions";
 
@@ -15,9 +15,11 @@ class EditorArea extends Component {
 
   render() {
     const {
-      editMarkdownContent,
-      handleTextSelection,
       markdownText,
+      fileId,
+      editingStatus,
+      saveMarkdownInstantContent,
+      handleTextSelection,
     } = this.props;
 
     return (
@@ -33,12 +35,14 @@ class EditorArea extends Component {
               id="editor"
               //ref={textAreaRef2}
               ref={this.textAreaRef}
-              onChange={editMarkdownContent}
+              onChange={(e) =>
+                saveMarkdownInstantContent(fileId, e.target.value)
+              }
               onClick={() => handleTextSelection(this.textAreaRef)}
               onSelect={() => handleTextSelection(this.textAreaRef)}
               value={markdownText}
-              // readOnly={readonly} // da riabilitare
-              placeholder="Start here..."
+              readOnly={editingStatus === "idle" ? true : false}
+              placeholder={editingStatus === "idle" ? "" : "Start here..."}
             ></textarea>
           </div>
         </div>
@@ -49,7 +53,8 @@ class EditorArea extends Component {
 
 const madDispatch = (dispatch) => {
   return {
-    editMarkdownContent: (e) => dispatch(editMarkdownContent(e)),
+    saveMarkdownInstantContent: (fileId, content) =>
+      dispatch(saveMarkdownInstantContent(fileId, content)),
     handleTextSelection: (textAreaRef) =>
       dispatch(handleTextSelection(textAreaRef)),
   };
@@ -58,11 +63,13 @@ const madDispatch = (dispatch) => {
 const mapState = (state) => {
   const { editingStatus, markdownText } = state.markdownFile;
   const { textSelection } = state.textSelection;
+  const { fileId } = state.markdownStore;
 
   return {
     editingStatus,
     markdownText,
     textSelection,
+    fileId,
   };
 };
 

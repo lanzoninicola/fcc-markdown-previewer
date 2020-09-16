@@ -1,4 +1,8 @@
 export const palette = {
+  common: {
+    black: "rgb(0,0,0)",
+    white: "rgb(255, 255, 255)",
+  },
   primary: {
     light: "rgb(0, 109, 119, 0.4)",
     main: "rgb(0, 109, 119, 0.8)",
@@ -14,6 +18,14 @@ export const palette = {
     main: "rgb(0, 0, 0, 0.4)",
     dark: "rgb(0, 0, 0, 0.5)",
   },
+  chartThreshold: {
+    undefined: "rgb(0, 0, 0, 0.5)",
+    lower: "rgb(71, 235, 211)",
+    low: "rgb(34, 193, 195)",
+    medium: "rgb(252, 176, 69)",
+    high: "rgb(253, 29, 29)",
+    higher: "rgb(131, 58, 180)",
+  },
 };
 
 export const getColorFromPalette = (schema) => {
@@ -27,7 +39,7 @@ export const getColorFromPalette = (schema) => {
     return palette.primary.main;
   }
 
-  if (!schema.split("").find((char) => char === "-")) {
+  if (schema !== "disabled" && !schema.split("").find((char) => char === "-")) {
     console.warn(
       `getColorFromPalette - Color might be defined like this: "primary-main" instead of "${schema}". Default "primary-main" color has been loaded.`
     );

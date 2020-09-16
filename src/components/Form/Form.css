@@ -11,7 +11,7 @@
   );
   width: 100%;
   height: 100vh;
-  z-index: 2;
+  z-index: 11;
 }
 
 .form-window {
@@ -29,6 +29,7 @@
 }
 
 #form-title {
+  text-align: center;
   font-family: "Hind", Helvetica, sans-serif;
   font-size: 20px;
   font-weight: 600;

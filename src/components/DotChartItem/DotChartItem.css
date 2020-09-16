@@ -1,53 +1,22 @@
 .dotchart-increment {
-    border-radius: 50%;
-    border: solid 2px;
+  border-radius: 50%;
+  border: solid 2px;
 }
 
 .dotchart-item-small {
-    width: 15px;
-    height: 15px;
-    margin-left: 3px;  
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
 }
 
 .dotchart-item-medium {
-    width: 30px;
-    height: 30px;
-    margin-left: 6px;  
+  width: 30px;
+  height: 30px;
+  margin-left: 6px;
 }
 
 .dotchart-item-large {
-    width: 60px;
-    height: 60px;
-    margin-left: 12px;  
+  width: 60px;
+  height: 60px;
+  margin-left: 12px;
 }
-
-.increment-undefined {
-    border-color: white;
-}
-
-.increment-lower {
-    border-color: #47ebd3;
-    background-color: #47ebd3;
-}
-
-.increment-low {
-    border-color: #22c1c3;
-    background-color: #22c1c3;
-}
-
-.increment-medium {
-    border-color: #fcb045;
-    background-color: #fcb045;
-}
-
-.increment-high {
-    border-color: #fd1d1d;
-    background-color: #fd1d1d;
-}
-
-.increment-higher {
-    border-color: #833ab4;
-    background-color: #833ab4;
-}
-
-

@@ -1,14 +1,19 @@
-import React from 'react'
-import './Button.css'
+import React from "react";
+import "./Button.css";
 
+const Button = ({ ...props }) => {
+  const { type, eventHandler, submit, disabled } = props;
 
-const Button = (props) => {
-
-    const { type, eventHandler } = props;
-
-    return (
-        <button className={`button button-${type}`} onClick={eventHandler}>{props.children}</button>
-    )
-}
+  return (
+    <button
+      className={`button button-${type}`}
+      type={submit ? "submit" : ""}
+      onClick={() => eventHandler()}
+      disabled={disabled}
+    >
+      {props.children}
+    </button>
+  );
+};
 
 export default Button;

@@ -1,9 +1,8 @@
 import React from "react";
-import SvgIcon from "../../SvgIcon/SvgIcon";
 import FormattingToolbarItem from "../FormattingToolbarItem/FormattingToolbarItem";
 
 import {
-  createNewMarkdowFile,
+  showFormToCreateNewFile,
   clearMarkdownContent,
   setH1,
   setH2,
@@ -19,6 +18,8 @@ import {
   showFormToInsertImage,
   setTable,
 } from "../../../redux/actionsCreators/globalActions";
+
+import { saveContentIntoHistoryStore } from "../../../redux/actionsCreators/markdownStoreActions";
 import { connect } from "react-redux";
 
 const FormattingToolbarItems = ({
@@ -32,7 +33,8 @@ const FormattingToolbarItems = ({
   editingStatus,
   markdownText,
   textSelection,
-  createNewMarkdowFile,
+  showFormToCreateNewFile,
+  saveContentIntoHistoryStore,
   clearMarkdownContent,
   setH1,
   setH2,
@@ -47,6 +49,7 @@ const FormattingToolbarItems = ({
   setNumbers,
   showFormToInsertImage,
   setTable,
+  fileId,
   ...props
 }) => {
   const toolbarItems = [
@@ -54,34 +57,36 @@ const FormattingToolbarItems = ({
       label: "NEW",
       icon: { name: "new" },
       alt: "New markdown content",
-      disabled: (focusMode === false ? false : true) || false,
-      eventHandler: createNewMarkdowFile,
+      disabled: false, //(focusMode === false ? false : true) || false,
+      eventHandler: showFormToCreateNewFile,
     },
     {
       label: "SAVE",
       icon: { name: "save" },
       alt: "Save a version of markdown text",
       disabled:
-        (focusMode === false ? true : false) &&
-        (editingStatus === "idle" ? true : false),
-      eventHandler: handleAddmarkdownContentToHistory,
+        //(focusMode === false ? true : false) &&
+        editingStatus === "idle" ? true : false,
+      eventHandler: () => {
+        saveContentIntoHistoryStore(fileId);
+      },
     },
     {
       label: "COPY",
       icon: { name: "copy" },
       alt: "New markdown content",
       disabled:
-        (focusMode === false ? true : false) &&
-        (editingStatus === "idle" ? true : false),
-      eventHandler: createNewMarkdowFile,
+        //(focusMode === false ? true : false) &&
+        editingStatus === "idle" ? true : false,
+      eventHandler: null,
     },
     {
       label: "TIME MACHINE",
       icon: { name: "timemachine" },
       alt: "Get a version of markdown text",
       disabled:
-        (focusMode === false ? true : false) &&
-        (editingStatus === "idle" ? true : false),
+        //(focusMode === false ? true : false) &&
+        editingStatus === "idle" ? true : false,
       eventHandler: handleAddmarkdownContentToHistory,
     },
     {
@@ -89,8 +94,8 @@ const FormattingToolbarItems = ({
       icon: { name: "clear" },
       alt: "Remove markdown Content",
       disabled:
-        (focusMode === false ? true : false) &&
-        (editingStatus === "idle" ? true : false),
+        //(focusMode === false ? true : false) &&
+        editingStatus === "idle" ? true : false,
       eventHandler: clearMarkdownContent,
     },
     {
@@ -105,7 +110,7 @@ const FormattingToolbarItems = ({
       alt: "H1",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setH1({
+        setH1(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -116,7 +121,7 @@ const FormattingToolbarItems = ({
       alt: "H2",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setH2({
+        setH2(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -127,7 +132,7 @@ const FormattingToolbarItems = ({
       alt: "H3",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setH3({
+        setH3(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -138,7 +143,7 @@ const FormattingToolbarItems = ({
       alt: "Bold",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setBold({
+        setBold(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -149,7 +154,7 @@ const FormattingToolbarItems = ({
       alt: "Italic",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setItalic({
+        setItalic(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -160,7 +165,7 @@ const FormattingToolbarItems = ({
       alt: "Striketrough",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setStrikeThrough({
+        setStrikeThrough(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -171,7 +176,7 @@ const FormattingToolbarItems = ({
       alt: "Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setCode({
+        setCode(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -182,7 +187,7 @@ const FormattingToolbarItems = ({
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setBlockCode({
+        setBlockCode(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -192,11 +197,7 @@ const FormattingToolbarItems = ({
       icon: { name: "link" },
       alt: "Block Code",
       disabled: editingStatus === "idle" ? true : false,
-      eventHandler: () =>
-        setLink({
-          markdownText: markdownText,
-          ...textSelection,
-        }),
+      eventHandler: () => setLink(),
     },
     {
       label: "LIST",
@@ -204,7 +205,7 @@ const FormattingToolbarItems = ({
       alt: "List",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setList({
+        setList(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -215,7 +216,7 @@ const FormattingToolbarItems = ({
       alt: "Numbers",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setNumbers({
+        setNumbers(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -233,7 +234,7 @@ const FormattingToolbarItems = ({
       alt: "Table",
       disabled: editingStatus === "idle" ? true : false,
       eventHandler: () =>
-        setTable({
+        setTable(fileId, {
           markdownText: markdownText,
           ...textSelection,
         }),
@@ -262,27 +263,31 @@ const FormattingToolbarItems = ({
 
 const mapDispatch = (dispatch) => {
   return {
-    createNewMarkdowFile: () => dispatch(createNewMarkdowFile()),
+    showFormToCreateNewFile: () => dispatch(showFormToCreateNewFile()),
+    saveContentIntoHistoryStore: (fileId) =>
+      dispatch(saveContentIntoHistoryStore(fileId)),
     clearMarkdownContent: () => dispatch(clearMarkdownContent()),
-    setH1: (data) => dispatch(setH1(data)),
-    setH2: (data) => dispatch(setH2(data)),
-    setH3: (data) => dispatch(setH3(data)),
-    setBold: (data) => dispatch(setBold(data)),
-    setItalic: (data) => dispatch(setItalic(data)),
-    setStrikeThrough: (data) => dispatch(setStrikeThrough(data)),
-    setCode: (data) => dispatch(setCode(data)),
-    setBlockCode: (data) => dispatch(setBlockCode(data)),
+    setH1: (fileId, data) => dispatch(setH1(fileId, data)),
+    setH2: (fileId, data) => dispatch(setH2(fileId, data)),
+    setH3: (fileId, data) => dispatch(setH3(fileId, data)),
+    setBold: (fileId, data) => dispatch(setBold(fileId, data)),
+    setItalic: (fileId, data) => dispatch(setItalic(fileId, data)),
+    setStrikeThrough: (fileId, data) =>
+      dispatch(setStrikeThrough(fileId, data)),
+    setCode: (fileId, data) => dispatch(setCode(fileId, data)),
+    setBlockCode: (fileId, data) => dispatch(setBlockCode(fileId, data)),
     setLink: () => dispatch(showFormToInsertLink()),
-    setList: (data) => dispatch(setList(data)),
-    setNumbers: (data) => dispatch(setNumbers(data)),
+    setList: (fileId, data) => dispatch(setList(fileId, data)),
+    setNumbers: (fileId, data) => dispatch(setNumbers(fileId, data)),
     showFormToInsertImage: () => dispatch(showFormToInsertImage()),
-    setTable: (data) => dispatch(setTable(data)),
+    setTable: (fileId, data) => dispatch(setTable(fileId, data)),
   };
 };
 
 const mapState = (state) => {
-  const { textSelection, markdownFile } = state;
+  const { textSelection, markdownFile, markdownStore } = state;
   const { markdownText, editingStatus } = markdownFile;
+  const { fileId } = markdownStore;
 
   //console.log('formattinToolbarItems - mapState - state', textSelection, markdownText)
 
@@ -290,6 +295,7 @@ const mapState = (state) => {
     markdownText,
     textSelection,
     editingStatus,
+    fileId,
   };
 };
 

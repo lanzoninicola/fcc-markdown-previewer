@@ -5,10 +5,6 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import LocalStorageStatsMenu from "../LocalStorageStats/LocalStorageStatsMenu/LocalStorageStatsMenu";
 import LocalStorageStatsWidget from "../LocalStorageStats/LocalStorageStatsWidget/LocalStorageStatsWidget";
 
-import {
-  createNewMarkdowFile,
-  clearMarkdownContent,
-} from "../../redux/actionsCreators/globalActions";
 import { connect } from "react-redux";
 
 const HeaderToolbar = ({ screenWidth, ...props }) => {
@@ -37,8 +33,6 @@ const HeaderToolbar = ({ screenWidth, ...props }) => {
     //     eventHandler: handleHideGridNumbers
     // },
   ];
-
-  const { createNewMarkdowFile, clearMarkdownContent } = props;
 
   return (
     <div className="header-toolbar">
@@ -75,11 +69,4 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    createNewMarkdowFile: () => dispatch(createNewMarkdowFile()),
-    clearMarkdownContent: () => dispatch(clearMarkdownContent()),
-  };
-};
-
-export default connect(mapState, mapDispatch)(HeaderToolbar);
+export default connect(mapState)(HeaderToolbar);

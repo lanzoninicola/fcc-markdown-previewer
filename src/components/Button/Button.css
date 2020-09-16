@@ -16,6 +16,12 @@
   border: solid 4px rgb(0, 109, 119);
 }
 
+.button-primary:disabled {
+  background-color: rgb(0, 109, 119, 0.1);
+  color: white;
+  border: solid 4px rgb(0, 109, 119, 0.1);
+}
+
 .button-primary:hover {
   background-color: rgb(255, 255, 255, 0.7);
   color: rgb(0, 109, 119);

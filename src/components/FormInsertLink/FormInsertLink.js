@@ -12,12 +12,12 @@ import {
 } from "../../redux/actionsCreators/globalActions";
 
 const FormInsertLink = ({ ...props }) => {
-  const { url, setURL, addingLink, closeFormToInsertLink } = props;
+  const { url, setURL, addingLink, closeFormToInsertLink, fileId } = props;
 
   return (
     <Fragment>
       <Form
-        title={"Insert the following information:"}
+        title={"ADD A LINK TO YOUR CONTENT"}
         inputs={[
           {
             value: url,
@@ -33,6 +33,7 @@ const FormInsertLink = ({ ...props }) => {
           type="primary"
           eventHandler={() =>
             addingLink(
+              fileId,
               {
                 markdownText: props.markdownText,
                 ...props.textSelection,
@@ -42,6 +43,7 @@ const FormInsertLink = ({ ...props }) => {
               }
             )
           }
+          disabled={!url ? true : false}
         >
           OK
         </Button>
@@ -54,8 +56,9 @@ const FormInsertLink = ({ ...props }) => {
 };
 
 const mapState = (state) => {
-  const { textSelection, markdownFile } = state;
+  const { textSelection, markdownFile, markdownStore } = state;
   const { markdownText } = markdownFile;
+  const { fileId } = markdownStore;
 
   const { markdownLink } = state;
   const { url } = markdownLink;
@@ -64,14 +67,15 @@ const mapState = (state) => {
     url,
     textSelection,
     markdownText,
+    fileId,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     setURL: (e) => dispatch(setURL(e)),
-    addingLink: (markdownData, linkData) =>
-      dispatch(addingLink(markdownData, linkData)),
+    addingLink: (fileId, markdownData, linkData) =>
+      dispatch(addingLink(fileId, markdownData, linkData)),
     closeFormToInsertLink: () => dispatch(closeFormToInsertLink()),
   };
 };

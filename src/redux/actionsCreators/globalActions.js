@@ -1,11 +1,9 @@
 import {
-  setmarkdownTextLog,
-  resetmarkdownTextLog,
-  resetmarkdownVersionsHistory,
-  resetmarkdownVersion,
-} from "../../helper/helper";
-import {
+  NEW_FILE_SHOW_FORM,
+  NEW_FILE_CLOSE_FORM,
+  EDITOR_STATUS_INIT,
   MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_TEXT_CONTENT_SAVE,
   MARKDOWN_TEXT_CONTENT_EDIT,
   MARKDOWN_TEXT_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
@@ -31,31 +29,66 @@ import {
   ADDING_LINK_SET_URL,
 } from "../actions/actions";
 
-export const createNewMarkdowFile = () => (dispatch) => {
-  console.log("createNewMarkdowFile fired");
-  return [dispatch(newMarkdownContent()), dispatch(clearMarkdownContent())];
+import {
+  createMarkdownEditorStore,
+  createNewMarkdownFileIntoStore,
+  saveInstantContentIntoStore,
+} from "./markdownStoreActions";
+
+export const initializeApplication = () => (dispatch) => {
+  return [dispatch(createMarkdownEditorStore()), dispatch(initEditorStatus())];
+};
+
+export const initEditorStatus = () => {
+  return {
+    type: EDITOR_STATUS_INIT,
+    payload: "idle",
+  };
+};
+
+export const showFormToCreateNewFile = () => {
+  return {
+    type: NEW_FILE_SHOW_FORM,
+    payload: true,
+  };
+};
+
+export const closeFormToCreateNewFile = () => {
+  return {
+    type: NEW_FILE_CLOSE_FORM,
+    payload: false,
+  };
+};
+
+export const createNewMarkdownFile = (fileName) => (dispatch) => {
+  return [
+    dispatch(createNewMarkdownFileIntoStore(fileName)),
+    dispatch(closeFormToCreateNewFile()),
+    dispatch(newMarkdownContent()),
+    dispatch(clearMarkdownContent()),
+  ];
 };
 
 export const newMarkdownContent = () => {
-  resetmarkdownTextLog();
-  resetmarkdownVersionsHistory();
-
-  // resetmarkdownVersion(); it uses state **********************
-
   return {
     type: MARKDOWN_TEXT_CONTENT_NEW,
     payload: "new",
   };
 };
 
-export const editMarkdownContent = (e) => {
-  setmarkdownTextLog(e.target.value);
+export const saveMarkdownInstantContent = (fileId, content) => (dispatch) => {
+  return [
+    dispatch(editMarkdownContent(content)),
+    dispatch(saveInstantContentIntoStore(fileId, content)),
+  ];
+};
 
+export const editMarkdownContent = (content) => {
   return {
     type: MARKDOWN_TEXT_CONTENT_EDIT,
     payload: {
       editingStatus: "in progress",
-      text: e.target.value,
+      text: content,
     },
   };
 };
@@ -91,6 +124,7 @@ export const handleTextSelection = (text) => {
 };
 
 export const setH1 = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -106,9 +140,9 @@ export const setH1 = (
     textToFormat.push(...markdownText.split(""));
     textToFormat.splice(startSelection, 0, "# ");
     newMarkdownText = textToFormat.join("");
-
-    setmarkdownTextLog(textToFormat);
   }
+
+  saveInstantContentIntoStore(fileId, newMarkdownText);
 
   return {
     type: TEXT_FORMATTING_APPLIED_H1,
@@ -117,6 +151,7 @@ export const setH1 = (
 };
 
 export const setH2 = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -135,7 +170,7 @@ export const setH2 = (
     textToFormat.splice(startSelection, 0, "## ");
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -145,6 +180,7 @@ export const setH2 = (
 };
 
 export const setH3 = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -161,7 +197,7 @@ export const setH3 = (
     textToFormat.splice(startSelection, 0, "### ");
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -171,6 +207,7 @@ export const setH3 = (
 };
 
 export const setBold = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -189,7 +226,7 @@ export const setBold = (
 
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -199,6 +236,7 @@ export const setBold = (
 };
 
 export const setItalic = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -217,7 +255,7 @@ export const setItalic = (
 
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -227,6 +265,7 @@ export const setItalic = (
 };
 
 export const setStrikeThrough = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -245,7 +284,7 @@ export const setStrikeThrough = (
 
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -255,6 +294,7 @@ export const setStrikeThrough = (
 };
 
 export const setCode = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -273,7 +313,7 @@ export const setCode = (
 
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -283,6 +323,7 @@ export const setCode = (
 };
 
 export const setBlockCode = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -301,7 +342,7 @@ export const setBlockCode = (
 
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -311,6 +352,7 @@ export const setBlockCode = (
 };
 
 export const setList = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -328,7 +370,7 @@ export const setList = (
     textToFormat.splice(startSelection, 0, "- ");
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -338,6 +380,7 @@ export const setList = (
 };
 
 export const setNumbers = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -355,7 +398,7 @@ export const setNumbers = (
     textToFormat.splice(startSelection, 0, "1. ");
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -393,6 +436,7 @@ export const setImageURL = (e) => {
 };
 
 export const setImage = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -427,7 +471,7 @@ export const setImage = (
     console.log("globalActions - setImage - textToFormat", textToFormat);
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   console.log("globalActions - setImage - newMarkdownText", newMarkdownText);
@@ -438,7 +482,7 @@ export const setImage = (
   };
 };
 
-export const addingImage = (toFormat, imageData) => (dispatch) => {
+export const addingImage = (fileId, toFormat, imageData) => (dispatch) => {
   console.log(
     "globalActions - addingImage - function fired",
     toFormat,
@@ -447,11 +491,12 @@ export const addingImage = (toFormat, imageData) => (dispatch) => {
 
   return [
     dispatch(closeFormToInsertImage()),
-    dispatch(setImage(toFormat, imageData)),
+    dispatch(setImage(fileId, toFormat, imageData)),
   ];
 };
 
 export const setTable = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -472,7 +517,9 @@ export const setTable = (
     textToFormat.splice(startSelection, 0, tablemarkdownText);
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    console.log("setTable - fileId", fileId);
+
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   return {
@@ -503,6 +550,7 @@ export const setURL = (e) => {
 };
 
 export const setLink = (
+  fileId,
   toFormat = {
     markdownText: "",
     textSelection: { startSelection: 0, endSelection: 0 },
@@ -551,7 +599,7 @@ export const setLink = (
     );
     newMarkdownText = textToFormat.join("");
 
-    setmarkdownTextLog(textToFormat);
+    saveInstantContentIntoStore(fileId, newMarkdownText);
   }
 
   console.log("globalActions - setLink - newMarkdownText", newMarkdownText);
@@ -562,7 +610,7 @@ export const setLink = (
   };
 };
 
-export const addingLink = (toFormat, linkData) => (dispatch) => {
+export const addingLink = (fileId, toFormat, linkData) => (dispatch) => {
   console.log(
     "globalActions - addingLink - function fired",
     toFormat,
@@ -571,6 +619,6 @@ export const addingLink = (toFormat, linkData) => (dispatch) => {
 
   return [
     dispatch(closeFormToInsertLink()),
-    dispatch(setLink(toFormat, linkData)),
+    dispatch(setLink(fileId, toFormat, linkData)),
   ];
 };
