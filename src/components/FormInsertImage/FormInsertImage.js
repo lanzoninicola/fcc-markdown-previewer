@@ -20,6 +20,7 @@ const FormInsertImage = ({ ...props }) => {
     setImageURL,
     addingImage,
     closeFormToInsertImage,
+    fileId,
   } = props;
 
   return (
@@ -48,6 +49,7 @@ const FormInsertImage = ({ ...props }) => {
           type="primary"
           eventHandler={() =>
             addingImage(
+              fileId,
               {
                 markdownText: props.markdownText,
                 ...props.textSelection,
@@ -70,8 +72,9 @@ const FormInsertImage = ({ ...props }) => {
 };
 
 const mapState = (state) => {
-  const { textSelection, markdownFile } = state;
+  const { textSelection, markdownFile, markdownStore } = state;
   const { markdownText } = markdownFile;
+  const { fileId } = markdownStore;
 
   const { markdownImage } = state;
   const { url, description } = markdownImage;
@@ -81,6 +84,7 @@ const mapState = (state) => {
     description,
     textSelection,
     markdownText,
+    fileId,
   };
 };
 
@@ -88,8 +92,8 @@ const mapDispatch = (dispatch) => {
   return {
     setImageDescription: (e) => dispatch(setImageDescription(e)),
     setImageURL: (e) => dispatch(setImageURL(e)),
-    addingImage: (markdownData, imageData) =>
-      dispatch(addingImage(markdownData, imageData)),
+    addingImage: (fileId, markdownData, imageData) =>
+      dispatch(addingImage(fileId, markdownData, imageData)),
     closeFormToInsertImage: () => dispatch(closeFormToInsertImage()),
   };
 };

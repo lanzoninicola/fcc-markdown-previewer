@@ -5,10 +5,6 @@ import SvgIcon from "../SvgIcon/SvgIcon";
 import LocalStorageStatsMenu from "../LocalStorageStats/LocalStorageStatsMenu/LocalStorageStatsMenu";
 import LocalStorageStatsWidget from "../LocalStorageStats/LocalStorageStatsWidget/LocalStorageStatsWidget";
 
-import {
-  createNewMarkdowFile,
-  clearMarkdownContent,
-} from "../../redux/actionsCreators/globalActions";
 import { connect } from "react-redux";
 
 const HeaderToolbar = ({ screenWidth, ...props }) => {
@@ -38,26 +34,9 @@ const HeaderToolbar = ({ screenWidth, ...props }) => {
     // },
   ];
 
-  const { createNewMarkdowFile, clearMarkdownContent } = props;
-
   return (
     <div className="header-toolbar">
       <div className="header-toolbar-items">
-        <div className="header-toolbar-item" onClick={createNewMarkdowFile}>
-          <SvgIcon name={"new"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"save"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"timemachine"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item">
-          <SvgIcon name={"copy"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
-        <div className="header-toolbar-item" onClick={clearMarkdownContent}>
-          <SvgIcon name={"clear"} iconColor={"#006d77"} bigIcon={true} />
-        </div>
         <div className="header-toolbar-item">
           {/* {screenWidth >= 768 && <LocalStorageStatsWidget
                         title="local storage space used"
@@ -90,11 +69,4 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    createNewMarkdowFile: () => dispatch(createNewMarkdowFile()),
-    clearMarkdownContent: () => dispatch(clearMarkdownContent()),
-  };
-};
-
-export default connect(mapState, mapDispatch)(HeaderToolbar);
+export default connect(mapState)(HeaderToolbar);

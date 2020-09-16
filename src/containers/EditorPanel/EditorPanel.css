@@ -1,19 +1,24 @@
 #editor-panel {
-    width: 50%;
-    height: auto;
-    margin: 10px;
-    border-radius: 0.7%;
-    padding: 10px;
-    background-color: #fbfbfb;
-    box-shadow: 20px -17px 57px -42px rgba(0,0,0,0.3);
-    /* box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5); */
-  }
-    
+  width: 50%;
+  height: auto;
+  margin: 10px;
+  border-radius: 0.7%;
+  padding: 10px;
+  background-color: #fbfbfb;
+  box-shadow: 20px -17px 57px -42px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.5); */
+}
+
+#editor-panel-draggable {
+  cursor: move;
+  z-index: 10;
+}
+
 #editor-panel-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: rgb(0,109,119);
+  color: rgb(0, 109, 119);
 }
 
 .editor-panel-header-toolbar {
@@ -34,12 +39,12 @@
   padding: 5px;
   height: auto;
   border-radius: 0.7%;
-  border: solid 1px  rgb(233,236,239, 1);
-  font-family: 'Hind', Helvetica, sans-serif;
+  border: solid 1px rgb(233, 236, 239, 1);
+  font-family: "Hind", Helvetica, sans-serif;
 }
 
 .editor-panel-header-toolbar-item select:focus {
-  border: solid 1px rgb(233,236,239, 1)
+  border: solid 1px rgb(233, 236, 239, 1);
 }
 
 #editor-panel-header-toolbar-item-label {
@@ -49,8 +54,6 @@
   font-size: 0.8rem;
 }
 
-
-
 @media screen and (max-width: 992px) {
   #editor-panel {
     width: auto;
@@ -59,8 +62,8 @@
 
 @media screen and (max-width: 450px) {
   .editor-panel-header-toolbar-item {
-      padding-right: 6px;
-      padding-left: 6px;
-      max-width: 20px;
+    padding-right: 6px;
+    padding-left: 6px;
+    max-width: 20px;
   }
 }

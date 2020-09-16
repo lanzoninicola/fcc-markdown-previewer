@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import {
+  markdownStore,
   textSelection,
   markdownFile,
   markdownImage,
@@ -7,6 +8,7 @@ import {
 } from "./reducers";
 
 export const rootReducer = combineReducers({
+  markdownStore,
   markdownFile,
   textSelection,
   markdownImage,

@@ -1,0 +1,144 @@
+/* hind-regular - latin */
+@font-face {
+  font-family: "Hind";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../asset/fonts/hind-v10-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local("Hind Regular"), local("Hind-Regular"),
+    url("../../asset/fonts/hind-v10-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../../asset/fonts/hind-v10-latin-regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */
+      url("../../asset/fonts/hind-v10-latin-regular.woff") format("woff"),
+    /* Modern Browsers */ url("../../asset/fonts/hind-v10-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../../asset/fonts/hind-v10-latin-regular.svg#Hind") format("svg"); /* Legacy iOS */
+}
+
+/* roboto-slab-regular - latin */
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../asset/fonts/roboto-slab-v12-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("../../asset/fonts/roboto-slab-v12-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../../asset/fonts/roboto-slab-v12-latin-regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */
+      url("../../asset/fonts/roboto-slab-v12-latin-regular.woff") format("woff"),
+    /* Modern Browsers */
+      url("../../asset/fonts/roboto-slab-v12-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../../asset/fonts/roboto-slab-v12-latin-regular.svg#RobotoSlab")
+      format("svg"); /* Legacy iOS */
+}
+
+/* alegreya-sans-regular - latin */
+@font-face {
+  font-family: "Alegreya Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../asset/fonts/alegreya-sans-v10-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local("Alegreya Sans Regular"), local("AlegreyaSans-Regular"),
+    url("../../asset/fonts/alegreya-sans-v10-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../../asset/fonts/alegreya-sans-v10-latin-regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */
+      url("../../asset/fonts/alegreya-sans-v10-latin-regular.woff")
+      format("woff"),
+    /* Modern Browsers */
+      url("../../asset/fonts/alegreya-sans-v10-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../../asset/fonts/alegreya-sans-v10-latin-regular.svg#AlegreyaSans")
+      format("svg"); /* Legacy iOS */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-editor-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 150px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
+}
+
+.container-editor-area-focusMode {
+  /* background: linear-gradient(90deg, rgba(0,109,119,0.6) 10%, rgba(1,118,189,0.7) 50%, rgba(0,109,119,0.6) 90%); */
+  background: linear-gradient(
+    90deg,
+    rgb(0, 0, 0, 0.4) 2%,
+    rgba(0, 109, 119, 0.7) 50%,
+    rgba(0, 0, 0, 0.4) 98%
+  );
+}
+
+h3 {
+  margin: 10px;
+  font-family: "Alegreya Sans";
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 450px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 0.85s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #preview-panel {
+    width: auto;
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+  animation-duration: 0.85s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
