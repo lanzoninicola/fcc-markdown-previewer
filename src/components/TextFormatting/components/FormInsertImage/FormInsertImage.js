@@ -10,7 +10,7 @@ import {
   setImageURL,
   addingImage,
   closeFormToInsertImage,
-} from "../../redux/actionsCreators/globalActions";
+} from "../../../../redux/actionsCreators/globalActions";
 
 const FormInsertImage = ({ ...props }) => {
   const {

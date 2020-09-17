@@ -6,8 +6,8 @@ import {
   MARKDOWN_STORE_FILE_CONTENT,
   MARKDOWN_STORE_FILE_TO_HISTORY,
 } from "../actions/actions";
-import { markdownLocalStore } from "../../factories/markdownStore/MarkdownLocalStore";
 
+import { markdownLocalStore } from "../../factories/markdownStore/MarkdownLocalStore";
 const markdownStorage = markdownLocalStore(MARKDOWN_EDITOR_STORE);
 
 export const createMarkdownEditorStore = () => {
@@ -43,9 +43,10 @@ export const saveInstantContentIntoStore = (fileId, content) => {
 };
 
 export const saveContentIntoHistoryStore = (fileId) => {
-  markdownStorage.storeFileContentToHistory(fileId);
+  const fileVersion = markdownStorage.storeFileContentToHistory(fileId);
 
   return {
     type: MARKDOWN_STORE_FILE_TO_HISTORY,
+    payload: fileVersion,
   };
 };

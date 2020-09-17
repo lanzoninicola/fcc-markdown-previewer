@@ -17,17 +17,13 @@ import {
   setNumbers,
   showFormToInsertImage,
   setTable,
-} from "../../../redux/actionsCreators/globalActions";
+} from "../../../../redux/actionsCreators/globalActions";
 
-import { saveContentIntoHistoryStore } from "../../../redux/actionsCreators/markdownStoreActions";
+import { saveContentIntoHistoryStore } from "../../../../redux/actionsCreators/markdownStoreActions";
 import { connect } from "react-redux";
 
-const FormattingToolbarItems = ({
+const FormattingToolbarItemList = ({
   focusMode,
-  handleNewmarkdownContent,
-  handleAddmarkdownContentToHistory,
-  handleClearmarkdownContent,
-  handleTextFormatting,
 
   // from REDUX
   editingStatus,
@@ -66,7 +62,11 @@ const FormattingToolbarItems = ({
       alt: "Save a version of markdown text",
       disabled:
         //(focusMode === false ? true : false) &&
-        editingStatus === "idle" ? true : false,
+        markdownText.length === 0
+          ? true
+          : false && editingStatus === "idle"
+          ? true
+          : false,
       eventHandler: () => {
         saveContentIntoHistoryStore(fileId);
       },
@@ -87,7 +87,7 @@ const FormattingToolbarItems = ({
       disabled:
         //(focusMode === false ? true : false) &&
         editingStatus === "idle" ? true : false,
-      eventHandler: handleAddmarkdownContentToHistory,
+      eventHandler: null, // () => getFileHistory(fileId),
     },
     {
       label: "CLEAR",
@@ -299,4 +299,4 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(FormattingToolbarItems);
+export default connect(mapState, mapDispatch)(FormattingToolbarItemList);

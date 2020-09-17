@@ -2,10 +2,10 @@ import {
   NEW_FILE_SHOW_FORM,
   NEW_FILE_CLOSE_FORM,
   EDITOR_STATUS_INIT,
-  MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_FILE_CONTENT_NEW,
   MARKDOWN_TEXT_CONTENT_SAVE,
-  MARKDOWN_TEXT_CONTENT_EDIT,
-  MARKDOWN_TEXT_CONTENT_CLEAR,
+  MARKDOWN_FILE_CONTENT_EDIT,
+  MARKDOWN_FILE_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
   TEXT_FORMATTING_APPLIED_H1,
   TEXT_FORMATTING_APPLIED_H2,
@@ -71,7 +71,7 @@ export const createNewMarkdownFile = (fileName) => (dispatch) => {
 
 export const newMarkdownContent = () => {
   return {
-    type: MARKDOWN_TEXT_CONTENT_NEW,
+    type: MARKDOWN_FILE_CONTENT_NEW,
     payload: "new",
   };
 };
@@ -85,7 +85,7 @@ export const saveMarkdownInstantContent = (fileId, content) => (dispatch) => {
 
 export const editMarkdownContent = (content) => {
   return {
-    type: MARKDOWN_TEXT_CONTENT_EDIT,
+    type: MARKDOWN_FILE_CONTENT_EDIT,
     payload: {
       editingStatus: "in progress",
       text: content,
@@ -95,7 +95,7 @@ export const editMarkdownContent = (content) => {
 
 export const clearMarkdownContent = () => {
   return {
-    type: MARKDOWN_TEXT_CONTENT_CLEAR,
+    type: MARKDOWN_FILE_CONTENT_CLEAR,
     payload: "",
   };
 };

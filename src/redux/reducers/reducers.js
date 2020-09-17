@@ -7,11 +7,11 @@ import {
   MARKDOWN_STORE_FILE_CONTENT,
   MARKDOWN_STORE_FILE_TO_HISTORY,
   EDITOR_STATUS_INIT,
-  MARKDOWN_TEXT_CONTENT_NEW,
+  MARKDOWN_FILE_CONTENT_NEW,
   MARKDOWN_TEXT_CONTENT_SAVE,
-  MARKDOWN_TEXT_CONTENT_EDIT,
+  MARKDOWN_FILE_CONTENT_EDIT,
   MARKDOWN_TEXT_CONTENT_COPY,
-  MARKDOWN_TEXT_CONTENT_CLEAR,
+  MARKDOWN_FILE_CONTENT_CLEAR,
   MARKDOWN_TEXT_SELECTION,
   TEXT_FORMATTING_APPLIED_H1,
   TEXT_FORMATTING_APPLIED_H2,
@@ -67,6 +67,7 @@ export const markdownStore = (state = initStateOfMarkdownStore, action) => {
         ...state,
         fileName: action.payload,
       };
+
     default:
       return state;
   }
@@ -75,6 +76,9 @@ export const markdownStore = (state = initStateOfMarkdownStore, action) => {
 let initStateOfMarkdownFile = {
   editingStatus: "idle", //'InProgress',
   markdownText: "",
+  fileCurrentVersion: null,
+  fileHistory: null,
+  showTimeMachine: false,
 };
 
 export const markdownFile = (state = initStateOfMarkdownFile, action) => {
@@ -84,18 +88,18 @@ export const markdownFile = (state = initStateOfMarkdownFile, action) => {
         ...state,
         editingStatus: action.payload,
       };
-    case MARKDOWN_TEXT_CONTENT_NEW:
+    case MARKDOWN_FILE_CONTENT_NEW:
       return {
         ...state,
         editingStatus: action.payload,
       };
-    case MARKDOWN_TEXT_CONTENT_EDIT:
+    case MARKDOWN_FILE_CONTENT_EDIT:
       return {
         ...state,
         editingStatus: action.payload.editingStatus,
         markdownText: action.payload.text,
       };
-    case MARKDOWN_TEXT_CONTENT_CLEAR:
+    case MARKDOWN_FILE_CONTENT_CLEAR:
       return {
         ...state,
         markdownText: action.payload,
@@ -165,6 +169,12 @@ export const markdownFile = (state = initStateOfMarkdownFile, action) => {
         ...state,
         markdownText: action.payload,
       };
+    case MARKDOWN_STORE_FILE_TO_HISTORY:
+      return {
+        ...state,
+        fileCurrentVersion: action.payload,
+      };
+
     default:
       return state;
   }

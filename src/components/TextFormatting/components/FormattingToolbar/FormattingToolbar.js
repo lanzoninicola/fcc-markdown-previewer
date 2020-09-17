@@ -1,6 +1,6 @@
 import React from "react";
 import "./FormattingToolbar.css";
-import FormattingToolbarItems from "./FormattingToolbarItems/FormattingToolbarItems";
+import FormattingToolbarItemList from "../FormattingToolbarItemList/index";
 
 const FormattingToolbar = ({
   screenWidth,
@@ -17,7 +17,7 @@ const FormattingToolbar = ({
       className={`toolbarArea ${focusMode && "toolbarArea-focusMode"}`}
     >
       <div id="toolbar" className="toolbar">
-        <FormattingToolbarItems
+        <FormattingToolbarItemList
           focusMode={focusMode}
           handleNewmarkdownContent={handleNewmarkdownContent}
           handleAddmarkdownContentToHistory={handleAddmarkdownContentToHistory}

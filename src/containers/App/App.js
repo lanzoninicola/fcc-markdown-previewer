@@ -5,9 +5,7 @@ import PreviewPanel from "../PreviewPanel/PreviewPanel";
 import EditorPanel from "../EditorPanel/EditorPanel";
 import Header from "../../components/Header/Header";
 import Dashboard from "../../components/Dashboard/Dashboard";
-import FormattingToolbar from "../../components/FormattingToolbar/FormattingToolbar";
-import FormInsertImage from "../../components/FormInsertImage/FormInsertImage";
-import FormInsertLink from "../../components/FormInsertLink/FormInsertLink";
+import FormattingToolbar from "../../components/TextFormatting/components/FormattingToolbar/index";
 import {
   openFullscreen,
   closeFullscreen,
@@ -17,7 +15,7 @@ import {
 import { initializeApplication } from "../../redux/actionsCreators/globalActions";
 
 import { connect } from "react-redux";
-import FormNewFile from "../../components/FormNewFile/FormNewFile";
+import Overlay from "../../components/Overlay/Overlay";
 
 class App extends Component {
   constructor(props) {
@@ -72,28 +70,14 @@ class App extends Component {
   };
 
   render() {
-    const {
-      screenWidth,
-      markdownText,
-      markdownVersionsHistory,
-      lastmarkdownVersion,
-      versionSelectedFromHistory,
-      focusMode,
-    } = this.state;
+    const { screenWidth, markdownText, focusMode } = this.state;
 
     return (
       <Fragment>
-        {this.props.showFormInsertFile && <FormNewFile />}
-        {this.props.showFormInsertImage && <FormInsertImage />}
-        {this.props.showFormInsertLink && <FormInsertLink />}
+        <Overlay />
         {!focusMode && <Header screenWidth={screenWidth} />}
         {/* <div className="container" style={{ flexDirection: (screenWidth <= 1366) ? "column" : "row" }}> */}
-        <FormattingToolbar
-          screenWidth={screenWidth}
-          handleAddmarkdownContentToHistory={
-            this.handleAddmarkdownContentToHistory
-          }
-        />
+        <FormattingToolbar screenWidth={screenWidth} />
         <div className="container">
           {!focusMode && <Dashboard text={markdownText} />}
         </div>
@@ -118,25 +102,10 @@ class App extends Component {
   }
 }
 
-const mapState = (state) => {
-  const { markdownStore, markdownImage, markdownLink } = state;
-  const { showFormInsertImage } = markdownImage;
-  const { showFormInsertLink } = markdownLink;
-  const { showFormInsertFile } = markdownStore;
-
-  //  console.log("app - mapState - state", markdownImage);
-
-  return {
-    showFormInsertImage,
-    showFormInsertLink,
-    showFormInsertFile,
-  };
-};
-
 const mapDispatch = (dispatch) => {
   return {
     initializeApplication: () => dispatch(initializeApplication()),
   };
 };
 
-export default connect(mapState, mapDispatch)(App);
+export default connect(null, mapDispatch)(App);

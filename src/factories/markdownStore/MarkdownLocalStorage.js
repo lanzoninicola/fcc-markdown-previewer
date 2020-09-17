@@ -114,6 +114,7 @@ export const markdownLocalStorage = (name) => {
         ...newFileHistoryData[fileId].versionsContent,
         [nextVersion]: {
           content: contentToStore,
+          name: `Version of ${today}`,
           saved_at: today,
         },
       };
@@ -121,6 +122,16 @@ export const markdownLocalStorage = (name) => {
       markdownLocalStore.filesHistory = newFileHistoryData;
 
       localStorage.setValue(markdownLocalStore);
+
+      return nextVersion;
+    },
+    getFilesHistory: (fileId) => {
+      const markdownLocalStore = localStorage.getValue();
+
+      const fileHistory =
+        markdownLocalStore.filesHistory[fileId].versionsContent;
+
+      return Object.entries(fileHistory);
     },
   };
 };
@@ -156,15 +167,15 @@ export const markdownLocalStorage = (name) => {
 //   filesHistory: {
 //     uid1: {
 //       versionsNumber: [0, 1, 2, 3, 4],
-//       versionsContent: {
-//         0: {
-//           content: 'lorem ipsum idioma',
-//           saved_at: ''
-//         },
-//         1: {
-//           content: 'lorem ipsum idioma addade',
-//           saved_at: ''
-//         },
+// versionsContent: {
+//   0: {
+//     content: 'lorem ipsum idioma',
+//     saved_at: ''
+//   },
+//   1: {
+//     content: 'lorem ipsum idioma addade',
+//     saved_at: ''
+//   },
 //       },
 //     },
 //     uid2: {
