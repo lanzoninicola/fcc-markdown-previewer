@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import Form from "../Form/Form";
 
 import { connect } from "react-redux";
-
+/* urra */
 import {
   setImageDescription,
   setImageURL,
