@@ -1,16 +1,15 @@
 import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../Button/Button";
-import Form from "../Form/Form";
+import Button from "../../../Button/Button";
+import Form from "../../../Form/Form";
 
 import { connect } from "react-redux";
 
-import {
-  createNewMarkdownFile,
-  closeFormToCreateNewFile,
-} from "../../redux/actionsCreators/globalActions";
+import { closeFormToCreateNewFile } from "../../../../redux/actionsCreators/textFormatting/textFormattingActions";
 
-import { setFileName } from "../../redux/actionsCreators/markdownStoreActions";
+import { createNewMarkdownFile } from "../../../../redux/actionsCreators/globalActions";
+
+import { setFileName } from "../../../../redux/actionsCreators/markdownStore/markdownStoreActions";
 
 const FormNewFile = ({ ...props }) => {
   const {

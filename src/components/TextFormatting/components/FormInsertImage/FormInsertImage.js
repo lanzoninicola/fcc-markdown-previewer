@@ -1,7 +1,7 @@
 import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../Button/Button";
-import Form from "../Form/Form";
+import Button from "../../../Button/Button";
+import Form from "../../../Form/Form";
 
 import { connect } from "react-redux";
 /* urra */
@@ -10,7 +10,7 @@ import {
   setImageURL,
   addingImage,
   closeFormToInsertImage,
-} from "../../../../redux/actionsCreators/globalActions";
+} from "../../../../redux/actionsCreators/textFormatting/textFormattingActions";
 
 const FormInsertImage = ({ ...props }) => {
   const {

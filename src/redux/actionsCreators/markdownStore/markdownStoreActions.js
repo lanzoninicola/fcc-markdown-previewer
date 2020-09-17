@@ -1,13 +1,13 @@
-import { MARKDOWN_EDITOR_STORE } from "../../config/localStore";
+import { MARKDOWN_EDITOR_STORE } from "../../../config/localStore";
 import {
   MARKDOWN_STORE_NEW,
   MARKDOWN_STORE_FILE_NEWID,
   MARKDOWN_STORE_FILE_NEWNAME,
   MARKDOWN_STORE_FILE_CONTENT,
   MARKDOWN_STORE_FILE_TO_HISTORY,
-} from "../actions/actions";
+} from "../../actions/actions";
 
-import { markdownLocalStore } from "../../factories/markdownStore/MarkdownLocalStore";
+import { markdownLocalStore } from "../../../factories/markdownStore/MarkdownLocalStore";
 const markdownStorage = markdownLocalStore(MARKDOWN_EDITOR_STORE);
 
 export const createMarkdownEditorStore = () => {

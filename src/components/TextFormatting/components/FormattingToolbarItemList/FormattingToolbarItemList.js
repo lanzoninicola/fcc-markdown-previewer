@@ -3,7 +3,6 @@ import FormattingToolbarItem from "../FormattingToolbarItem/FormattingToolbarIte
 
 import {
   showFormToCreateNewFile,
-  clearMarkdownContent,
   setH1,
   setH2,
   setH3,
@@ -17,9 +16,11 @@ import {
   setNumbers,
   showFormToInsertImage,
   setTable,
-} from "../../../../redux/actionsCreators/globalActions";
+} from "../../../../redux/actionsCreators/textFormatting/textFormattingActions";
 
-import { saveContentIntoHistoryStore } from "../../../../redux/actionsCreators/markdownStoreActions";
+import { clearMarkdownContent } from "../../../../redux/actionsCreators/globalActions";
+
+import { saveContentIntoHistoryStore } from "../../../../redux/actionsCreators/markdownStore/markdownStoreActions";
 import { connect } from "react-redux";
 
 const FormattingToolbarItemList = ({

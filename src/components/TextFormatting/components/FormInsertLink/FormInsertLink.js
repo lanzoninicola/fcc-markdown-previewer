@@ -1,7 +1,7 @@
 import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../Button/Button";
-import Form from "../Form/Form";
+import Button from "../../../Button/Button";
+import Form from "../../../Form/Form";
 
 import { connect } from "react-redux";
 
@@ -9,7 +9,7 @@ import {
   setURL,
   addingLink,
   closeFormToInsertLink,
-} from "../../redux/actionsCreators/globalActions";
+} from "../../../../redux/actionsCreators/textFormatting/textFormattingActions";
 
 const FormInsertLink = ({ ...props }) => {
   const { url, setURL, addingLink, closeFormToInsertLink, fileId } = props;
