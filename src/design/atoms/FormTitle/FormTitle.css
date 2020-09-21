@@ -1,0 +1,13 @@
+#form-title {
+  text-align: center;
+  font-family: "Hind", Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+#form-subtitle {
+  font-family: "Hind", Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+}

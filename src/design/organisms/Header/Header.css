@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255, 1);
+  /* background-color: #006D77; */
+  /* background: rgb(0,109,119); */
+  /* background: linear-gradient(90deg, rgba(0, 109, 119,1) 45%, rgba(1,118,189,1) 100%); */
+  /* background: linear-gradient(90deg,  rgb(0,0,0, 0.4) 2%, rgba(0,109,119,0.7) 50%, rgba(0,0,0,0.4) 98%); */
+  height: 55px;
+}
+
+.header-anchor {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}

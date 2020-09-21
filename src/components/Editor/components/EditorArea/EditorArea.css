@@ -1,0 +1,40 @@
+#editor {
+  box-sizing: border-box;
+  border: none;
+  width: 100%;
+  height: 100vh;
+  background-color: #fbfbfb;
+  border-radius: 0.7%;
+  /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
+}
+
+#editor-area {
+  display: flex;
+  flex-direction: row;
+  /* padding: 20px; */
+  padding-left: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#text-area {
+  width: 100%;
+}
+
+textarea {
+  /* width: 100%; */
+  resize: none;
+  font-family: "Roboto Slab", "Courier New", Courier, monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+textarea::placeholder {
+  font-size: 16px;
+}
+
+#editor:focus {
+  outline: none;
+  /* border: solid 2px #6E7E85; */
+}

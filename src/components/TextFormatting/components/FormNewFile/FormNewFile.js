@@ -1,7 +1,9 @@
-import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../../../Button/Button";
-import Form from "../../../Form/Form";
+import FormTitle from "../../../../design/atoms/FormTitle/index";
+import TextInput from "../../../../design/atoms/TextInput/index";
+import Form from "../../../../design/molecules/Form/Form";
+import ButtonSecondary from "../../../../design/atoms/ButtonSecondary/index";
+import ButtonPrimary from "../../../../design/atoms/ButtonPrimary/index";
 
 import { connect } from "react-redux";
 
@@ -21,34 +23,30 @@ const FormNewFile = ({ ...props }) => {
 
   return (
     <Fragment>
-      <Form
-        title={"NEW MARKDOWN FILE"}
-        inputs={[
-          {
+      <Form>
+        <FormTitle title={"NEW MARKDOWN FILE"} />
+        <TextInput
+          input={{
             value: fileName,
             placeholder: "Give a unique name to your new file...",
             label: "File name",
             onChangeEventHandler: setFileName,
             required: true,
-          },
-        ]}
-      >
-        ,
-        <Button
-          type="primary"
-          eventHandler={() => createNewMarkdownFile(fileName)}
+          }}
+        />
+        <ButtonPrimary
+          onClickEventHandler={() => createNewMarkdownFile(fileName)}
           disabled={!fileName ? true : false}
         >
           OK
-        </Button>
-        <Button
-          type="secondary"
-          eventHandler={() => {
+        </ButtonPrimary>
+        <ButtonSecondary
+          onClickEventHandler={() => {
             closeFormToCreateNewFile();
           }}
         >
           CLOSE
-        </Button>
+        </ButtonSecondary>
       </Form>
     </Fragment>
   );

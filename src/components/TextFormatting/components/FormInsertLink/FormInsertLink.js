@@ -1,7 +1,7 @@
 import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../../../Button/Button";
-import Form from "../../../Form/Form";
+import Button from "../../../../design/atoms/Button/index";
+import Form from "../../../../design/molecules/Form/Form";
 
 import { connect } from "react-redux";
 
@@ -30,8 +30,8 @@ const FormInsertLink = ({ ...props }) => {
       >
         ,
         <Button
-          type="primary"
-          eventHandler={() =>
+          color="primary"
+          onClickEventHandler={() =>
             addingLink(
               fileId,
               {
@@ -47,7 +47,10 @@ const FormInsertLink = ({ ...props }) => {
         >
           OK
         </Button>
-        <Button type="secondary" eventHandler={() => closeFormToInsertLink()}>
+        <Button
+          color="secondary"
+          onClickEventHandler={() => closeFormToInsertLink()}
+        >
           CLOSE
         </Button>
       </Form>

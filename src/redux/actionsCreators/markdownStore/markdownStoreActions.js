@@ -1,4 +1,3 @@
-import { MARKDOWN_EDITOR_STORE } from "../../../config/localStore";
 import {
   MARKDOWN_STORE_NEW,
   MARKDOWN_STORE_FILE_NEWID,
@@ -8,7 +7,9 @@ import {
 } from "../../actions/actions";
 
 import { markdownLocalStore } from "../../../factories/markdownStore/MarkdownLocalStore";
-const markdownStorage = markdownLocalStore(MARKDOWN_EDITOR_STORE);
+import { MARKDOWN_STORE_CONFIG } from "../../../config/localStore";
+
+const markdownStorage = markdownLocalStore(MARKDOWN_STORE_CONFIG().name());
 
 export const createMarkdownEditorStore = () => {
   markdownStorage.initStore();

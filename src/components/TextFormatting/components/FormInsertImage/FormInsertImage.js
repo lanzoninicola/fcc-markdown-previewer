@@ -1,7 +1,7 @@
 import { checkPropTypes } from "prop-types";
 import React, { Fragment } from "react";
-import Button from "../../../Button/Button";
-import Form from "../../../Form/Form";
+import Button from "../../../../design/atoms/Button/index";
+import Form from "../../../../design/molecules/Form/Form";
 
 import { connect } from "react-redux";
 /* urra */
@@ -46,8 +46,8 @@ const FormInsertImage = ({ ...props }) => {
       >
         ,
         <Button
-          type="primary"
-          eventHandler={() =>
+          color="primary"
+          onClickEventHandler={() =>
             addingImage(
               fileId,
               {
@@ -63,7 +63,10 @@ const FormInsertImage = ({ ...props }) => {
         >
           OK
         </Button>
-        <Button type="secondary" eventHandler={() => closeFormToInsertImage()}>
+        <Button
+          color="secondary"
+          onClickEventHandler={() => closeFormToInsertImage()}
+        >
           CLOSE
         </Button>
       </Form>
@@ -99,32 +102,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(FormInsertImage);
-
-/*
-
-
-  setImage = () => {
-    const { markdownText } = this.state;
-    const { startSelection, endSelection } = this.state.textSelection;
-
-    let textToFormat = [];
-    textToFormat.push(...markdownText.split(""))
-    let markdownTextPostFormatting = '';
-
-    let imagemarkdownText = `![${this.state.markdownImageDescription}](${this.state.markdownImageURL})`;
-
-    textToFormat.splice(endSelection, 0, "");
-    textToFormat.splice(startSelection, 0, imagemarkdownText);
-    markdownTextPostFormatting = textToFormat.join("");
-
-    setmarkdownTextLog(markdownTextPostFormatting);
-
-    this.setState(
-      {
-        markdownText: markdownTextPostFormatting,
-        showFormInsertImage: false
-      }
-    )
-  }
-  
-*/

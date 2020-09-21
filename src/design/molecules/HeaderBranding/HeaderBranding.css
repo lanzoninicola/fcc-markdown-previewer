@@ -1,0 +1,28 @@
+.header-branding {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.header-branding-logo {
+  max-width: 29px;
+}
+
+#appname {
+  margin: 0px;
+  padding: 5px;
+  color: #006d77;
+  font-family: "Hind", Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 600px) {
+  #appname {
+    font-size: 0.8rem;
+    width: 50px;
+    line-height: 1rem;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import "./FormattingToolbarItem.css";
-import SvgIcon from "../../../SvgIcon/SvgIcon";
+import SvgIcon from "../../../../design/atoms/SvgIcon/index";
 
 const FormattingToolbarItem = ({ label, icon, disabled, eventHandler }) => {
   let showLabel = false;
