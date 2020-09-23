@@ -1,12 +1,15 @@
+import validate from "../../../validation/core/validate";
+
 function themeFactory(palette = {}) {
   let themeLoaded = {
     ...palette,
   };
 
   //
-  // Color module
+  //  Color module
+  //  The "color" function returns relative color from the global palette
   //
-  function color(schema = "", palette = {}) {
+  function getGlobalPalette(schema = "", palette = {}) {
     if (palette !== undefined || palette !== null) {
       themeLoaded = {
         ...themeLoaded,
@@ -18,11 +21,7 @@ function themeFactory(palette = {}) {
       return themeLoaded["palette"];
     }
 
-    if (schema && typeof schema !== "string") {
-      throw new Error(
-        'themeFactory() - color(): The "schema" parameter must be a "string". Eg. "primary" or "secondary"...'
-      );
-    }
+    validate("getGlobalPalette").input().args(schema, palette);
 
     const isSchemaExists = () => {
       return Object.keys(themeLoaded["palette"]).includes(schema);
@@ -31,12 +30,11 @@ function themeFactory(palette = {}) {
     if (schema && !isSchemaExists()) {
       let schemaAvailable = Object.keys(themeLoaded["palette"]).join(", ");
       throw new Error(
-        `themeFactory() - color(): Schema "${schema}" not found... You have choose between these: "${schemaAvailable}"`
+        `themeFactory() - getGlobalPalette(): Schema "${schema}" not found... You have choose between these: "${schemaAvailable}"`
       );
     }
 
     function luminance(value) {
-      //console.log('luminance - themeLoaded', themeLoaded['palette'][schema]);
       const defaultLuminance = "dark";
 
       if (!value) {
@@ -50,81 +48,92 @@ function themeFactory(palette = {}) {
     };
   }
 
-  // Component Palette Module
+  //
+  //  COMPONENT PALETTE MODULE
+  //
+  const getComponentTheme = (componentName = "") => {
+    validate("getComponentTheme").input().args(componentName);
 
-  const componentPalette = (name = "") => {
-    if (typeof name !== "string") {
+    if (componentName !== "" && !themeLoaded["components"][componentName]) {
       throw new Error(
-        'themeFactory() - componensPalette(): Name parameter must be a "string". Eg. "button", "text"...'
+        `themeFactory() - getComponentTheme(): The component "${componentName}" is not defined inside the theme object and "components" node. Maybe, you have misspelled the component name.`
       );
     }
 
-    if (!themeLoaded["components"][name]) {
-      throw new Error(
-        `themeFactory() - componensPalette(): The component "${name}" is not defined inside the theme object and "components" node. Maybe, you have misspelled the component name.`
-      );
-    }
+    const component = themeLoaded["components"][componentName];
 
-    const component = themeLoaded["components"][name];
-
+    //
     const getListOfComponentsInsideTheme = () => {
       return themeLoaded["components"];
     };
 
-    const colorComponent = (schema = "") => {
-      if (typeof schema !== "string") {
+    //
+    const getComponentClasses = (classesName = "") => {
+      validate("getComponentClasses").input().args(classesName);
+
+      // default values
+      if (typeof classesName === "string") {
+        classesName = "";
+      }
+
+      if (classesName !== "" && !component["classes"][classesName]) {
         throw new Error(
-          'themeFactory() - colorComponent(): The "schema" parameter must be a string. Eg. "primary" or "secondary"...'
+          `themeFactory - getComponentClasses(): The classesName "${classesName}" for the component "${componentName}" has not been defined.`
         );
       }
 
-      if (!schema || !component[schema]) {
-        throw new Error(
-          `themeFactory - colorComponent(): The color schema "${schema}" for the component "${name}" has not been defined.`
-        );
-      }
+      let componentClassSelectors = component["classes"][classesName];
 
-      let componentSchemaColors = component[schema];
-
-      const getComponentCSSSelectorList = () => {
-        return Object.keys(componentSchemaColors);
+      const getComponentCSSSelectorsValues = () => {
+        return componentClassSelectors;
       };
 
-      const getColorForEachComponentCSSSelector = () => {
-        let obj = {};
-        let componentSelectors = selectors();
-        componentSelectors.forEach((selector) => {
-          let selectorColor = null;
-          if (typeof componentSchemaColors[selector] === "function") {
-            selectorColor = componentSchemaColors[selector]();
-          } else {
-            selectorColor = componentSchemaColors[selector];
-          }
-
-          obj = { ...obj, [selector]: selectorColor };
-        });
-        return obj;
-      };
-
-      let colorComponentAPIs = {};
-
-      if (schema) {
-        colorComponentAPIs = {
-          ...colorComponentAPIs,
-          selectors: () => getComponentCSSSelectorList(),
-          colorSelectors: () => getColorForEachComponentCSSSelector(),
-        };
+      if (classesName !== "") {
+        return getComponentCSSSelectorsValues();
       }
-
-      return colorComponentAPIs;
+      if (classesName === "") {
+        return component["classes"];
+      }
     };
 
-    let componentAPIs = { components: () => getListOfComponentsInsideTheme() };
+    //
+    const ifElse = (condition) => {
+      validate("ifElse").input().args(condition);
 
-    if (name) {
+      const getComponentClassIfConditionIsTruthy = (classesName) => {
+        const classTruthy = getComponentClasses(classesName);
+
+        const getComponentClassIfConditionIsFalsy = (classesName) => {
+          const classFalsy = getComponentClasses(classesName);
+
+          return condition ? classTruthy : classFalsy;
+        };
+
+        return {
+          else: (classesName) =>
+            getComponentClassIfConditionIsFalsy(classesName),
+        };
+      };
+
+      return {
+        then: (classesName) =>
+          getComponentClassIfConditionIsTruthy(classesName),
+      };
+    };
+
+    let componentAPIs = {};
+
+    if (componentName !== "") {
       componentAPIs = {
         ...componentAPIs,
-        color: (schema) => colorComponent(schema),
+        classes: (classesName) => getComponentClasses(classesName),
+        ifElse: (condition) => ifElse(condition),
+      };
+    }
+
+    if (componentName === "") {
+      componentAPIs = {
+        componentList: Object.keys(getListOfComponentsInsideTheme()),
       };
     }
 
@@ -133,8 +142,8 @@ function themeFactory(palette = {}) {
 
   return {
     show: () => themeLoaded,
-    color: (schema, palette) => color(schema, palette),
-    component: (name) => componentPalette(name),
+    color: (schema, palette) => getGlobalPalette(schema, palette),
+    component: (componentName) => getComponentTheme(componentName),
   };
 }
 
@@ -188,8 +197,10 @@ export default themeFactory;
 
 // Retrieve component selectors handles by themeFactory
 //
-// themeFactory(standard).component('button').color('primary').selectors();
+// themeFactory(standard).component('button').class()
 
 // Retrive colors of all component selectors based on schema
 //
-// themeFactory(standard).component('button').color('primary').colorSelectors();
+// appTheme.component('button').class('primary');
+
+// appTheme.component('button').ifElse(condition).then('primary').else('disabled');

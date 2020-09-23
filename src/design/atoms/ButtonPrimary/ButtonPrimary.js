@@ -19,23 +19,18 @@ const ButtonPrimary = ({ ...props }) => {
   //   this.themePaletteGlobal
   // );
 
-  const themeStyle = appTheme
-    .component("button")
-    .color("primary")
-    .colorSelectors();
+  // const themeStyle = appTheme
+  //   .component("button")
+  //   .ifElse(props.disabled)
+  //   .then("primary")
+  //   .else("disabled");
 
-  //const themeStyle = appTheme().color().color().color();
-  console.log(themeStyle);
+  // //const themeStyle = appTheme().color().color().color();
+  // console.log(themeStyle);
 
   return (
     <div>Hello workd</div>
-    // <Button
-    //   {...props}
-    //   style={{
-    //     ...themeStyle,
-
-    //   }}
-    // >
+    // <Button {...props} className={{ backgroundColor: "red" }}>
     //   {props.children}
     // </Button>
   );

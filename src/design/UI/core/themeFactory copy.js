@@ -65,7 +65,7 @@ function themeFactory(palette = {}) {
 
     if (name === "") {
       throw new Error(
-        'themeFactory() - componensPalette(): Function needs a parameter with the name of component choosed in the "componentsColorsPalette()" function.'
+        'themeFactory() - componensPalette(): Function needs a parameter with the name of component choosed in the "componentsColorPalettes()" function.'
       );
     }
 

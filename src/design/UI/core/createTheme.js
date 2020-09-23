@@ -1,21 +1,23 @@
 import themeFactory from "./themeFactory";
 
-import ValidationInputOf from "../validation/index";
+import validate from "../../../validation/index";
 
-const createTheme = (colorsPalette, componentsColorsPalette) => {
-  ValidationInputOf().colorsPalette(colorsPalette);
+const createTheme = (colorPalettes, componentsColorPalettes) => {
+  validate("createTheme").input().args(colorPalettes, componentsColorPalettes);
 
-  const userPalette = colorsPalette();
+  const userPalette = colorPalettes();
+  validate("colorPalettes").output().currentOutput(userPalette);
 
   let componentsWithColors = {};
 
-  if (componentsColorsPalette) {
-    ValidationInputOf().componentColorsPalette(componentsColorsPalette);
-
+  if (componentsColorPalettes) {
     let themeColorFn = themeFactory().color;
     let themeColorFnWithPalette = (schema) => themeColorFn(schema, userPalette);
 
-    componentsWithColors = componentsColorsPalette(themeColorFnWithPalette);
+    componentsWithColors = componentsColorPalettes(themeColorFnWithPalette);
+    validate("componentsColorPalettes")
+      .output()
+      .currentOutput(componentsWithColors);
   }
 
   const globalPalette = {

@@ -1,10 +1,10 @@
 import createTheme from "./core/createTheme";
 
 import {
-  colorsPalette,
-  componentsColorsPalette,
+  colorPalettes,
+  componentsColorPalettes,
 } from "./themes/defaultTheme/defaultTheme";
 
-const appTheme = createTheme(colorsPalette, componentsColorsPalette);
+const appTheme = createTheme(colorPalettes, componentsColorPalettes);
 
 export default appTheme;

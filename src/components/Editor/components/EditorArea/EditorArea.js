@@ -1,4 +1,4 @@
-import React, { Component, Fragment, forwardRef } from "react";
+import React, { Component, Fragment } from "react";
 import "./EditorArea.css";
 
 import { connect } from "react-redux";
