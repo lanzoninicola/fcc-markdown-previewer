@@ -24,12 +24,12 @@ export const markdownLocalStore = (name) => {
       markdownStore.saveContent(stringFileId, content);
     },
     storeFileContentToHistory: (fileId) => {
-      console.log(
-        "markdownLocalStore - storeFileContentHistory - fileId",
-        fileId
-      );
       let stringFileId = markdownStore.getIdtoString(fileId);
       markdownStore.addToHistory(stringFileId);
+    },
+    showFileHistory: (fileId) => {
+      let stringFileId = markdownStore.getIdtoString(fileId);
+      return markdownStore.getFilesHistory(stringFileId);
     },
   };
 };

@@ -1,0 +1,46 @@
+#dotchart {
+  width: auto;
+}
+
+#dotchart-title {
+  margin-top: -4px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  font-family: "Hind", Helvetica, sans-serif;
+  font-size: 0.7rem;
+  color: white;
+}
+
+#dotchart-bar {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.foo {
+  background-color: green;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dotchart-item-small {
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+}
+
+.dotchart-item-medium {
+  width: 30px;
+  height: 30px;
+  margin-left: 6px;
+}
+
+.dotchart-item-large {
+  width: 60px;
+  height: 60px;
+  margin-left: 12px;
+}

@@ -1,0 +1,12 @@
+.header-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.header-toolbar-items {
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+  padding-left: 5px;
+}

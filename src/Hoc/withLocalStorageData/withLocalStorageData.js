@@ -9,9 +9,9 @@ const withLocalStorageData = (WrappedComponent) => {
       this.state = {
         globalLocalStorage: new GlobalLocalStorage(),
         localStorageData: {
-          localStorageSpaceUsedInByte: 0,
-          localStorageFreeSpaceInByte: 0,
-          localStorageFreeSpaceInPercentage: "",
+          spaceUsedInByte: 0,
+          freeSpaceInByte: 0,
+          freeSpaceInPercentage: "",
         },
         lastRefreshedDate: null,
       };
@@ -24,9 +24,9 @@ const withLocalStorageData = (WrappedComponent) => {
         ...this.state,
         localStorageData: {
           ...this.state.localStorageData,
-          localStorageSpaceUsedInByte: globalLocalStorage.getSpaceUsedInByte(),
-          localStorageFreeSpaceInByte: globalLocalStorage.getFreeSpaceInByte(),
-          localStorageFreeSpaceInPercentage: globalLocalStorage.getFreeSpaceInPercentage(),
+          spaceUsedInByte: globalLocalStorage.getSpaceUsedInByte(),
+          freeSpaceInByte: globalLocalStorage.getFreeSpaceInByte(),
+          freeSpaceInPercentage: globalLocalStorage.getFreeSpaceInPercentage(),
         },
       });
     }
@@ -44,9 +44,9 @@ const withLocalStorageData = (WrappedComponent) => {
         ...this.state,
         localStorageData: {
           ...this.state.localStorageData,
-          localStorageSpaceUsedInByte: globalLocalStorage.getSpaceUsedInByte(),
-          localStorageFreeSpaceInByte: globalLocalStorage.getFreeSpaceInByte(),
-          localStorageFreeSpaceInPercentage: globalLocalStorage.getFreeSpaceInPercentage(),
+          spaceUsedInByte: globalLocalStorage.getSpaceUsedInByte(),
+          freeSpaceInByte: globalLocalStorage.getFreeSpaceInByte(),
+          freeSpaceInPercentage: globalLocalStorage.getFreeSpaceInPercentage(),
         },
         lastRefreshedDate: new Date(),
       });

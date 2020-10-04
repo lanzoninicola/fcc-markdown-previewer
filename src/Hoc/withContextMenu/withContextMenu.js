@@ -1,72 +1,62 @@
-import React from 'react';
-import './withContextMenu.css'
-import ContextMenu from '../../components/ContextMenu/ContextMenu'
+import React from "react";
+import "./withContextMenu.css";
+import ContextMenu from "../../design/atoms/ContextMenu/index";
 
-const withContextMenu = (
-    ContextMenuContent,
-    contextMenuConfig = {}
-) => (WrappedComponent,
-    wrappedComponentConfig = {}
+const withContextMenu = (ContextMenuContent, contextMenuConfig = {}) => (
+  WrappedComponent,
+  wrappedComponentConfig = {}
 ) => {
+  return class withContextMenu extends React.PureComponent {
+    constructor(props) {
+      super(props);
 
-        return (
-            class withContextMenu extends React.PureComponent {
-                constructor(props) {
-                    super(props)
-
-                    this.state = {
-                        showContextMenu: false,
-                        contextMenuConfig: {},
-                        wrappedComponentConfig: {}
-                    }
-                }
-
-                componentDidMount() {
-                    this.setState({
-                        ...this.state,
-                        contextMenuConfig: {
-                            ...contextMenuConfig
-                        },
-                        wrappedComponentConfig: {
-                            ...wrappedComponentConfig
-                        }
-                    })
-                }
-
-                handleOpenContextMenu = () => {
-                    this.setState({ showContextMenu: !this.state.showContextMenu })
-                }
-
-                render() {
-
-                    const { showContextMenu, contextMenuConfig, wrappedComponentConfig } = this.state;
-
-                    return (
-                        <div id="wrapper-context-menu">
-                            <WrappedComponent
-                                handleOnClickEvent={this.handleOpenContextMenu}
-                                showContextMenu={showContextMenu}
-                                config={wrappedComponentConfig}
-                                {...this.props} />
-                            {showContextMenu &&
-
-                                <ContextMenu
-                                    config={contextMenuConfig}
-                                    {...this.props}
-                                >
-                                    {(ContextMenuContent) &&
-                                        <ContextMenuContent {...this.props} />}
-                                </ContextMenu>}
-                        </div>
-                    )
-                }
-            }
-        )
-
+      this.state = {
+        showContextMenu: false,
+        contextMenuConfig: {},
+        wrappedComponentConfig: {},
+      };
     }
 
+    componentDidMount() {
+      this.setState({
+        ...this.state,
+        contextMenuConfig: {
+          ...contextMenuConfig,
+        },
+        wrappedComponentConfig: {
+          ...wrappedComponentConfig,
+        },
+      });
+    }
+
+    handleOpenContextMenu = () => {
+      this.setState({ showContextMenu: !this.state.showContextMenu });
+    };
+
+    render() {
+      const {
+        showContextMenu,
+        contextMenuConfig,
+        wrappedComponentConfig,
+      } = this.state;
+
+      return (
+        <div id="wrapper-context-menu">
+          <WrappedComponent
+            handleOnClickEvent={this.handleOpenContextMenu}
+            showContextMenu={showContextMenu}
+            config={wrappedComponentConfig}
+            {...this.props}
+          />
+          {showContextMenu && (
+            <ContextMenu {...this.props}>
+              {ContextMenuContent && <ContextMenuContent {...this.props} />}
+            </ContextMenu>
+          )}
+        </div>
+      );
+    }
+  };
+};
+
 export default withContextMenu;
-
-
-
-

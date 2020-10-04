@@ -1,0 +1,18 @@
+.button {
+  margin-left: 5px;
+  margin-right: 5px;
+  min-width: 140px;
+  height: 40px;
+  border-radius: 50px;
+  font-family: "Hind", Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  .button {
+    min-width: 125px;
+    min-height: 15px;
+  }
+}
