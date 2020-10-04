@@ -19,7 +19,7 @@ const FormattingToolbarItem = ({ label, icon, disabled, eventHandler }) => {
         disabled={disabled}
       >
         <span>
-          <SvgIcon name={icon.name} schema={colorSchema} />
+          <SvgIcon name={icon.name} color={colorSchema} />
         </span>
         {showLabel && <span className="toolbar-label">{label}</span>}
       </button>

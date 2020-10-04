@@ -1,7 +1,7 @@
 export function input(...args) {
   if (args[0] instanceof Function === false) {
     throw new Error(
-      `UI core module: createTheme(): "componentsColorPalettes" must be a function instead of "${typeof args[0]}". Check your in your theme file.`
+      `UI core module: createTheme(): "components" must be a function instead of "${typeof args[0]}". Check your in your theme file.`
     );
   }
 }
@@ -9,7 +9,7 @@ export function input(...args) {
 export function output(outputData) {
   if (outputData !== undefined && typeof outputData !== "object") {
     throw new Error(
-      `UI core module: componentsColorPalettes(): the function must returns an object`
+      `UI core module: components(): the function must returns an object`
     );
   }
 
@@ -17,7 +17,7 @@ export function output(outputData) {
 
   if (userComponentsThemeKeys.length === 0) {
     throw new Error(
-      `UI core module: componentsColorPalettes(): the object returned by the function must contains at least one component. Eg. " button: {} "`
+      `UI core module: components(): the object returned by the function must contains at least one component. Eg. " button: {} "`
     );
   }
 
@@ -29,9 +29,9 @@ export function output(outputData) {
     let keyType = typeof keyValue;
     userComponentsThemeKeysTypeOf.push(keyType);
 
-    let classesNode = Object.keys(outputData[key])[0];
+    let stylesNode = Object.keys(outputData[key])[0];
 
-    if (classesNode === "classes") {
+    if (stylesNode === "styles") {
       userComponentsThemeDeepestKeysNoClassesNode.push(0);
     } else {
       userComponentsThemeDeepestKeysNoClassesNode.push(1);
@@ -44,7 +44,7 @@ export function output(outputData) {
 
   if (keysTypeNoObject.length > 0) {
     throw new Error(
-      `UI core module: componentsColorPalettes(): the object returned by the function must contains at least one component object. Eg. " button: {} "`
+      `UI core module: components(): the object returned by the function must contains at least one component object. Eg. " button: {} "`
     );
   }
 
@@ -54,7 +54,7 @@ export function output(outputData) {
 
   if (deepestKeyNoClassesNode.length > 0) {
     throw new Error(
-      `UI core module: componentsColorPalettes(): each component object must contains the "classes" object. Eg. " button: { classes: {} } "`
+      `UI core module: components(): each component object must contains the "styles" object. Eg. " button: { styles: {} } "`
     );
   }
 }

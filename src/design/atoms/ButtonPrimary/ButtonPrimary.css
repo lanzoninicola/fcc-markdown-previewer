@@ -1,5 +1,7 @@
 .button-primary {
   border: solid 1px;
+  color: rgb(255, 255, 255, 0.7);
+  background-color: rgb(0, 109, 119);
 }
 
 .button-primary:hover {

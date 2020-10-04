@@ -2,30 +2,29 @@ import themeFactory from "./themeFactory";
 
 import validate from "../../../validation/index";
 
-const createTheme = (colorPalettes, componentsColorPalettes) => {
-  validate("createTheme").input().args(colorPalettes, componentsColorPalettes);
+const createTheme = ({ palette = {}, typography = {} }) => {
+  console.log("createTheme fired");
+  // validate("createTheme").input().args(themeConfig); to do
 
-  const userPalette = colorPalettes();
-  validate("colorPalettes").output().currentOutput(userPalette);
+  const userPalette = palette();
+  // validate("palette").output().currentOutput(userPalette);
 
-  let componentsWithColors = {};
+  // const userTheme = new themeFactory(userPalette);
 
-  if (componentsColorPalettes) {
-    let themeColorFn = themeFactory().color;
-    let themeColorFnWithPalette = (schema) => themeColorFn(schema, userPalette);
+  let userTypography = typography();
 
-    componentsWithColors = componentsColorPalettes(themeColorFnWithPalette);
-    validate("componentsColorPalettes")
-      .output()
-      .currentOutput(componentsWithColors);
+  if (typography) {
   }
 
-  const globalPalette = {
+  const designSystemComponents = {
     palette: userPalette,
-    components: componentsWithColors,
+    typography: userTypography,
   };
 
-  return themeFactory(globalPalette);
+  // commented when skipped row 13
+  // userTheme.theme = designSystemComponents;
+
+  return new themeFactory(designSystemComponents);
 };
 
 export default createTheme;

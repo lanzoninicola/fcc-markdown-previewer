@@ -15,44 +15,29 @@ import appTheme from "../../UI/index";
 //   };
 // };
 
-const Container = (props) => {
-  const css = {
-    p: {
-      marginTop: "100px",
-      color: "red",
+const cssFlexColumnCenter = () => {
+  const flexColumnCenter = appTheme.classes({
+    flexColumnCenter: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
-    // flexColumnCenter: {
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   alignItems: "center",
-    //   backgroundColor: "red", //color("primary", "main"),
-    //   _hover: {
-    //     // backgroundColor: color("secondary"),
-    //   },
-    // },
-    // relative: {
-    //   position: "relative",
-    // },
-  };
+  });
 
-  return appTheme.style(css, props);
+  console.log("cssflexColumnCenter()", flexColumnCenter);
+
+  return flexColumnCenter;
 };
 
-/*
+const cssRelative = () => {
+  const relative = appTheme.classes({
+    relative: { position: "relative" },
+  });
 
-<Container></Container>
+  console.log("cssRelative()", relative);
 
-*/
-
-// const cssRelative = () => {
-//   const relative = appTheme.style({
-//     relative: { position: "relative" },
-//   });
-
-//   console.log("cssRelative()", relative);
-
-//   return relative;
-// };
+  return relative;
+};
 
 // const cssDotSize = (props) => {
 //   const { size } = props;
@@ -92,7 +77,7 @@ const Container = (props) => {
 const DotChart = ({ title, data, size, ...props }) => {
   let graphTitle = title ? title.toUpperCase() : DotChart.defaultProps.title;
 
-  // const { flexColumnCenter, relative, dotSize } = appTheme.style([
+  // const { flexColumnCenter, relative, dotSize } = appTheme.classes([
   //   cssFlexColumnCenter,
   //   cssRelative,
   //   (size) => cssDotSize(size),
@@ -100,21 +85,11 @@ const DotChart = ({ title, data, size, ...props }) => {
 
   // console.log("dotChart", StyleSheet);
 
-  console.log(<Container />);
-
   return (
     //    <div id="dotchart" className={"relative flex-column-center"}>
     // <div id="dotchart" className={`foo  ${relative} ${flexColumnCenter}`}>
-    // <div id="dotchart">
-
-    <Container htag="p" className={"foo"}>
+    <div id="dotchart" className={(cssFlexColumnCenter(), cssRelative())}>
       <p id="dotchart-title">{graphTitle}</p>
-
-      {/* provare a colorare input tag da div select-input
-      <div class="Select-input">
-        <input type="text" name="style-me" />
-      </div> */}
-
       <div id="dotchart-bar" className={"flex-row-center"}>
         <span className={`dotchart-item-${size}`}>
           <SvgIcon
@@ -153,7 +128,7 @@ const DotChart = ({ title, data, size, ...props }) => {
           />
         </span>
       </div>
-    </Container>
+    </div>
   );
 };
 
@@ -176,7 +151,7 @@ DotChart.defaultProps = {
 
 StyleSheet {options: {…}, deployed: true, attached: true, rules: RuleList, renderer: DomRenderer, …}
 attached: true
-class: {flexColumnCenter: "flexColumnCenter-0-1-1", relative: "relative-0-1-2"}
+classes: {flexColumnCenter: "flexColumnCenter-0-1-1", relative: "relative-0-1-2"}
 deployed: true
 keyframes: {}
 options: {jss: Jss, insertionPoint: undefined, index: 0, generateId: ƒ, Renderer: ƒ, …}

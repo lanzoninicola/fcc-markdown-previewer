@@ -35,18 +35,18 @@ function themeFactory(palette = {}) {
       );
     }
 
-    function luminance(value) {
-      //console.log('luminance - themeLoaded', themeLoaded['palette'][schema]);
-      const defaultLuminance = "dark";
+    function shade(value) {
+      //console.log('shade - themeLoaded', themeLoaded['palette'][schema]);
+      const defaultShade = "dark";
 
       if (!value) {
-        value = defaultLuminance;
+        value = defaultShade;
       }
       return themeLoaded["palette"][schema][value];
     }
 
     return {
-      luminance: () => luminance(),
+      shade: () => shade(),
     };
   }
 
@@ -65,7 +65,7 @@ function themeFactory(palette = {}) {
 
     if (name === "") {
       throw new Error(
-        'themeFactory() - componensPalette(): Function needs a parameter with the name of component choosed in the "componentsColorPalettes()" function.'
+        'themeFactory() - componensPalette(): Function needs a parameter with the name of component choosed in the "components()" function.'
       );
     }
 
@@ -158,7 +158,7 @@ export default themeFactory;
 //   components: {
 //     comp1: {
 //       primary: {
-//         borderColor: () => color("primary").luminance("dark"),
+//         borderColor: () => color("primary").shade("dark"),
 //         selector2: ...,
 //       }
 //     }
@@ -173,9 +173,9 @@ export default themeFactory;
 //
 // themeFactory(standard).color('primary').colors;
 
-// Get color of specific palette and luminance
+// Get color of specific palette and shade
 //
-// themeFactory(standard).color('primary').luminance('dark');
+// themeFactory(standard).color('primary').shade('dark');
 
 // Retrieve data of all Components color palette
 //

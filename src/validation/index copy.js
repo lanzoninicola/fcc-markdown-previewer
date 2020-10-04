@@ -1,11 +1,11 @@
 import catalog from "./catalog";
 
 import { input as createThemeInput } from "./requirements/createTheme";
-import { output as colorPalettesOutput } from "./requirements/colorPalettes";
+import { output as paletteOutput } from "./requirements/palette";
 import {
-  input as componentColorPalettesInput,
-  output as componentColorPalettesOutput,
-} from "./requirements/componentsColorPalettes";
+  input as componentInput,
+  output as componentOutput,
+} from "./requirements/components";
 
 function buildCatalog(catalog) {
   let validationCatalog = { input: {}, output: {} };
@@ -29,14 +29,14 @@ function buildCatalog(catalog) {
 return {
   input: {
     createTheme: (args) => createThemeInput(args),
-    componentsColorPalettes: (args) => componentColorPalettesInput(args),
+    components: (args) => componentInput(args),
     getGlobalPalette: (args) => getGlobalPalette(args),
   },
   output: {
     createTheme: () => createThemeOutput(),
-    colorPalettes: (outputData) => colorPalettesOutput(outputData),
-    componentsColorPalettes: (outputData) =>
-      componentColorPalettesOutput(outputData),
+    palette: (outputData) => paletteOutput(outputData),
+    components: (outputData) =>
+      componentOutput(outputData),
   },
 };
 */

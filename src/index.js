@@ -8,13 +8,13 @@ import { createStore, applyMiddleware } from "redux";
 import { rootReducer } from "./redux/reducers/rootReducer";
 
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 
 import * as serviceWorker from "./serviceWorker";
 
 const middleware = [thunk];
 if (process.env.NODE_ENV !== "production") {
-  middleware.push(logger);
+  //middleware.push(logger);
 }
 
 const store = createStore(rootReducer, applyMiddleware(...middleware));

@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { getIcon } from "./IconCatalog";
-import { palette, getColorFromPalette } from "../../../config/theme";
+import appTheme from "../../UI/index";
 
-const SvgIcon = ({ name, schema }) => {
+const SvgIcon = ({ name, color }) => {
   let iconFromCatalog = getIcon(name);
 
-  let svgColor = getColorFromPalette(schema);
+  let svgColor = appTheme
+    .ifElse(color !== undefined && color !== null && color !== "")
+    .then(color)
+    .else(appTheme.color("primary", "main"));
+
+  // let svgColor = "black";
 
   return (
     <svg
@@ -47,5 +52,5 @@ export default React.memo(SvgIcon);
 
 SvgIcon.propTypes = {
   name: PropTypes.string.isRequired,
-  schema: PropTypes.string,
+  color: PropTypes.string,
 };

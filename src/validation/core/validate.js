@@ -1,6 +1,4 @@
 function validate(fnName) {
-  import(`../requirements/${fnName}.js`).then((module) => {});
-
   if (typeof fnName !== "string") {
     throw new Error(
       `validate: Parameter must be a string. Give the name of function and not the function itself. Eg. validate("function_name").`
