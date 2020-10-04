@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/fcc-markdown-previewer/static/css/main.eb700329.chunk.css",
+    "main.js": "/fcc-markdown-previewer/static/js/main.fec0cfbc.chunk.js",
+    "main.js.map": "/fcc-markdown-previewer/static/js/main.fec0cfbc.chunk.js.map",
+    "runtime-main.js": "/fcc-markdown-previewer/static/js/runtime-main.16d6da64.js",
+    "runtime-main.js.map": "/fcc-markdown-previewer/static/js/runtime-main.16d6da64.js.map",
+    "static/js/2.7ff7ad0f.chunk.js": "/fcc-markdown-previewer/static/js/2.7ff7ad0f.chunk.js",
+    "static/js/2.7ff7ad0f.chunk.js.map": "/fcc-markdown-previewer/static/js/2.7ff7ad0f.chunk.js.map",
+    "static/js/3.9b49ae70.chunk.js": "/fcc-markdown-previewer/static/js/3.9b49ae70.chunk.js",
+    "static/js/3.9b49ae70.chunk.js.map": "/fcc-markdown-previewer/static/js/3.9b49ae70.chunk.js.map",
+    "static/js/4.fa20e19b.chunk.js": "/fcc-markdown-previewer/static/js/4.fa20e19b.chunk.js",
+    "static/js/4.fa20e19b.chunk.js.map": "/fcc-markdown-previewer/static/js/4.fa20e19b.chunk.js.map",
+    "static/js/5.00a8f59f.chunk.js": "/fcc-markdown-previewer/static/js/5.00a8f59f.chunk.js",
+    "static/js/5.00a8f59f.chunk.js.map": "/fcc-markdown-previewer/static/js/5.00a8f59f.chunk.js.map",
+    "static/js/6.a2b72115.chunk.js": "/fcc-markdown-previewer/static/js/6.a2b72115.chunk.js",
+    "static/js/6.a2b72115.chunk.js.map": "/fcc-markdown-previewer/static/js/6.a2b72115.chunk.js.map",
+    "static/js/7.55605ba3.chunk.js": "/fcc-markdown-previewer/static/js/7.55605ba3.chunk.js",
+    "static/js/7.55605ba3.chunk.js.map": "/fcc-markdown-previewer/static/js/7.55605ba3.chunk.js.map",
+    "static/js/8.52361cc6.chunk.js": "/fcc-markdown-previewer/static/js/8.52361cc6.chunk.js",
+    "static/js/8.52361cc6.chunk.js.map": "/fcc-markdown-previewer/static/js/8.52361cc6.chunk.js.map",
+    "static/js/9.9e17894b.chunk.js": "/fcc-markdown-previewer/static/js/9.9e17894b.chunk.js",
+    "static/js/9.9e17894b.chunk.js.map": "/fcc-markdown-previewer/static/js/9.9e17894b.chunk.js.map",
+    "index.html": "/fcc-markdown-previewer/index.html",
+    "precache-manifest.53ea694aabc2d57ce580aaed0ce46ca7.js": "/fcc-markdown-previewer/precache-manifest.53ea694aabc2d57ce580aaed0ce46ca7.js",
+    "service-worker.js": "/fcc-markdown-previewer/service-worker.js",
+    "static/css/main.eb700329.chunk.css.map": "/fcc-markdown-previewer/static/css/main.eb700329.chunk.css.map",
+    "static/js/2.7ff7ad0f.chunk.js.LICENSE.txt": "/fcc-markdown-previewer/static/js/2.7ff7ad0f.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/fcc-markdown-previewer/static/media/roboto-slab-v12-latin-regular.88fa6849.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.16d6da64.js",
+    "static/js/2.7ff7ad0f.chunk.js",
+    "static/css/main.eb700329.chunk.css",
+    "static/js/main.fec0cfbc.chunk.js"
+  ]
+}
