@@ -74,13 +74,14 @@ class themeFactory {
   //  appTheme.style(fun1 - return {cssName1: {selector1, selector2}, cssName2: {selector1, selector2}}
   //  appTheme.style([fun1, fun2])
 
-  style = (classSelectors) => {
+  style = (classSelectors, props) => {
     // verificare che style abbia un parametro --> verifico se necessario se uso return this e poi ifElse
     // verificare che le funzioni inizino con css
     // verificare lo shape dell'oggetto (deve essere di 2 livelli) ritornato dalla funzione css
 
     let stylesToCSS = {};
     let componentCSSClasses = [];
+    let nextProps = {};
 
     if (typeof classSelectors === "object") {
       //  appTheme.style(cssObj)  - {cssName: {selector1, selector2}}
@@ -95,13 +96,49 @@ class themeFactory {
 
         console.log(stylesToCSS);
 
+        const foo = jss.createStyleSheet(stylesToCSS).attach();
         const { classes } = jss.createStyleSheet(stylesToCSS).attach();
+
+        console.log(foo);
 
         componentCSSClasses.push(classes[cssClass]);
       });
     }
 
-    return componentCSSClasses;
+    // requirement 1
+    if (props?.className) {
+      componentCSSClasses.push(props.className);
+
+      for (let propsItem in props) {
+        if (propsItem !== "className") {
+          nextProps = {
+            ...nextProps,
+            [propsItem]: props[propsItem],
+          };
+        }
+      }
+    }
+
+    // requirement 2
+    const htmlTagFromProps = props?.htag;
+    const defaultHTMLTag = "div";
+    let JsxTag = defaultHTMLTag;
+
+    if (htmlTagFromProps) {
+      const isValidHTMLTag = (input) =>
+        props?.htag.toString() instanceof HTMLUnknownElement;
+
+      console.log(htmlTagFromProps);
+      console.log(isValidHTMLTag(htmlTagFromProps));
+
+      JsxTag = isValidHTMLTag(htmlTagFromProps) ? htmlTagFromProps : JsxTag;
+    }
+
+    return (
+      <JsxTag className={componentCSSClasses.join(" ")} {...nextProps}>
+        {props.children}
+      </JsxTag>
+    );
 
     // if (typeof classSelectors === "function") {
     //   //  appTheme.style(fun1) - return {cssName: {selector1, selector2}}

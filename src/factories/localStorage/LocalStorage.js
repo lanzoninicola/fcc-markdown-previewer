@@ -5,11 +5,9 @@ export const localStorageItem = (name) => {
   return {
     getValue: () => {
       let value = localStorage.getItem(itemName);
-      console.log("getValue", typeof value, typeof JSON.parse(value));
       return JSON.parse(value);
     },
     setValue: (value) => {
-      console.log("localStorage set Value fired");
       if (value === undefined) {
         throw new Error(
           "Function expected a value parameter. Operation interrupted"

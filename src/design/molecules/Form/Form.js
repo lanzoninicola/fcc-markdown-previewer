@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import "./Form.css";
 
 const Form = ({ ...props }) => {
-  console.log(props);
-
   return (
     <div className="form-container">
       <div className="form-window">

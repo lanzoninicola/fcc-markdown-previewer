@@ -15,6 +15,7 @@ const LocalStorageStatsView = ({ ...props }) => {
           title={"Local storage usage"}
           data={spaceUsedInByte}
           size={"medium"}
+          disabled={true}
         />
       </div>
       <div className="localStorageStats-section-view">

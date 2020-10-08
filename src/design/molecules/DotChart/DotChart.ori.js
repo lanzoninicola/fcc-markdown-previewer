@@ -3,36 +3,13 @@ import PropTypes from "prop-types";
 import "./DotChart.css";
 import SvgIcon from "../../atoms/SvgIcon/index";
 
-import { css, appStylesheets } from "../../UI/core/StyledContainer";
-
 const DotChart = ({ title, data, size, ...props }) => {
   let graphTitle = title ? title.toUpperCase() : DotChart.defaultProps.title;
 
-  console.log(appStylesheets);
-
-  const [flexColumnCenter, relative, flexRowCenter] = css(() => {
-    return {
-      flexColumnCenter: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: props.disabled ? "red" : "yellow",
-      },
-      relative: {
-        position: "relative",
-      },
-      flexRowCenter: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      },
-    };
-  });
-
   return (
-    <div id="dotchart" className={`${relative} ${flexColumnCenter}`}>
+    <div id="dotchart" className={"relative flex-column-center"}>
       <p id="dotchart-title">{graphTitle}</p>
-      <div id="dotchart-bar" className={`${flexRowCenter}`}>
+      <div id="dotchart-bar" className={"flex-row-center"}>
         <span className={`dotchart-item-${size}`}>
           <SvgIcon
             name={"filledcircle"}
