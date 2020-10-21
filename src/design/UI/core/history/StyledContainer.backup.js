@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import appTheme from "../index";
-import hyphenateStyleName from "../utils/hyphenateStyleName";
-import isNotValidHTMLTag from "../utils/isNotValidHTMLTag";
-import setHTMLAttributes from "../utils/setHTMLAttributes";
+import appTheme from "../../index";
+import hyphenateStyleName from "../../utils/hyphenateStyleName";
+import isNotValidHTMLTag from "../../utils/isNotValidHTMLTag";
+import setHTMLAttributes from "../../utils/setHTMLAttributes";
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
@@ -12,7 +12,7 @@ if (!NODE_ENV) {
 
 const __DEV__ = NODE_ENV === "development";
 
-const warn = console.warn;
+const warn = console.error;
 
 const HTML_HEAD_TAG = "head";
 const HTML_STYLE_TAG = "style";
@@ -22,12 +22,21 @@ const HTML_HEAD_NODE =
   document.head || document.getElementsByTagName(HTML_HEAD_TAG)[0];
 const STYLED_COMPONENT = "styledcomponent";
 
+// what if the user/dev selects a different theme
+// It could be more effective a class object with separate instances
 export let appStylesheets = {
   // htmlNodeId,
   // parentComponentRef: "",
+
+  //* Components CSS objects *** split globals cssClassNamesObject and component cssClassNamesObject
   objectCSSClassesName: [],
-  standardCSSClassesName: [],
+
+  //* Components CSS from classname prop
+  // CSS selector could be for: element, id, class
+  componentClassesNameProp: [],
+
   cssRules: {},
+
   stylesheets: {
     /*
     [stylesheetName] = checksum(rule) 
@@ -36,8 +45,10 @@ export let appStylesheets = {
 };
 
 // const addComponentIdentifierToCSSClass = appStylesheets.parentComponentRef !== "";
+function buildCSSRule() {}
 
 function buildCSSRules(stylesheetsObject = {}, componentName = "") {
+  console.time("buildCSSRules");
   let selectorName = "";
   let selectorRule = {};
   let selectorRuleProps = {};
@@ -103,50 +114,65 @@ function buildCSSRules(stylesheetsObject = {}, componentName = "") {
     ].selectorStyleText = selectorRulePropValueText.trim();
   });
 
-  // miss full text of stylesheets
+  // miss full text of
 
   cssRules = {
     ...cssRules,
     ...selectorRule,
   };
 
+  console.log(cssRules);
+
   appStylesheets = {
     ...appStylesheets,
     cssRules,
   };
+
+  console.log(appStylesheets);
+
+  console.timeEnd("buildCSSRules");
 }
 
-function buildStyleSheets() {
-  let { cssRules } = appStylesheets;
+function buidStylesheetSignature(stylesheetNameText = "", stylesheetText = "") {
+  //** TODO: convert stylesheetText in CHECKSUM value
 
-  let ruleText = "";
-  let rulesText = "";
-  let componentStyles = {};
+  let { stylesheets } = appStylesheets;
+
+  appStylesheets = {
+    ...appStylesheets,
+    stylesheets: {
+      ...stylesheets,
+      [stylesheetNameText]: stylesheetText,
+    },
+  };
+}
+
+function combineStylesText() {
+  const { cssRules } = appStylesheets;
+
+  let rulesPlainText = "";
 
   Object.keys(cssRules).forEach((stylesheet) => {
     let selectorText = cssRules[stylesheet]["selectorText"];
     let selectorStyleText = cssRules[stylesheet]["selectorStyleText"];
 
     let text = `.${selectorText} {${selectorStyleText}} `;
-    ruleText = text;
-    rulesText += text;
+    rulesPlainText += text;
 
-    cssRules[stylesheet].ruleText = ruleText.trim();
-
-    componentStyles = {
-      ...componentStyles,
-      [stylesheet]: selectorStyleText,
-    };
+    buidStylesheetSignature(selectorText, selectorStyleText);
   });
 
   appStylesheets = {
     ...appStylesheets,
-    rulesText: rulesText.trim(),
-    stylesheets: componentStyles,
+    rulesPlainText: rulesPlainText.trim(),
   };
+
+  console.log(appStylesheets);
 }
 
 function extractCSSClassesName(stylesheetsObject = {}, componentName = "") {
+  const { objectCSSClassesName } = appStylesheets;
+
   // console.log("extractCSSClassesName fired", stylesheetsObject);
   Object.keys(stylesheetsObject).forEach((stylesheet) => {
     let CSSClassName = "";
@@ -157,7 +183,8 @@ function extractCSSClassesName(stylesheetsObject = {}, componentName = "") {
       CSSClassName = `${stylesheet}`;
     }
 
-    appStylesheets.objectCSSClassesName.push(CSSClassName);
+    if (!objectCSSClassesName.includes(CSSClassName))
+      objectCSSClassesName.push(CSSClassName);
   });
 }
 
@@ -168,9 +195,9 @@ function isNotStyleDOMNodeExist() {
 }
 
 // qui devo verificare negli stylesheets globali
-function isObjectStyleExist() {
-  return appStylesheets.objectCSSClassesName.length > 0 ? true : false;
-}
+// function isObjectStyleExist() {
+//   return appStylesheets.objectCSSClassesName.length > 0 ? true : false;
+// }
 
 function DOMCreateStyleNode() {
   const style = document.createElement(HTML_STYLE_TAG);
@@ -184,23 +211,26 @@ function DOMCreateStyleNode() {
 }
 
 function DOMAttachStyle() {
-  console.log("DOMAttachStyle fired");
+  console.time("DOMAttachStyle");
   const style = document.getElementById(STYLED_COMPONENT);
 
   const sheet = style.sheet;
 
-  let prevCSSRule = [];
+  // let prevCSSRule = [];
 
-  Object.keys(sheet["cssRules"]).forEach((cssRule) => {
-    let cssText = sheet["cssRules"][cssRule]["cssText"];
-    prevCSSRule.push(cssText);
-  });
+  // Object.keys(sheet["cssRules"]).forEach((cssRule) => {
+  //   let cssText = sheet["cssRules"][cssRule]["cssText"];
+  //   prevCSSRule.push(cssText);
+  // });
 
-  const prevCSSRuleText = prevCSSRule.join(" ");
+  // const prevCSSRuleText = prevCSSRule.join(" ");
 
-  const nextCSSRuleText = `${prevCSSRuleText} ${appStylesheets.rulesText}`;
+  // const nextCSSRuleText = `${prevCSSRuleText} ${appStylesheets.rulesPlainText}`;
+
+  const nextCSSRuleText = `${appStylesheets.rulesPlainText}`;
 
   style.innerText = nextCSSRuleText.trim();
+  console.timeEnd("DOMAttachStyle");
 }
 
 export function css(stylesheetRules, componentName = "") {
@@ -209,7 +239,7 @@ export function css(stylesheetRules, componentName = "") {
   if (__DEV__) {
     if (componentName === "") {
       warn(
-        'css() function: Component name parameter missing. We recommend passing the "component name" as the second parameter of the function css(), It will be added to the CSS class name as a prefix'
+        '"componentName" parameter missing. Css() function should have the "component name" as the second parameter. It is required if you want to avoid CSS classname collision.'
       );
     }
   }
@@ -228,17 +258,17 @@ export function css(stylesheetRules, componentName = "") {
 
   buildCSSRules(stylesheetsObjectProp, componentName);
 
-  buildStyleSheets();
+  combineStylesText();
 
   if (isNotStyleDOMNodeExist()) {
     DOMCreateStyleNode();
   }
 
   // **** da modificare vd funzione isObjectStyleExist
-  if (isObjectStyleExist()) {
-    // se in un component ho 3 classi, 2 esistono e il 3 è nuovo, sa femo con la funzione DOMAttachStyle
-    DOMAttachStyle();
-  }
+  // if (isObjectStyleExist()) {
+  // se in un component ho 3 classi, 2 esistono e il 3 è nuovo, sa femo con la funzione DOMAttachStyle
+  DOMAttachStyle();
+  // }
 
   return appStylesheets.objectCSSClassesName;
 }
@@ -272,13 +302,13 @@ function Styled({
   
 
   function addReactStandardClassNameProp(classNameFromProps) {
-    let { standardCSSClassesName } = appStylesheets;
+    let { componentClassesNameProp } = appStylesheets;
 
-    standardCSSClassesName = [...standardCSSClassesName, ...classNameFromProps];
+    componentClassesNameProp = [...componentClassesNameProp, ...classNameFromProps];
 
     appStylesheets = {
       ...appStylesheets,
-      standardCSSClassesName,
+      componentClassesNameProp,
     };
   }
 
@@ -298,10 +328,10 @@ function Styled({
   }
 
   function convertClassesNameToText() {
-    const { objectCSSClassesName, standardCSSClassesName } = appStylesheets;
+    const { objectCSSClassesName, componentClassesNameProp } = appStylesheets;
     const mergedStylesName = mergeStylesName(
       objectCSSClassesName,
-      standardCSSClassesName
+      componentClassesNameProp
     );
 
     return mergedStylesName.join(" ");
@@ -327,7 +357,7 @@ function Styled({
     };
   }, [
     appStylesheets.objectCSSClassesName.length,
-    appStylesheets.standardCSSClassesName.length,
+    appStylesheets.componentClassesNameProp.length,
   ]);
 
   // check css type format validation

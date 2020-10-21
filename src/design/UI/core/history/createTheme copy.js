@@ -1,6 +1,6 @@
-import themeFactory from "./themeFactory";
+import themeFactory from "../themeFactory";
 
-import validate from "../../../validation/index";
+import validate from "../../../../validation/index";
 
 const createTheme = (palette, components, typography) => {
   validate("createTheme").input().args(palette, components, typography);

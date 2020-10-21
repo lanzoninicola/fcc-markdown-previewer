@@ -1,5 +1,5 @@
 import validate from "../../../validation/core/validate";
-import jss from "./jss";
+import jss from "./history/jss";
 import React, { Children } from "react";
 
 class themeFactory {

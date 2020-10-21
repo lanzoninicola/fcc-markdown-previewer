@@ -1,4 +1,4 @@
-import validate from "../../../validation/core/validate";
+import validate from "../../../../validation/core/validate";
 import jss from "./jss";
 
 class themeFactory {

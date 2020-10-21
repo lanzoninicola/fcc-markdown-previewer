@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import appTheme from "../index";
-import hyphenateStyleName from "../utils/hyphenateStyleName";
-import isNotValidHTMLTag from "../utils/isNotValidHTMLTag";
-import setHTMLAttributes from "../utils/setHTMLAttributes";
+import appTheme from "../../index";
+import hyphenateStyleName from "../../utils/hyphenateStyleName";
+import isNotValidHTMLTag from "../../utils/isNotValidHTMLTag";
+import setHTMLAttributes from "../../utils/setHTMLAttributes";
 
 const HTML_HEAD_TAG = "head";
 const HTML_STYLE_TAG = "style";
@@ -48,7 +48,7 @@ function Styled({
   const addComponentIdentifierToCSSClass = parentComponentRef !== "";
 
   function extractCSSClassesName(stylesheetsObject = {}) {
-    console.log("extractCSSClassesName fired", stylesheetsObject);
+    // console.log("extractCSSClassesName fired", stylesheetsObject);
     Object.keys(stylesheetsObject).forEach((stylesheet) => {
       let CSSClassName = "";
 
@@ -107,12 +107,10 @@ function Styled({
   //   return cssString;
   // }
 
-  function buildStylesheetRuleFromString() {}
-
   function buildCSSRules(stylesheetsObject) {
     let selectorName = "";
     let selectorRule = {};
-    let selectorRuleStyle = {};
+    let selectorRuleProps = {};
     let { cssRules } = styleNode;
 
     // try to use memoize technique
@@ -123,33 +121,49 @@ function Styled({
 
       selectorName += `${stylesheet}`;
 
+      selectorRule = {
+        ...selectorRule,
+        [selectorName]: {
+          selectorText: `${selectorName}`,
+        },
+      };
+
+      let selectorRulePropValueText = "";
+
       Object.keys(stylesheetsObject[stylesheet]).forEach((stylesheetRule) => {
         const stylesheetRuleValue =
           stylesheetsObject[stylesheet][stylesheetRule];
+
+        let hyphenatedStylesheetName = "";
+        let selectorRuleProp = {};
+
         // manage if it is an private key with underscore (eg. _hover)
         // manage if it is and object (child style => "Parent > child" )
         // manage if it is a function ((color) => fn(color) or (prop) => fn(prop))
 
-        // A CSS property value is a string
+        //*** A CSS property value is a string ***//
         if (typeof stylesheetRuleValue === "string") {
-          const hyphenatedStylesheetName = hyphenateStyleName(stylesheetRule);
-          selectorRuleStyle = {
-            ...selectorRuleStyle,
+          hyphenatedStylesheetName = hyphenateStyleName(stylesheetRule);
+          selectorRuleProp = {
             [hyphenatedStylesheetName]: `${stylesheetRuleValue}`,
           };
 
-          selectorRule = {
-            ...selectorRule,
-            [selectorName]: {
-              selectorText: `${selectorName}`,
-              styleText: `${hyphenatedStylesheetName}: ${stylesheetRuleValue}; `,
-              style: {
-                ...selectorRuleStyle,
-              },
-            },
-          };
+          selectorRulePropValueText += `${hyphenatedStylesheetName}: ${stylesheetRuleValue}; `;
         }
+
+        selectorRuleProps = {
+          ...selectorRuleProps,
+          ...selectorRuleProp,
+        };
+
+        selectorRule[selectorName].style = {
+          ...selectorRuleProps,
+        };
       });
+
+      selectorRule[
+        selectorName
+      ].selectorStyleText = selectorRulePropValueText.trim();
     });
 
     // miss full text of stylesheets
@@ -158,10 +172,6 @@ function Styled({
       ...cssRules,
       ...selectorRule,
     };
-  }
-
-  function buildStyleSheet() {
-    const cssRules = buildCSSRules(styleSheetsObjectProp);
 
     styleNode = {
       ...styleNode,
@@ -169,14 +179,31 @@ function Styled({
     };
   }
 
-  // function buildStyleSheetCSSText() {
-  //   const cssString = serializeCSSString(styleSheetsObjectProp);
+  function buildStyleSheets() {
+    buildCSSRules(styleSheetsObjectProp);
 
-  //   styleNode = {
-  //     ...styleNode,
-  //     cssString,
-  //   };
-  // }
+    let { cssRules } = styleNode;
+
+    let ruleText = "";
+    let rulesText = "";
+    Object.keys(cssRules).forEach((stylesheet) => {
+      console.log();
+
+      let selectorText = cssRules[stylesheet]["selectorText"];
+      let selectorStyleText = cssRules[stylesheet]["selectorStyleText"];
+
+      let text = `.${selectorText} {${selectorStyleText}} `;
+      ruleText = text;
+      rulesText += text;
+
+      cssRules[stylesheet].ruleText = ruleText.trim();
+    });
+
+    styleNode = {
+      ...styleNode,
+      rulesText: rulesText.trim(),
+    };
+  }
 
   function DOMCreateStyleNode() {
     const style = document.createElement(HTML_STYLE_TAG);
@@ -189,25 +216,24 @@ function Styled({
     HTML_HEAD_NODE.appendChild(style);
   }
 
-  function DOMAttachStyle({ cssString, parentComponentRef }) {
+  function DOMAttachStyle() {
     const style = document.getElementById(STYLED_COMPONENT);
 
     const sheet = style.sheet;
 
-    const rules = sheet.rules;
+    let prevCSSRule = [];
 
-    sheet.insertRule(cssString);
-    // style.textContent = cssString;
+    Object.keys(sheet["cssRules"]).forEach((cssRule) => {
+      let cssText = sheet["cssRules"][cssRule]["cssText"];
+      prevCSSRule.push(cssText);
+    });
 
-    console.log(rules);
+    const prevCSSRuleText = prevCSSRule.join(" ");
 
-    console.log(style.sheet, style.styleNode);
+    const nextCSSRuleText = `${prevCSSRuleText} ${styleNode.rulesText}`;
+
+    style.innerText = nextCSSRuleText.trim();
   }
-
-  // function DOMappendStyle({ cssString, parentComponentRef }) {
-  //   // THIS MUST APPEND STYLE NOT CREATE NEW NODE ***********************
-  //   // to do
-  // }
 
   function DOMDetachStyle(name) {
     const style = document.getElementsByName(name);
@@ -253,23 +279,21 @@ function Styled({
   useEffect(() => {
     extractCSSClassesName(styleSheetsObjectProp);
 
-    serializeCSSString(styleSheetsObjectProp);
+    buildStyleSheets();
 
-    // if (isReactStandardClassNameExist()) {
-    //   addReactStandardClassNameProp(classNameStandardProp);
-    // }
+    if (isReactStandardClassNameExist()) {
+      addReactStandardClassNameProp(classNameStandardProp);
+    }
 
-    // buildStyleSheetCSSText();
+    if (isNotStyleDOMNodeExist()) {
+      DOMCreateStyleNode();
+    }
 
-    // if (isNotStyleDOMNodeExist()) {
-    //   DOMCreateStyleNode();
-    // }
+    if (isObjectStyleExist()) {
+      DOMAttachStyle();
+    }
 
-    // if (isObjectStyleExist()) {
-    //   DOMAttachStyle(styleNode);
-    // }
-
-    // setClassesNamesToComponent(convertClassesNameToText());
+    setClassesNamesToComponent(convertClassesNameToText());
 
     return () => {
       // if (isObjectStyleExist()) {
