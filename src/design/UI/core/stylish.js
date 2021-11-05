@@ -3,9 +3,9 @@ import appTheme from "../index";
 import hyphenateStyleName from "../utils/hyphenateStyleName";
 import isNotValidHTMLTag from "../utils/isNotValidHTMLTag";
 import setHTMLAttributes from "../utils/setHTMLAttributes";
-import {warn} from "../utils/errors";
-import {__DEV__} from '../utils/environments'
-import {isPseudoclass, getPseudoclass, pseudoClasses} from "./pseudoClasses"
+import { warn } from "../utils/errors";
+import { __DEV__ } from "../utils/environments";
+import { isPseudoclass, getPseudoclass, pseudoClasses } from "./pseudoClasses";
 
 const HTML_HEAD_TAG = "head";
 const HTML_STYLE_TAG = "style";
@@ -39,30 +39,27 @@ export let appStylesheets = {
 
 // const addComponentIdentifierToCSSClass = appStylesheets.parentComponentRef !== "";
 
-
-function isPrivateKey(key){
+function isPrivateKey(key) {
   return key.charAt(0) === "_";
 }
 
-function isPseudoclass(key){
-  return rule.charAt(0) === "_";
-})
+// function isPseudoclass(key){
+//   return rule.charAt(0) === "_";
+// })
 
 function handleStylesheetList(stylesheetsObject = {}, componentName = "") {
-
   let stylesheetList = [];
 
   for (let stylesheet in stylesheetsObject) {
-    stylesheetList.push(stylesheet)
+    stylesheetList.push(stylesheet);
     for (let rule in stylesheetsObject[stylesheet]) {
-
       if (isPrivateKey(rule)) {
-        stylesheetList.push(`${stylesheet}${rule}`)
+        stylesheetList.push(`${stylesheet}${rule}`);
       }
     }
   }
 
-  console.log(stylesheetList)
+  // console.log(stylesheetList);
 
   /*
  
