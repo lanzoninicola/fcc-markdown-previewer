@@ -10,7 +10,7 @@
     "jss": "^10.4.0",
     "jss-plugin-camel-case": "^10.4.0",
     "jss-plugin-vendor-prefixer": "^10.4.0",
-    "marked": "^1.1.1",
+    "marked": "^4.0.10",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
